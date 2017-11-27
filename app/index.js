@@ -1,1 +1,8 @@
-console.log('💂‍ M E T A - I D  Ð A P P 💂')
+import React from 'react'
+import { render } from 'react-dom'
+
+import Root from 'core/containers/Root'
+
+const rootEl = document.getElementById('Root')
+
+render(<Root />, rootEl)
