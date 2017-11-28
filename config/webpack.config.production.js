@@ -4,8 +4,11 @@ const CleanPlugin = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const graphql = require('./graphql.config')
+
 const GLOBALS = {
   'process.env': {
+    META_NETWORK_GRAPHQL_ENDPOINT: JSON.stringify(graphql.endpoints.production),
     NODE_ENV: JSON.stringify('production'),
   },
 }
