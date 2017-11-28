@@ -1,3 +1,4 @@
+import * as MetaNetwork from './meta-network'
 import * as WebStorage from './web-storage'
 
-export { WebStorage }
+export { MetaNetwork, WebStorage }
