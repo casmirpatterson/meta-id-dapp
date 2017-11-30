@@ -92,3 +92,47 @@ export const createClaim = variables =>
 `,
     variables
   )
+
+/**
+ * Read all verifiable claims from the META Claims Index by `issuer`
+ *
+ * @param  {Object} variables        [description]
+ * @param  {String} variables.issuer [description]
+ * @return {Object}                  Response data
+ */
+export const readClaimsByIssuer = variables =>
+  metaNetworkRequest(
+    `
+  query readClaimsByIssuer($issuer: String) {
+    claim (issuer: $issuer) {
+      id
+      issuer
+      subject
+      claim
+    }
+  }
+`,
+    variables
+  )
+
+/**
+ * Read all verifiable claims from the META Claims Index by `subject`
+ *
+ * @param  {Object} variables         [description]
+ * @param  {String} variables.subject [description]
+ * @return {Object}                   Response data
+ */
+export const readClaimsBySubject = variables =>
+  metaNetworkRequest(
+    `
+  query readClaimsBySubject($subject: String) {
+    claim (subject: $subject) {
+      id
+      issuer
+      subject
+      claim
+    }
+  }
+`,
+    variables
+  )
