@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
+import { createConnectedRouter, createRender, resolver } from 'found'
 import { Provider } from 'react-redux'
 
 import { configureStore } from 'core/store'
+
+const Router = createConnectedRouter({
+  getFound: store => store.get('found'),
+  render: createRender({
+    renderError: (
+      { error } // eslint-disable-line react/display-name
+    ) => <div>{error.status === 404 ? 'Not Found' : 'Error'}</div>,
+  }),
+})
 
 const store = configureStore()
 
@@ -13,9 +23,7 @@ export default class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div>
-          <h1>META-ID ÐApp</h1>
-        </div>
+        <Router resolver={resolver} />
       </Provider>
     )
   }
