@@ -37,6 +37,27 @@ export const createIdentity = variables =>
   )
 
 /**
+ * Read a META Identity from the META Identity Index
+ *
+ * @param  {Object} variables       [description]
+ * @param  {String} variables.owner [description]
+ * @return {Object}                 Response data
+ */
+export const readIdentity = variables =>
+  metaNetworkRequest(
+    `
+  query readIdentity($owner: String!) {
+    identity(owner: $owner) {
+      id
+      owner
+      signature
+    }
+  }
+`,
+    variables
+  )
+
+/**
  * Add a new verifiable claim to the META Claims Index
  *
  * @param  {Object} variables           [description]
