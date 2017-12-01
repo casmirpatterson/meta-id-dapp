@@ -1,5 +1,5 @@
-import * as actions from './actionTypes'
 import { MetaId } from 'core/services'
+import * as actions from './actionTypes'
 
 /**
  * Register a META Identity
@@ -16,12 +16,12 @@ export const createIdentity = identity => ({
 })
 
 /**
- * Retrieve a META Identity
+ * Retrieve a META Identity by `username`
  *
- * @param  {String} owner Ethereum address of META Identity owner
- * @return {Object}       Flux Standard Action
+ * @param  {String} username Username of META Identity owner
+ * @return {Object}          Flux Standard Action
  */
-export const readIdentity = owner => ({
+export const readIdentity = username => ({
   type: actions.READ_IDENTITY,
-  promise: MetaId.readIdentity({ owner }),
+  promise: MetaId.readIdentity({ id: MetaId.getMetaIdFromUsername(username) }),
 })
