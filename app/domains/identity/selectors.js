@@ -1,3 +1,4 @@
+import { MetaId } from 'core/services'
 import { name } from './constants'
 
 /**
@@ -6,7 +7,7 @@ import { name } from './constants'
  * @param  {Object} state Redux store
  * @return {Object}       Domain state
  */
-export const getAll = state => state.get(name)
+const getAll = state => state.get(name)
 
 /**
  * Select a META Identity by `id`
@@ -18,8 +19,9 @@ export const getAll = state => state.get(name)
  * @param  {Object} props React component props
  * @return {Object}       META Identity
  */
-const getIdentityById = (state, { match: { params } }) =>
-  state.getIn([name, params.id])
+const getIdentityById = (state, { match: { params } }) => {
+  return state.getIn([name, MetaId.getMetaIdFromUsername(params.id)])
+}
 
 export default {
   identityById: getIdentityById,

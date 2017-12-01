@@ -5,7 +5,14 @@ import { handle } from 'redux-pack'
 import * as actions from './actionTypes'
 import * as model from './model'
 
-const createClaim = claim => model.claimFactory(claim)
+const createClaim = claims =>
+  claims.map(claim => model.claimFactory(claim)).reduce(
+    (obj, claim) =>
+      Object.assign({}, obj, {
+        [claim.id]: claim,
+      }),
+    {}
+  )
 
 export const initialState = Immutable.fromJS({})
 
@@ -14,15 +21,12 @@ export default createReducer(initialState, {
     handle(state, action, {
       success: prevState =>
         prevState.merge({
-          [action.payload.id]: createClaim(action.payload),
+          [action.payload.claim[0].id]: createClaim(action.payload.claim[0]),
         }),
     }),
 
   [actions.READ_CLAIMS]: (state, action) =>
     handle(state, action, {
-      success: prevState =>
-        prevState.merge({
-          [action.payload.id]: createClaim(action.payload),
-        }),
+      success: prevState => prevState.merge(createClaim(action.payload.claim)),
     }),
 })

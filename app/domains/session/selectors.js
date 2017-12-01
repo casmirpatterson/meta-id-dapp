@@ -30,18 +30,6 @@ const getAccountAddress = createSelector([getAccount], account => {
 })
 
 /**
- * Get session identity
- *
- * @type {Object}
- */
-const getSessionIdentity = createSelector(
-  [getAccountAddress, Identity.getAll],
-  (address, identity) => {
-    return identity.get(address)
-  }
-)
-
-/**
  * Check if active session account
  *
  * @type {Boolean}
@@ -53,20 +41,18 @@ const getIsLoggedIn = createSelector([getAccount], account => {
 /**
  * Check if a META-ID matches the session account
  *
- * @todo - need to test the efficiency of this selector
- * @see - https://github.com/reactjs/reselect/blob/master/README.md#accessing-react-props-in-selectors
- *
- * @param  {Object}  state Redux store
- * @param  {Object}  props React component props
- * @return {Boolean}
+ * @type {Boolean}
  */
-const getIsSessionAccount = (state, { match: { params } }) =>
-  state.getIn([name, 'account', 'address']) === params.id
+const getIsSessionAccount = createSelector(
+  [getAccount, Identity.identityById],
+  (account, identity) => {
+    return Boolean(account && identity && account.address === identity.owner)
+  }
+)
 
 export default {
   account: getAccount,
   accountAddress: getAccountAddress,
-  sessionIdentity: getSessionIdentity,
   isLoggedIn: getIsLoggedIn,
   isSessionAccount: getIsSessionAccount,
 }

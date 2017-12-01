@@ -32,7 +32,7 @@ const finalCreateStore = compose(
 )(createStore)
 
 // persist stored state
-const persistState = JSON.parse(WebStorage.getLocalItem(STATE_KEY)) || {}
+const persistState = WebStorage.getSessionItem(STATE_KEY) || {}
 
 // expose create store method
 export const configureStore = (state = persistState) => {
@@ -42,7 +42,11 @@ export const configureStore = (state = persistState) => {
 
   // store state on change
   store.subscribe(() => {
-    WebStorage.setLocalItem(STATE_KEY, JSON.stringify(store.getState()))
+    WebStorage.setSessionItem(STATE_KEY, {
+      claims: store.getState().get('claims'),
+      identity: store.getState().get('identity'),
+      session: store.getState().get('session'),
+    })
   })
 
   return store
