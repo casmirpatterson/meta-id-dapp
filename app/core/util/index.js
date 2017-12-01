@@ -48,3 +48,13 @@ export const hasAsyncActionSucceeded = action => action.payload && !action.error
  * @return {Boolean}        hasAsyncActionFinished
  */
 export const hasAsyncActionFinished = action => action.payload || action.error
+
+export const readFileAsText = file =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader()
+
+    reader.onload = ({ target: { error, result } }) =>
+      error ? reject(error) : resolve(result)
+
+    reader.readAsText(file)
+  })
