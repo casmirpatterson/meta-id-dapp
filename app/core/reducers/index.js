@@ -1,9 +1,9 @@
 import { foundReducer } from 'found'
 import { combineReducers } from 'redux-immutablejs'
 
-// import * as Sample from 'domains/sample'
+import * as Identity from 'domains/identity'
 
 export default combineReducers({
   found: foundReducer,
-  // [Sample.name]: Sample.reducer,
+  [Identity.name]: Identity.reducer,
 })
