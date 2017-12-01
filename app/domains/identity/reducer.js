@@ -7,8 +7,6 @@ import * as model from './model'
 
 const createIdentity = identity => model.identityFactory(identity)
 
-// TODO - listen for `READ_CLAIMS` action for claimsIssued/claimsReceived data
-
 export const initialState = Immutable.fromJS({})
 
 export default createReducer(initialState, {

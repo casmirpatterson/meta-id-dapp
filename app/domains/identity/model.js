@@ -6,8 +6,6 @@ import { Record } from 'immutable'
  */
 const Identity = new Record({
   id: '',
-  claimsIssued: [],
-  claimsReceived: [],
   owner: '',
   signature: '',
 })

@@ -1,7 +1,4 @@
-import { createSelector } from 'reselect'
-
 import { name } from './constants'
-import { seletors as Identity } from 'domains/identity'
 
 /**
  * Select the entire domain from the store by `name`
@@ -14,28 +11,16 @@ const getAll = state => state.get(name)
 /**
  * Get all claims where META-ID is the `subject`
  *
- * @return {Array}
- */
-const getClaimsAboutIdentity = createSelector(
-  [getAll, Identity.getIdentityById],
-  (claims, identity) => {
-    return identity.claimsReceived.map(claim => claims[claim])
-  }
-)
-
-/**
- * Get all claims where META-ID is the `issuer`
+ * @todo - need to test the efficiency of this selector
+ * @see - https://github.com/reactjs/reselect/blob/master/README.md#accessing-react-props-in-selectors
  *
- * @type {Array}
+ * @param  {Object} state Redux store
+ * @param  {Object} props React component props
+ * @return {Array}        Claims about META-ID
  */
-const getClaimsByIdentity = createSelector(
-  [getAll, Identity.getIdentityById],
-  (claims, identity) => {
-    return identity.claimsIssued.map(claim => claims[claim])
-  }
-)
+const getClaimsBySubject = (state, { match: { params } }) =>
+  state.get(name).map(claim => claim.subject === params.id)
 
 export default {
-  claimsAboutIdentity: getClaimsAboutIdentity,
-  claimsByIdentity: getClaimsByIdentity,
+  claimsBySubject: getClaimsBySubject,
 }
