@@ -1,3 +1,5 @@
+import { bufferToHex, sha3 } from 'ethereumjs-util'
+
 import MetaNetwork from 'core/services/meta-network'
 
 /**
@@ -9,6 +11,14 @@ import MetaNetwork from 'core/services/meta-network'
  */
 const metaNetworkRequest = (query, variables) =>
   MetaNetwork.request(query, variables)
+
+/**
+ * Utility function to convert `username` into META-ID `id`
+ *
+ * @param  {String} username META-ID username
+ * @return {String}
+ */
+export const getMetaIdFromUsername = username => bufferToHex(sha3(username))
 
 /**
  * Add a new META Identity to the META Identity Index
@@ -46,8 +56,8 @@ export const createIdentity = variables =>
 export const readIdentity = variables =>
   metaNetworkRequest(
     `
-  query readIdentity($owner: String!) {
-    identity(owner: $owner) {
+  query readIdentity($id: String!) {
+    identity(id: $id) {
       id
       owner
       signature
