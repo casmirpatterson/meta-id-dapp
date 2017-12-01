@@ -11,6 +11,18 @@ export default makeRouteConfig(
   <Route Component={App}>
     <Route path={routes.home.path} Component={pages.Home} />
 
-    {/* <Route path={routes.sample.path} Component={pages.Sample} /> */}
+    <Route
+      path={`${routes.claim.path}/${routes.claim.params}`}
+      Component={pages.Claim}
+    />
+
+    <Route path={routes.login.path} Component={pages.Login} />
+
+    <Route path={routes.register.path} Component={pages.Register} />
+
+    <Route
+      path={`${routes.search.path}/${routes.search.params}`}
+      Component={pages.Search}
+    />
   </Route>
 )
