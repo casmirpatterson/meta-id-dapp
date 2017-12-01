@@ -14,15 +14,16 @@ export default createReducer(initialState, {
     handle(state, action, {
       success: prevState =>
         prevState.merge({
-          [action.payload.id]: createClaim(action.payload),
+          [action.payload.claim[0].id]: createClaim(action.payload.claim[0]),
         }),
     }),
 
+  // TODO - this needs to map over returned claims array
   [actions.READ_CLAIMS]: (state, action) =>
     handle(state, action, {
       success: prevState =>
         prevState.merge({
-          [action.payload.id]: createClaim(action.payload),
+          [action.payload.claim[0].id]: createClaim(action.payload.claim[0]),
         }),
     }),
 })
