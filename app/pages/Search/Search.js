@@ -16,11 +16,12 @@ class Search extends Component {
   }
 
   render() {
-    const { identity } = this.props
+    const { identity, routeParams } = this.props
 
     return (
       <div>
         <h2>Search</h2>
+        <p>{routeParams.id}</p>
         {identity && <p>Ethereum Address: {identity.owner}</p>}
       </div>
     )
