@@ -1,7 +1,7 @@
 import Home from './Home'
-// import Sample from './Sample'
+import Claim from './Claim'
+import Login from './Login'
+import Register from './Register'
+import Search from './Search'
 
-export {
-  Home,
-  // Sample,
-}
+export { Home, Claim, Login, Register, Search }
