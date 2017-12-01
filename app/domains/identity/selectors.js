@@ -19,8 +19,9 @@ const getAll = state => state.get(name)
  * @param  {Object} props React component props
  * @return {Object}       META Identity
  */
-const getIdentityById = (state, { match: { params } }) =>
-  state.getIn([name, MetaId.getMetaIdFromUsername(params.id)])
+const getIdentityById = (state, { match: { params } }) => {
+  return state.getIn([name, MetaId.getMetaIdFromUsername(params.id)])
+}
 
 export default {
   identityById: getIdentityById,
