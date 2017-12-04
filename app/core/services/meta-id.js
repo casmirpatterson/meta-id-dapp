@@ -64,17 +64,39 @@ export const createIdentity = variables => {
 }
 
 /**
- * Read a META Identity from the META Identity Index
+ * Read a META Identity from the META Identity Index by `id`
  *
- * @param  {Object} variables       [description]
- * @param  {String} variables.owner [description]
- * @return {Object}                 Response data
+ * @param  {Object} variables    Query variables
+ * @param  {String} variables.id Hash of username `sha3(username)`
+ * @return {Object}              Response data
  */
-export const readIdentity = variables => {
+export const readIdentityById = variables => {
   return metaNetworkRequest(
     `
       query readIdentity($id: String!) {
         identity(id: $id) {
+          id
+          owner
+          signature
+        }
+      }
+    `,
+    variables
+  )
+}
+
+/**
+ * Read a META Identity from the META Identity Index by `owner`
+ *
+ * @param  {Object} variables       Query variables
+ * @param  {String} variables.owner Ethereum address of META Identity
+ * @return {Object}                 Response data
+ */
+export const readIdentityByOwner = variables => {
+  return metaNetworkRequest(
+    `
+      query readIdentity($owner: String!) {
+        identity(owner: $owner) {
           id
           owner
           signature
