@@ -1,6 +1,6 @@
 import { isValidAddress } from 'ethereumjs-util'
 
-import { MetaId } from 'core/services'
+import { metaId } from 'core/util'
 import { name } from './constants'
 
 /**
@@ -9,7 +9,7 @@ import { name } from './constants'
  * @param  {Object} state Redux store
  * @return {Object}       Domain state
  */
-const getAll = state => state.get(name)
+// const getAll = state => state.get(name)
 
 /**
  * Select a META Identity by `id` or `owner` address
@@ -30,7 +30,7 @@ const getIdentityById = (state, { match: { params } }) => {
     identity = state.get(name).find(identity => identity.owner === params.id)
   } else {
     // select identity by `id` (`username` hash)
-    identity = state.getIn([name, MetaId.getMetaIdFromUsername(params.id)])
+    identity = state.getIn([name, metaId.getmetaIdFromUsername(params.id)])
   }
 
   return identity

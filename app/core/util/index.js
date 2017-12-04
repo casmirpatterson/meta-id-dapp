@@ -1,7 +1,8 @@
 import { NODE_ENV } from 'core/constants'
 import * as accounts from './eth-accounts'
+import * as metaId from './meta-id'
 
-export { accounts }
+export { accounts, metaId }
 
 /**
  * Check for development mode
