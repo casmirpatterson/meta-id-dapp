@@ -38,10 +38,10 @@ export const createMetaIdObject = (account, username) => {
 /**
  * Add a new META Identity to the META Identity Index
  *
- * @param  {Object} variables           [description]
- * @param  {String} variables.owner     [description]
- * @param  {String} variables.signature [description]
- * @param  {String} variables.username  [description]
+ * @param  {Object} variables           Query variables
+ * @param  {String} variables.owner     Ethereum address of META Identity
+ * @param  {String} variables.signature `username` signed with `owner` private key
+ * @param  {String} variables.username  Unique username
  * @return {Object}                     Response data
  */
 export const createIdentity = variables => {
@@ -110,11 +110,11 @@ export const readIdentityByOwner = variables => {
 /**
  * Add a new verifiable claim to the META Claims Index
  *
- * @param  {Object} variables           [description]
- * @param  {String} variables.claim     [description]
- * @param  {String} variables.issuer    [description]
- * @param  {String} variables.signature [description]
- * @param  {String} variables.subject   [description]
+ * @param  {Object} variables           Query variables
+ * @param  {String} variables.claim     Value of the claim
+ * @param  {String} variables.issuer    Ethereum address of issuer
+ * @param  {String} variables.signature Issuer's signature of the claim
+ * @param  {String} variables.subject   Ethereum address of subject
  * @return {Object}                     Response data
  */
 export const createClaim = variables => {
@@ -147,8 +147,8 @@ export const createClaim = variables => {
 /**
  * Read all verifiable claims from the META Claims Index by `issuer`
  *
- * @param  {Object} variables        [description]
- * @param  {String} variables.issuer [description]
+ * @param  {Object} variables        Query variables
+ * @param  {String} variables.issuer Ethereum address of META Identity
  * @return {Object}                  Response data
  */
 export const readClaimsByIssuer = variables => {
@@ -170,8 +170,8 @@ export const readClaimsByIssuer = variables => {
 /**
  * Read all verifiable claims from the META Claims Index by `subject`
  *
- * @param  {Object} variables         [description]
- * @param  {String} variables.subject [description]
+ * @param  {Object} variables         Query variables
+ * @param  {String} variables.subject Ethereum address of META Identity
  * @return {Object}                   Response data
  */
 export const readClaimsBySubject = variables => {
