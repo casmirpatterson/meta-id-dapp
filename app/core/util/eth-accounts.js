@@ -33,7 +33,6 @@ export const create = (encryptedKeystore, password) => {
 
   return {
     address,
-    privateKey,
     sign,
   }
 }
