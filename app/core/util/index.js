@@ -1,4 +1,7 @@
 import { NODE_ENV } from 'core/constants'
+import * as accounts from './eth-accounts'
+
+export { accounts }
 
 /**
  * Check for development mode
