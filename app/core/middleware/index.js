@@ -4,6 +4,7 @@ import { middleware as reduxPack } from 'redux-pack'
 import ClaimsMiddleware from './claims'
 import IdentityMiddleware from './identity'
 import SessionMiddleware from './session'
+import UIMiddleware from './ui'
 
 const createMiddleware = isDevelopment => {
   // default middleware
@@ -12,6 +13,7 @@ const createMiddleware = isDevelopment => {
     ClaimsMiddleware,
     IdentityMiddleware,
     SessionMiddleware,
+    UIMiddleware,
   ]
 
   // logger middleware in development
