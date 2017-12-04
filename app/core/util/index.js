@@ -22,20 +22,22 @@ export const isDomainAction = (domain, actionType) =>
   actionType.indexOf(domain) === 0
 
 /**
- * Check if async action has started
- *
- * @param  {Object}  action Flux Standard Action
- * @return {Boolean}        hasAsyncActionStarted
- */
-export const hasAsyncActionStarted = action => !action.payload && !action.error
-
-/**
  * Check if async action has failed
  *
  * @param  {Object}  action Flux Standard Action
  * @return {Boolean}        hasAsyncActionFailed
  */
-export const hasAsyncActionFailed = action => action.payload && action.error
+export const hasAsyncActionFailed = action =>
+  action.meta && action.meta['redux-pack/LIFECYCLE'] === 'failure'
+
+/**
+ * Check if async action has started
+ *
+ * @param  {Object}  action Flux Standard Action
+ * @return {Boolean}        hasAsyncActionStarted
+ */
+export const hasAsyncActionStarted = action =>
+  action.meta && action.meta['redux-pack/LIFECYCLE'] === 'start'
 
 /**
  * Check if async action has succeeded
@@ -43,15 +45,8 @@ export const hasAsyncActionFailed = action => action.payload && action.error
  * @param  {Object}  action Flux Standard Action
  * @return {Boolean}        hasAsyncActionSucceeded
  */
-export const hasAsyncActionSucceeded = action => action.payload && !action.error
-
-/**
- * Check if async action has finished
- *
- * @param  {Object}  action Flux Standard Action
- * @return {Boolean}        hasAsyncActionFinished
- */
-export const hasAsyncActionFinished = action => action.payload || action.error
+export const hasAsyncActionSucceeded = action =>
+  action.meta && action.meta['redux-pack/LIFECYCLE'] === 'success'
 
 export const readFileAsText = file =>
   new Promise((resolve, reject) => {
