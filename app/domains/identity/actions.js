@@ -16,12 +16,25 @@ export const createIdentity = (account, username) => ({
 })
 
 /**
+ * Retrieve a META Identity by `owner` address
+ *
+ * @param  {String} owner Ethereum address of META Identity owner
+ * @return {Object}       Flux Standard Action
+ */
+export const readIdentityByOwner = owner => ({
+  type: actions.READ_IDENTITY,
+  promise: MetaId.readIdentityByOwner({ owner }),
+})
+
+/**
  * Retrieve a META Identity by `username`
  *
  * @param  {String} username Username of META Identity owner
  * @return {Object}          Flux Standard Action
  */
-export const readIdentity = username => ({
+export const readIdentityByUsername = username => ({
   type: actions.READ_IDENTITY,
-  promise: MetaId.readIdentity({ id: MetaId.getMetaIdFromUsername(username) }),
+  promise: MetaId.readIdentityById({
+    id: MetaId.getMetaIdFromUsername(username),
+  }),
 })
