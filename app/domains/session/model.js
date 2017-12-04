@@ -2,11 +2,12 @@ import { Record } from 'immutable'
 
 /**
  * Session account Immutable.Record
+ *
  * @type {Record}
  */
 const Account = new Record({
   address: '',
-  privateKey: '',
+  sign: null,
 })
 
 /**
