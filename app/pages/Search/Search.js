@@ -40,7 +40,7 @@ class Search extends Component {
         {identity && <p>Ethereum Address: {identity.owner}</p>}
         {claims &&
           claims.map((claim, key) => (
-            <Link key={key} to={`${routes.search.path}/${claim.username}`}>
+            <Link key={key} to={`${routes.search.path}/${claim.issuer}`}>
               Claim verified by: {claim.issuer}
             </Link>
           ))}
