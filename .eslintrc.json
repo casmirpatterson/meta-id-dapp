@@ -2,5 +2,9 @@
   "extends": "jaak",
   "globals": {
     "Buffer": false
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2017
   }
 }
