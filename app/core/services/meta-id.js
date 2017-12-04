@@ -47,18 +47,18 @@ export const createMetaIdObject = (account, username) => {
 export const createIdentity = variables =>
   metaNetworkRequest(
     `
-  mutation CreateIdentity(
-    $username: String,
-    $owner: String,
-    $signature: String
-  ) {
-    createIdentity(username: $username, owner: $owner, signature: $signature) {
-      id
-      owner
-      signature
+    mutation CreateIdentity(
+      $username: String,
+      $owner: String,
+      $signature: String
+    ) {
+      createIdentity(username: $username, owner: $owner, signature: $signature) {
+        id
+        owner
+        signature
+      }
     }
-  }
-`,
+  `,
     variables
   )
 
@@ -72,14 +72,14 @@ export const createIdentity = variables =>
 export const readIdentity = variables =>
   metaNetworkRequest(
     `
-  query readIdentity($id: String!) {
-    identity(id: $id) {
-      id
-      owner
-      signature
+    query readIdentity($id: String!) {
+      identity(id: $id) {
+        id
+        owner
+        signature
+      }
     }
-  }
-`,
+  `,
     variables
   )
 
@@ -96,26 +96,26 @@ export const readIdentity = variables =>
 export const createClaim = variables =>
   metaNetworkRequest(
     `
-  mutation CreateClaim(
-    $issuer: String,
-    $subject: String,
-    $claim: String,
-    $signature: String
-  ) {
-    createClaim(
-      issuer: $issuer,
-      subject: $subject,
-      claim: $claim,
-      signature: $signature
+    mutation CreateClaim(
+      $issuer: String,
+      $subject: String,
+      $claim: String,
+      $signature: String
     ) {
-      id
-      issuer
-      subject
-      claim
-      signature
+      createClaim(
+        issuer: $issuer,
+        subject: $subject,
+        claim: $claim,
+        signature: $signature
+      ) {
+        id
+        issuer
+        subject
+        claim
+        signature
+      }
     }
-  }
-`,
+  `,
     variables
   )
 
@@ -129,15 +129,15 @@ export const createClaim = variables =>
 export const readClaimsByIssuer = variables =>
   metaNetworkRequest(
     `
-  query readClaimsByIssuer($issuer: String) {
-    claim (issuer: $issuer) {
-      id
-      issuer
-      subject
-      claim
+    query readClaimsByIssuer($issuer: String) {
+      claim (issuer: $issuer) {
+        id
+        issuer
+        subject
+        claim
+      }
     }
-  }
-`,
+  `,
     variables
   )
 
@@ -151,14 +151,14 @@ export const readClaimsByIssuer = variables =>
 export const readClaimsBySubject = variables =>
   metaNetworkRequest(
     `
-  query readClaimsBySubject($subject: String) {
-    claim (subject: $subject) {
-      id
-      issuer
-      subject
-      claim
+    query readClaimsBySubject($subject: String) {
+      claim (subject: $subject) {
+        id
+        issuer
+        subject
+        claim
+      }
     }
-  }
-`,
+  `,
     variables
   )
