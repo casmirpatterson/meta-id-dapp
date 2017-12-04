@@ -1,4 +1,5 @@
 import { MetaId } from 'core/services'
+import { metaId } from 'core/util'
 import * as actions from './actionTypes'
 
 /**
@@ -12,7 +13,7 @@ import * as actions from './actionTypes'
  */
 export const createIdentity = (account, username) => ({
   type: actions.CREATE_IDENTITY,
-  promise: MetaId.createIdentity(MetaId.createMetaIdObject(account, username)),
+  promise: MetaId.createIdentity(metaId.createMetaIdObject(account, username)),
 })
 
 /**
@@ -35,6 +36,6 @@ export const readIdentityByOwner = owner => ({
 export const readIdentityByUsername = username => ({
   type: actions.READ_IDENTITY,
   promise: MetaId.readIdentityById({
-    id: MetaId.getMetaIdFromUsername(username),
+    id: metaId.getMetaIdFromUsername(username),
   }),
 })

@@ -21,7 +21,9 @@ export default createReducer(initialState, {
     handle(state, action, {
       success: prevState =>
         prevState.merge({
-          [action.payload.claim[0].id]: createClaim(action.payload.claim[0]),
+          [action.payload.createClaim.id]: model.claimFactory(
+            action.payload.createClaim
+          ),
         }),
     }),
 
