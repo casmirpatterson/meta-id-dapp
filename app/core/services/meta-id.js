@@ -44,23 +44,24 @@ export const createMetaIdObject = (account, username) => {
  * @param  {String} variables.username  [description]
  * @return {Object}                     Response data
  */
-export const createIdentity = variables =>
-  metaNetworkRequest(
+export const createIdentity = variables => {
+  return metaNetworkRequest(
     `
-    mutation CreateIdentity(
-      $username: String,
-      $owner: String,
-      $signature: String
-    ) {
-      createIdentity(username: $username, owner: $owner, signature: $signature) {
-        id
-        owner
-        signature
+      mutation CreateIdentity(
+        $username: String,
+        $owner: String,
+        $signature: String
+      ) {
+        createIdentity(username: $username, owner: $owner, signature: $signature) {
+          id
+          owner
+          signature
+        }
       }
-    }
-  `,
+    `,
     variables
   )
+}
 
 /**
  * Read a META Identity from the META Identity Index
@@ -69,19 +70,20 @@ export const createIdentity = variables =>
  * @param  {String} variables.owner [description]
  * @return {Object}                 Response data
  */
-export const readIdentity = variables =>
-  metaNetworkRequest(
+export const readIdentity = variables => {
+  return metaNetworkRequest(
     `
-    query readIdentity($id: String!) {
-      identity(id: $id) {
-        id
-        owner
-        signature
+      query readIdentity($id: String!) {
+        identity(id: $id) {
+          id
+          owner
+          signature
+        }
       }
-    }
-  `,
+    `,
     variables
   )
+}
 
 /**
  * Add a new verifiable claim to the META Claims Index
@@ -93,31 +95,32 @@ export const readIdentity = variables =>
  * @param  {String} variables.subject   [description]
  * @return {Object}                     Response data
  */
-export const createClaim = variables =>
-  metaNetworkRequest(
+export const createClaim = variables => {
+  return metaNetworkRequest(
     `
-    mutation CreateClaim(
-      $issuer: String,
-      $subject: String,
-      $claim: String,
-      $signature: String
-    ) {
-      createClaim(
-        issuer: $issuer,
-        subject: $subject,
-        claim: $claim,
-        signature: $signature
+      mutation CreateClaim(
+        $issuer: String,
+        $subject: String,
+        $claim: String,
+        $signature: String
       ) {
-        id
-        issuer
-        subject
-        claim
-        signature
+        createClaim(
+          issuer: $issuer,
+          subject: $subject,
+          claim: $claim,
+          signature: $signature
+        ) {
+          id
+          issuer
+          subject
+          claim
+          signature
+        }
       }
-    }
-  `,
+    `,
     variables
   )
+}
 
 /**
  * Read all verifiable claims from the META Claims Index by `issuer`
@@ -126,20 +129,21 @@ export const createClaim = variables =>
  * @param  {String} variables.issuer [description]
  * @return {Object}                  Response data
  */
-export const readClaimsByIssuer = variables =>
-  metaNetworkRequest(
+export const readClaimsByIssuer = variables => {
+  return metaNetworkRequest(
     `
-    query readClaimsByIssuer($issuer: String) {
-      claim (issuer: $issuer) {
-        id
-        issuer
-        subject
-        claim
+      query readClaimsByIssuer($issuer: String) {
+        claim (issuer: $issuer) {
+          id
+          issuer
+          subject
+          claim
+        }
       }
-    }
-  `,
+    `,
     variables
   )
+}
 
 /**
  * Read all verifiable claims from the META Claims Index by `subject`
@@ -148,17 +152,18 @@ export const readClaimsByIssuer = variables =>
  * @param  {String} variables.subject [description]
  * @return {Object}                   Response data
  */
-export const readClaimsBySubject = variables =>
-  metaNetworkRequest(
+export const readClaimsBySubject = variables => {
+  return metaNetworkRequest(
     `
-    query readClaimsBySubject($subject: String) {
-      claim (subject: $subject) {
-        id
-        issuer
-        subject
-        claim
+      query readClaimsBySubject($subject: String) {
+        claim (subject: $subject) {
+          id
+          issuer
+          subject
+          claim
+        }
       }
-    }
-  `,
+    `,
     variables
   )
+}
