@@ -21,6 +21,21 @@ const metaNetworkRequest = (query, variables) =>
 export const getMetaIdFromUsername = username => bufferToHex(sha3(username))
 
 /**
+ * Utility function to create a valid META-ID object to register a new identity
+ *
+ * @param  {Object} account  Ethereum account object
+ * @param  {String} username Identity username
+ * @return {Object}          META-ID object
+ */
+export const createMetaIdObject = (account, username) => {
+  return {
+    owner: account.address,
+    signature: account.sign(username),
+    username: username,
+  }
+}
+
+/**
  * Add a new META Identity to the META Identity Index
  *
  * @param  {Object} variables           [description]
@@ -40,6 +55,7 @@ export const createIdentity = variables =>
     createIdentity(username: $username, owner: $owner, signature: $signature) {
       id
       owner
+      signature
     }
   }
 `,
