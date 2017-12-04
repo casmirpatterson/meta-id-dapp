@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { isValidAddress } from 'ethereumjs-util'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
@@ -16,7 +17,17 @@ class Search extends Component {
   componentDidMount() {
     const { actions, routeParams } = this.props
 
-    return actions.readIdentity(routeParams.id)
+    let readIdentity
+
+    // check `id` route parameter for `owner` address or `username` string
+    if (isValidAddress(routeParams.id)) {
+      readIdentity = actions.readIdentityByOwner
+    } else {
+      readIdentity = actions.readIdentityByUsername
+    }
+
+    // fetch identity by `owner` || `username`
+    return readIdentity(routeParams.id)
   }
 
   render() {
