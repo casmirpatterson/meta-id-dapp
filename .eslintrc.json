@@ -1,3 +1,6 @@
 {
-  "extends": "jaak"
+  "extends": "jaak",
+  "globals": {
+    "Buffer": false
+  }
 }
