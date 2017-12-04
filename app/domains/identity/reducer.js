@@ -14,7 +14,9 @@ export default createReducer(initialState, {
     handle(state, action, {
       success: prevState =>
         prevState.merge({
-          [action.payload.identity[0].id]: createIdentity(action.payload.identity[0]),
+          [action.payload.createIdentity.id]: createIdentity(
+            action.payload.createIdentity
+          ),
         }),
     }),
 
@@ -22,7 +24,9 @@ export default createReducer(initialState, {
     handle(state, action, {
       success: prevState =>
         prevState.merge({
-          [action.payload.identity[0].id]: createIdentity(action.payload.identity[0]),
+          [action.payload.identity[0].id]: createIdentity(
+            action.payload.identity[0]
+          ),
         }),
     }),
 })
