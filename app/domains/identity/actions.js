@@ -4,15 +4,15 @@ import * as actions from './actionTypes'
 /**
  * Register a META Identity
  *
- * @param  {Object} identity           META Identity data
- * @param  {String} identity.owner     Ethereum address of META Identity owner
- * @param  {String} identity.signature `username` signed with `owner` private key
- * @param  {String} identity.username  Unique username
- * @return {Object}                    Flux Standard Action
+ * @param  {Object}   account         Ethereum account object
+ * @param  {String}   account.address Account Ethereum address
+ * @param  {Function} account.sign    Account message signing method
+ * @param  {String}   username        Unique username
+ * @return {Object}                   Flux Standard Action
  */
-export const createIdentity = identity => ({
+export const createIdentity = (account, username) => ({
   type: actions.CREATE_IDENTITY,
-  promise: MetaId.createIdentity(identity),
+  promise: MetaId.createIdentity(MetaId.createMetaIdObject(account, username)),
 })
 
 /**
