@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { MetaId } from 'core/services'
 import { accounts } from 'core/util'
 import { actions as IdentityActions } from 'domains/identity'
 import { actions as SessionActions } from 'domains/session'
@@ -18,14 +17,10 @@ class Register extends Component {
     // create an Ethereum account object
     const account = accounts.create(encryptedKeystore, password)
 
-    // construct META-ID object
-    const identity = MetaId.createMetaIdObject(account, username)
-
-    // log the new account in
-    actions.login(account)
-
-    // create a new META-ID
-    return actions.createIdentity(identity)
+    // create a new META-ID and log the new account in
+    return actions
+      .createIdentity(account, username)
+      .then(() => actions.login(account))
   }
 
   render() {
