@@ -5,7 +5,7 @@ export default {
   },
   claim: {
     path: '/claim',
-    params: ':id',
+    params: ':provider?',
   },
   login: {
     path: '/login',
