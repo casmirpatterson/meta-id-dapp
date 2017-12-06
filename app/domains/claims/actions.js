@@ -1,5 +1,5 @@
 import * as actions from './actionTypes'
-import { MetaId } from 'core/services'
+import { MetaClaims, MetaId } from 'core/services'
 
 /**
  * Add a verifiable claim to the META Claims Index
@@ -36,4 +36,16 @@ export const readClaimsByIssuer = issuer => ({
 export const readClaimsBySubject = subject => ({
   type: actions.READ_CLAIMS,
   promise: MetaId.readClaimsBySubject({ subject }),
+})
+
+/**
+ * Verify a META Claim with a META Claims Service
+ *
+ * @param  {Object} claim   Valid META Claim object
+ * @param  {String} service META Claims Service URL
+ * @return {Object}         Flux Standard Action
+ */
+export const verifyClaim = (claim, service) => ({
+  type: actions.VERIFY_CLAIM,
+  promise: MetaClaims.verifyClaim(claim, service),
 })
