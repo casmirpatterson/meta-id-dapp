@@ -3,50 +3,75 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 
+import { META_CLAIMS_SERVICES } from 'core/constants'
+import { metaId, spotify } from 'core/util'
 import { actions as ClaimsActions } from 'domains/claims'
 import { selectors as SessionSelectors } from 'domains/session'
 
+import * as Components from './components'
+
 class Claim extends Component {
-  onMetaClaimsServiceRequest = () => {
-    const { account, actions } = this.props
+  componentDidMount() {
+    const { routeParams } = this.props
 
-    // construct the verified claim object
-    // TODO - send MCS request (not used for now)
-    // createMetaClaimObject(account, 'someClaimMessage')
+    if (routeParams.provider) {
+      // TODO - retrieve `claimMessage` { oauth.provider.claimMessge } from redux store/sessionStorage
+      const claimMessage = 'lukehedger' // TEMP
 
-    // construct the verified claim object
-    // TODO - handle MCS response (mocked for now)
-    const claim = {
-      claim: 'abcdefg',
-      issuer: '0x06b94c7d6039f4009dcad7c9b3cd0e5a0ba4a928',
-      subject: account.address,
-      signature:
-        '0x445e600c32a87c3471d91400f45b7e57306dc6ff768cc6656bd0aa11a2466b523dddb45db91e570b8bd7f9bc8dd3728e797314ea75542139f96ae20bcfdab63700',
+      return this.onMetaClaimsServiceCallback(
+        claimMessage,
+        routeParams.provider
+      )
+    }
+  }
+
+  onMetaClaimsServiceCallback = (claimMessage, provider) => {
+    const { account, actions, location } = this.props
+
+    const extraData = {}
+
+    // TODO - this should be smarter 🤓
+    if (provider === 'spotify') {
+      // extract Spotify OAuth access token from URL location hash
+      extraData.oAuthToken = spotify.getOAuthTokenFromCallbackHash(
+        location.hash
+      )
     }
 
-    actions.createClaim(claim)
+    // construct the verified claim object
+    const claim = metaId.createMetaClaimObject(account, claimMessage, extraData)
+
+    // request verification of claim from META Claims Service and add to index
+    return actions
+      .verifyClaim(claim, META_CLAIMS_SERVICES[provider].url)
+      .then(({ payload }) => actions.createClaim(payload))
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  onSpotifyClaimsServiceRequest = claimMessge => {
+    // TODO - store `claimMessage` { oauth.provider.claimMessage } in redux store/sessionStorage
+
+    return (window.location.href = spotify.generateOAuthURL())
   }
 
   render() {
-    const { routeParams } = this.props
-
     return (
       <div>
         <h2>Claim</h2>
 
-        <p>{routeParams.id}.id.meta</p>
+        <Components.ClaimsService
+          claimButtonText="JAAK META Claims Service"
+          claimInputPlaceholder="META-ID"
+          claimProvider="jaak"
+          onClaimsServiceRequest={this.onMetaClaimsServiceCallback}
+        />
 
-        <button onClick={() => this.onMetaClaimsServiceRequest()}>
-          JAAK META Claims Service
-        </button>
-
-        <button onClick={() => this.onMetaClaimsServiceRequest()}>
-          Spotify META Claims Service
-        </button>
-
-        <button onClick={() => this.onMetaClaimsServiceRequest()}>
-          Twitter META Claims Service
-        </button>
+        <Components.ClaimsService
+          claimButtonText="Spotify META Claims Service"
+          claimInputPlaceholder="Spotify username"
+          claimProvider="spotify"
+          onClaimsServiceRequest={this.onSpotifyClaimsServiceRequest}
+        />
       </div>
     )
   }
