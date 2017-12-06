@@ -45,7 +45,7 @@ class Search extends Component {
             </Link>
           ))}
         {isSessionAccount && (
-          <Link to={`${routes.claim.path}/${routeParams.id}`}>
+          <Link to={routes.claim.path}>
             <button>New Claim</button>
           </Link>
         )}
