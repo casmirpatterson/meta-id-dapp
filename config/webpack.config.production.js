@@ -23,7 +23,7 @@ const PATHS = {
 module.exports = {
   devtool: 'source-map',
 
-  entry: PATHS.src,
+  entry: ['babel-polyfill', PATHS.src],
 
   output: {
     path: PATHS.dist,
