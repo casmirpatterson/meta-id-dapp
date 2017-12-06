@@ -1,8 +1,9 @@
 import { NODE_ENV } from 'core/constants'
 import * as accounts from './eth-accounts'
 import * as metaId from './meta-id'
+import * as spotify from './spotify'
 
-export { accounts, metaId }
+export { accounts, metaId, spotify }
 
 /**
  * Check for development mode
