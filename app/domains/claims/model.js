@@ -6,6 +6,7 @@ import { Record } from 'immutable'
  */
 const Claim = new Record({
   id: '',
+  claim: '',
   issuer: '',
   signature: '',
   subject: '',
