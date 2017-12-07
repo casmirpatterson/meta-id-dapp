@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
 import { Text } from 'jaak-primitives'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import { ThemeProvider } from 'styled-components'
 
 import { Logo } from 'core/components'
-import { Footer, Header, Image, Main, View } from 'core/primitives'
+import {
+  Footer,
+  Header,
+  Image,
+  Main,
+  Text as CustomText,
+  View,
+} from 'core/primitives'
 import { theme } from 'core/style'
+import { selectors as SessionSelectors } from 'domains/session'
 
 class App extends Component {
   render() {
-    const { children } = this.props
+    const { children, sessionIdentity } = this.props
 
     return (
       <ThemeProvider theme={theme}>
@@ -21,6 +31,10 @@ class App extends Component {
           <Main>
             <Header padding={['16px']}>
               <Logo maxWidth="314px" size={['58px', 'auto']} />
+
+              {sessionIdentity && (
+                <CustomText>{sessionIdentity.owner}</CustomText>
+              )}
             </Header>
 
             {children}
@@ -46,4 +60,8 @@ class App extends Component {
   }
 }
 
-export default App
+export default connect(
+  createStructuredSelector({
+    sessionIdentity: SessionSelectors.sessionIdentity,
+  })
+)(App)
