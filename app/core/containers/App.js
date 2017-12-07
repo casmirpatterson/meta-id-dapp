@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
@@ -14,6 +15,12 @@ import {
 } from 'domains/session'
 
 class App extends Component {
+  getChildContext() {
+    return {
+      router: this.props.router,
+    }
+  }
+
   render() {
     const { actions, children, sessionIdentity } = this.props
 
@@ -69,6 +76,10 @@ class App extends Component {
       </ThemeProvider>
     )
   }
+}
+
+App.childContextTypes = {
+  router: PropTypes.object,
 }
 
 export default connect(
