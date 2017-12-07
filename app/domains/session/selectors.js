@@ -26,7 +26,7 @@ const getAccount = createSelector([getAll], state => {
  * @type {String}
  */
 const getAccountAddress = createSelector([getAccount], account => {
-  return account.address
+  return account.get('address')
 })
 
 /**
@@ -46,7 +46,9 @@ const getIsLoggedIn = createSelector([getAccount], account => {
 const getIsSessionAccount = createSelector(
   [getAccount, Identity.identityById],
   (account, identity) => {
-    return Boolean(account && identity && account.address === identity.owner)
+    return Boolean(
+      account && identity && account.get('address') === identity.get('owner')
+    )
   }
 )
 
