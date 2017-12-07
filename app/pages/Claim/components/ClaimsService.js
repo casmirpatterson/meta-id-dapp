@@ -27,7 +27,7 @@ const enhance = compose(
   withState(
     'claimInput',
     'setClaimInput',
-    ({ claimInputDefaultValue }) => claimInputDefaultValue
+    ({ claimInputDefaultValue }) => claimInputDefaultValue || ''
   )
 )
 
