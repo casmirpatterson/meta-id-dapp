@@ -13,8 +13,8 @@ const ClaimsMiddleware = ({ dispatch }) => next => action => {
   if (!isDomainAction(name, action.type)) return next(action)
 
   if (
-    claims.CREATE_CLAIM === action.type ||
-    (claims.VERIFY_CLAIM === action.type && hasAsyncActionFailed(action))
+    (hasAsyncActionFailed(action) && claims.CREATE_CLAIM === action.type) ||
+    (hasAsyncActionFailed(action) && claims.VERIFY_CLAIM === action.type)
   ) {
     dispatch(farce.push(`${routes.claim.path}`))
   }
