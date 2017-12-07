@@ -10,7 +10,9 @@ import { theme } from 'jaak-primitives'
  */
 const customTheme = {
   ...theme,
+  accent: '#EF3581',
   primary: '#251E2F',
+  jaak: '#F08F74',
 }
 
 export default customTheme
