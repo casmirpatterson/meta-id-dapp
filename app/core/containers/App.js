@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
-import { Text } from 'jaak-primitives'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { ThemeProvider } from 'styled-components'
 
 import { Logo } from 'core/components'
-import {
-  Footer,
-  Header,
-  Image,
-  Main,
-  Text as CustomText,
-  View,
-} from 'core/primitives'
+import { Footer, Header, Image, Main, Text, View } from 'core/primitives'
 import { theme } from 'core/style'
 import { selectors as SessionSelectors } from 'domains/session'
 
@@ -32,16 +24,14 @@ class App extends Component {
             <Header padding={['16px']}>
               <Logo maxWidth="314px" size={['58px', 'auto']} />
 
-              {sessionIdentity && (
-                <CustomText>{sessionIdentity.owner}</CustomText>
-              )}
+              {sessionIdentity && <Text>{sessionIdentity.owner}</Text>}
             </Header>
 
             {children}
           </Main>
 
           <Footer>
-            <Text display="inline-block" fontSize="12px">
+            <Text color="jaak" display="inline-block" fontSize="12px">
               &#60; &#47;&#62; by
             </Text>
 
