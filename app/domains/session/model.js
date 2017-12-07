@@ -7,7 +7,7 @@ import { Record } from 'immutable'
  */
 const Account = new Record({
   address: '',
-  sign: null,
+  privateKey: '',
 })
 
 /**

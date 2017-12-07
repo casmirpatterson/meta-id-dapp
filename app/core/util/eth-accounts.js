@@ -28,12 +28,9 @@ export const create = (encryptedKeystore, password) => {
   // extract checksum hex address from decrypted keystore
   const address = decryptedKeystore.getChecksumAddressString()
 
-  // attach account signing function
-  const sign = message => signMessage(message, privateKey)
-
   return {
     address,
-    sign,
+    privateKey,
   }
 }
 
