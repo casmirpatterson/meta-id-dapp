@@ -7,9 +7,9 @@ import { actions } from 'domains/ui'
 
 const UIMiddleware = ({ dispatch }) => next => action => {
   if (hasAsyncActionFailed(action)) {
-    dispatch(
-      actions.update({ error: action.payload.errors, isRequesting: false })
-    )
+    const errors = action.payload.errors || action.payload.response.errors
+
+    dispatch(actions.update({ error: errors, isRequesting: false }))
   }
 
   if (hasAsyncActionStarted(action)) {
