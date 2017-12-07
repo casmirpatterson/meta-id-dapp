@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { ThemeProvider } from 'styled-components'
 
-import { Logo } from 'core/components'
+import { Link, Logo } from 'core/components'
 import { Footer, Header, Image, Main, Text, View } from 'core/primitives'
+import { routes } from 'core/routes'
 import { theme } from 'core/style'
 import { selectors as SessionSelectors } from 'domains/session'
 
@@ -22,9 +23,13 @@ class App extends Component {
         >
           <Main>
             <Header padding={['16px']}>
-              <Logo maxWidth="314px" size={['58px', 'auto']} />
+              <Link to={routes.home.path}>
+                <Logo maxWidth="314px" size={['58px', 'auto']} />
+              </Link>
 
-              {sessionIdentity && <Text>{sessionIdentity.owner}</Text>}
+              {sessionIdentity && (
+                <Text textAlign="center">{sessionIdentity.owner}</Text>
+              )}
             </Header>
 
             {children}
