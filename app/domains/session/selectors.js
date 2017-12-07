@@ -52,9 +52,19 @@ const getIsSessionAccount = createSelector(
   }
 )
 
+/**
+ * Get OAuth claim message
+ *
+ * @type {String}
+ */
+const getOAuthClaimMessage = createSelector([getAll], state => {
+  return state.get('oAuthClaimMessage')
+})
+
 export default {
   account: getAccount,
   accountAddress: getAccountAddress,
   isLoggedIn: getIsLoggedIn,
   isSessionAccount: getIsSessionAccount,
+  oAuthClaimMessage: getOAuthClaimMessage,
 }
