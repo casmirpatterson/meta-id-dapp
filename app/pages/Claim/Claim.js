@@ -41,10 +41,11 @@ class Claim extends Component {
     // construct the verified claim object
     const claim = metaId.createMetaClaimObject(account, claimMessage, extraData)
 
-    // request verification of claim from META Claims Service and add to index
+    // request verification of claim from META Claims Service
+    // then add to index if verified
     return actions
       .verifyClaim(claim, META_CLAIMS_SERVICES[provider].url)
-      .then(({ payload }) => actions.createClaim(payload))
+      .then(({ error, payload }) => !error && actions.createClaim(payload))
   }
 
   onSpotifyClaimsServiceRequest = claimMessage => {
