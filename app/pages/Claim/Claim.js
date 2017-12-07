@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 
 import { META_CLAIMS_SERVICES } from 'core/constants'
+import Protected from 'core/containers/Protected'
 import { metaId, spotify } from 'core/util'
 import { actions as ClaimsActions } from 'domains/claims'
 import {
@@ -62,7 +63,7 @@ class Claim extends Component {
     const { oAuthClaimMessage } = this.props
 
     return (
-      <div>
+      <Protected>
         <h2>Claim</h2>
 
         <Components.ClaimsService
@@ -79,7 +80,7 @@ class Claim extends Component {
           claimProvider="spotify"
           onClaimsServiceRequest={this.onSpotifyClaimsServiceRequest}
         />
-      </div>
+      </Protected>
     )
   }
 }
