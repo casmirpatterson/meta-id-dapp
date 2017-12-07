@@ -23,6 +23,12 @@ const ClaimsService = ({
   </div>
 )
 
-const enhance = compose(withState('claimInput', 'setClaimInput', ''))
+const enhance = compose(
+  withState(
+    'claimInput',
+    'setClaimInput',
+    ({ claimInputDefaultValue }) => claimInputDefaultValue
+  )
+)
 
 export default enhance(ClaimsService)
