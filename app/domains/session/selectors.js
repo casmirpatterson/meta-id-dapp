@@ -17,7 +17,7 @@ const getAll = state => state.get(name)
  * @type {Object}
  */
 const getAccount = createSelector([getAll], state => {
-  return state.get('account').toObject()
+  return state.get('account') && state.get('account').toObject()
 })
 
 /**
@@ -26,7 +26,7 @@ const getAccount = createSelector([getAll], state => {
  * @type {String}
  */
 const getAccountAddress = createSelector([getAccount], account => {
-  return account.address
+  return account && account.address
 })
 
 /**
