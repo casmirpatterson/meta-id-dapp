@@ -61,10 +61,23 @@ const getOAuthClaimMessage = createSelector([getAll], state => {
   return state.get('oAuthClaimMessage')
 })
 
+/**
+ * Get META Identity of session account
+ *
+ * @type {Object}
+ */
+const getSessionIdentity = createSelector(
+  [getAccountAddress, Identity.identity],
+  (address, identity) => {
+    return identity.find(({ owner }) => owner === address)
+  }
+)
+
 export default {
   account: getAccount,
   accountAddress: getAccountAddress,
   isLoggedIn: getIsLoggedIn,
   isSessionAccount: getIsSessionAccount,
   oAuthClaimMessage: getOAuthClaimMessage,
+  sessionIdentity: getSessionIdentity,
 }

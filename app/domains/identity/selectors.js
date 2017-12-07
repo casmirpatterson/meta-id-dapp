@@ -9,7 +9,7 @@ import { name } from './constants'
  * @param  {Object} state Redux store
  * @return {Object}       Domain state
  */
-// const getAll = state => state.get(name)
+const getAll = state => state.get(name)
 
 /**
  * Select a META Identity by `id` or `owner` address
@@ -39,5 +39,6 @@ const getIdentityById = (state, { match: { params } }) => {
 }
 
 export default {
+  identity: getAll,
   identityById: getIdentityById,
 }
