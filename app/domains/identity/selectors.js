@@ -27,10 +27,12 @@ const getIdentityById = (state, { match: { params } }) => {
   // check `id` route parameter for `owner` address or `username` string
   if (isValidAddress(params.id)) {
     // select identity by `owner` address
-    identity = state.get(name).find(identity => identity.owner === params.id)
+    identity = state
+      .get(name)
+      .find(identity => identity.get('owner') === params.id)
   } else {
     // select identity by `id` (`username` hash)
-    identity = state.getIn([name, metaId.getmetaIdFromUsername(params.id)])
+    identity = state.getIn([name, metaId.getMetaIdFromUsername(params.id)])
   }
 
   return identity

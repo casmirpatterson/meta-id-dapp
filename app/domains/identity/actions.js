@@ -5,11 +5,11 @@ import * as actions from './actionTypes'
 /**
  * Register a META Identity
  *
- * @param  {Object}   account         Ethereum account object
- * @param  {String}   account.address Account Ethereum address
- * @param  {Function} account.sign    Account message signing method
- * @param  {String}   username        Unique username
- * @return {Object}                   Flux Standard Action
+ * @param  {Object} account            Ethereum account object
+ * @param  {String} account.address    Account Ethereum address
+ * @param  {String} account.privateKey Account private key
+ * @param  {String} username           Unique username
+ * @return {Object}                    Flux Standard Action
  */
 export const createIdentity = (account, username) => ({
   type: actions.CREATE_IDENTITY,

@@ -21,7 +21,9 @@ const getAll = state => state.get(name)
 const getClaimsBySubject = createSelector(
   [getAll, Identity.identityById],
   (claims, identity) => {
-    return claims.filter(claim => claim.subject === identity.owner).toArray()
+    return claims
+      .filter(claim => claim.get('subject') === identity.get('owner'))
+      .toArray()
   }
 )
 

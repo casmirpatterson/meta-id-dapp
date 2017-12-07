@@ -6,20 +6,20 @@ import { createStructuredSelector } from 'reselect'
 import { META_CLAIMS_SERVICES } from 'core/constants'
 import { metaId, spotify } from 'core/util'
 import { actions as ClaimsActions } from 'domains/claims'
-import { selectors as SessionSelectors } from 'domains/session'
+import {
+  actions as SessionActions,
+  selectors as SessionSelectors,
+} from 'domains/session'
 
 import * as Components from './components'
 
 class Claim extends Component {
   componentDidMount() {
-    const { routeParams } = this.props
+    const { oAuthClaimMessage, routeParams } = this.props
 
     if (routeParams.provider) {
-      // TODO - retrieve `claimMessage` { oauth.provider.claimMessge } from redux store/sessionStorage
-      const claimMessage = 'lukehedger' // TEMP
-
       return this.onMetaClaimsServiceCallback(
-        claimMessage,
+        oAuthClaimMessage,
         routeParams.provider
       )
     }
@@ -41,20 +41,26 @@ class Claim extends Component {
     // construct the verified claim object
     const claim = metaId.createMetaClaimObject(account, claimMessage, extraData)
 
-    // request verification of claim from META Claims Service and add to index
+    // request verification of claim from META Claims Service
+    // then add to index if verified
     return actions
       .verifyClaim(claim, META_CLAIMS_SERVICES[provider].url)
-      .then(({ payload }) => actions.createClaim(payload))
+      .then(({ error, payload }) => !error && actions.createClaim(payload))
   }
 
-  // eslint-disable-next-line no-unused-vars
-  onSpotifyClaimsServiceRequest = claimMessge => {
-    // TODO - store `claimMessage` { oauth.provider.claimMessage } in redux store/sessionStorage
+  onSpotifyClaimsServiceRequest = claimMessage => {
+    const { actions } = this.props
 
+    // store claim message to persist over OAuth flow
+    actions.setOAuthClaimMessage(claimMessage)
+
+    // redirect to Spotify OAuth gateway
     return (window.location.href = spotify.generateOAuthURL())
   }
 
   render() {
+    const { oAuthClaimMessage } = this.props
+
     return (
       <div>
         <h2>Claim</h2>
@@ -68,6 +74,7 @@ class Claim extends Component {
 
         <Components.ClaimsService
           claimButtonText="Spotify META Claims Service"
+          claimInputDefaultValue={oAuthClaimMessage}
           claimInputPlaceholder="Spotify username"
           claimProvider="spotify"
           onClaimsServiceRequest={this.onSpotifyClaimsServiceRequest}
@@ -80,8 +87,12 @@ class Claim extends Component {
 export default connect(
   createStructuredSelector({
     account: SessionSelectors.account,
+    oAuthClaimMessage: SessionSelectors.oAuthClaimMessage,
   }),
   dispatch => ({
-    actions: bindActionCreators({ ...ClaimsActions }, dispatch),
+    actions: bindActionCreators(
+      { ...ClaimsActions, ...SessionActions },
+      dispatch
+    ),
   })
 )(Claim)

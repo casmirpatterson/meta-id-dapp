@@ -19,3 +19,14 @@ export const login = account => ({
 export const logout = () => ({
   type: actions.LOGOUT,
 })
+
+/**
+ * Store a claim message sent to an OAuth provider for retrieval after callback
+ *
+ * @param  {String} oAuthClaimMessage Raw claim message
+ * @return {Object}                   Flux Standard Action
+ */
+export const setOAuthClaimMessage = oAuthClaimMessage => ({
+  type: actions.SET_OAUTH_CLAIM_MESSAGE,
+  payload: { oAuthClaimMessage },
+})
