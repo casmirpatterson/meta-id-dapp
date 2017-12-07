@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 import { ThemeProvider } from 'styled-components'
 
@@ -7,11 +8,14 @@ import { Link, Logo } from 'core/components'
 import { Footer, Header, Image, Main, Text, View } from 'core/primitives'
 import { routes } from 'core/routes'
 import { theme } from 'core/style'
-import { selectors as SessionSelectors } from 'domains/session'
+import {
+  actions as SessionActions,
+  selectors as SessionSelectors,
+} from 'domains/session'
 
 class App extends Component {
   render() {
-    const { children, sessionIdentity } = this.props
+    const { actions, children, sessionIdentity } = this.props
 
     return (
       <ThemeProvider theme={theme}>
@@ -28,7 +32,9 @@ class App extends Component {
               </Link>
 
               {sessionIdentity && (
-                <Text textAlign="center">{sessionIdentity.owner}</Text>
+                <Text margin={['16px', '0']} textAlign="center">
+                  {sessionIdentity.owner}
+                </Text>
               )}
             </Header>
 
@@ -36,6 +42,16 @@ class App extends Component {
           </Main>
 
           <Footer>
+            {sessionIdentity ? (
+              <Text cursor="pointer" onClick={() => actions.logout()}>
+                Logout
+              </Text>
+            ) : (
+              <Link to={routes.login.path}>
+                <Text cursor="pointer">Login</Text>
+              </Link>
+            )}
+
             <Text color="jaak" display="inline-block" fontSize="12px">
               &#60; &#47;&#62; by
             </Text>
@@ -58,5 +74,8 @@ class App extends Component {
 export default connect(
   createStructuredSelector({
     sessionIdentity: SessionSelectors.sessionIdentity,
+  }),
+  dispatch => ({
+    actions: bindActionCreators({ ...SessionActions }, dispatch),
   })
 )(App)
