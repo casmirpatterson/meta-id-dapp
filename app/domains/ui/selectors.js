@@ -16,7 +16,7 @@ const getAll = state => state.get(name)
  * @type {Array}
  */
 const getError = createSelector([getAll], state => {
-  return state.get('error')
+  return state.get('error') && state.get('error').toJS()
 })
 
 /**
