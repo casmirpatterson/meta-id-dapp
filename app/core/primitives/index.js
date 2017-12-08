@@ -5,6 +5,7 @@ import Footer from './Footer'
 import Header from './Header'
 import Image from './Image'
 import Input from './Input'
+import Label from './Label'
 import Loader from './Loader'
 import Main from './Main'
 import Text from './Text'
@@ -18,6 +19,7 @@ export {
   Header,
   Image,
   Input,
+  Label,
   Loader,
   Main,
   Text,
