@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { Link, Logo } from 'core/components'
 import {
+  Error,
   Footer,
   Header,
   Image,
@@ -32,7 +33,13 @@ class App extends Component {
   }
 
   render() {
-    const { actions, children, isRequesting, sessionIdentity } = this.props
+    const {
+      actions,
+      children,
+      error,
+      isRequesting,
+      sessionIdentity,
+    } = this.props
 
     return (
       <ThemeProvider theme={theme}>
@@ -58,6 +65,16 @@ class App extends Component {
                 <Position position="absolute" top="16px" right="16px">
                   <Loader />
                 </Position>
+              )}
+
+              {error && (
+                <Error>
+                  {error.map((e, key) => (
+                    <Text color="error" key={key}>
+                      {e.message}
+                    </Text>
+                  ))}
+                </Error>
               )}
             </Header>
 
@@ -100,6 +117,7 @@ App.childContextTypes = {
 
 export default connect(
   createStructuredSelector({
+    error: UISelectors.error,
     isRequesting: UISelectors.isRequesting,
     sessionIdentity: SessionSelectors.sessionIdentity,
   }),
