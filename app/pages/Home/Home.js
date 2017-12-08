@@ -36,7 +36,7 @@ class Home extends Component {
             margin={['16px', 0, 0]}
             textAlign="center"
           >
-            New META-ID
+            Create META-ID
           </Text>
         </Link>
       </View>
