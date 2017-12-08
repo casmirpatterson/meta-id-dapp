@@ -57,6 +57,6 @@ export const createMetaIdObject = (account, username) => {
  * @param  {String} owner Ethereum address to truncate
  * @return {String}       Truncated address
  */
-export const getTruncatedMetaIdOwner = owner => {
+export const getTruncatedMetaIdOwner = (owner = '') => {
   return `${owner.substring(0, 5)}...${owner.substring(39)}`
 }
