@@ -27,4 +27,8 @@ injectGlobal`
     color: ${theme.primary};
     -webkit-font-smoothing: antialiased;
   }
+
+  a {
+    text-decoration: none;
+  }
 `
