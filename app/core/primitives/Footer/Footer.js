@@ -1,4 +1,5 @@
 import React from 'react'
+import { padding } from 'polished'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -8,6 +9,7 @@ import styled from 'styled-components'
  * @return {Function} React component
  */
 const StyledFooter = styled.footer`
+  ${props => padding(...props.padding)};
   flex: ${({ flex }) => flex};
   text-align: ${({ textAlign }) => textAlign};
 `
@@ -30,6 +32,7 @@ const Footer = ({ children, ...props }) => (
  */
 Footer.defaultProps = {
   flex: 'none',
+  padding: ['16px'],
   textAlign: 'center',
 }
 
@@ -41,6 +44,8 @@ Footer.defaultProps = {
 Footer.propTypes = {
   /** Flex */
   flex: PropTypes.string,
+  /** [Padding shorthand](https://polished.js.org/docs/#padding) */
+  padding: PropTypes.array,
   /** Text align */
   textAlign: PropTypes.string,
 }
