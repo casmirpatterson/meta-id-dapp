@@ -1,3 +1,4 @@
+import Button from './Button'
 import Error from './Error'
 import Footer from './Footer'
 import Header from './Header'
@@ -7,4 +8,4 @@ import Main from './Main'
 import Text from './Text'
 import View from './View'
 
-export { Error, Footer, Header, Image, Loader, Main, Text, View }
+export { Button, Error, Footer, Header, Image, Loader, Main, Text, View }
