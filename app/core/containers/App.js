@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Position } from 'jaak-primitives'
+import { Box, Position } from 'jaak-primitives'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -19,6 +19,7 @@ import {
 } from 'core/primitives'
 import { routes } from 'core/routes'
 import { theme } from 'core/style'
+import { metaId } from 'core/util'
 import {
   actions as SessionActions,
   selectors as SessionSelectors,
@@ -56,9 +57,22 @@ class App extends Component {
               </Link>
 
               {sessionIdentity && (
-                <Text margin={['16px', '0']} textAlign="center">
-                  {sessionIdentity.owner}
-                </Text>
+                <Box align="center" flexDirection="column">
+                  <Image
+                    backgroundSize="cover"
+                    margin={['32px', 'auto', 0]}
+                    src="/img/icon-id.svg"
+                    size={['32px']}
+                  />
+
+                  <Text
+                    fontWeight={700}
+                    margin={[0, 0, '16px']}
+                    textAlign="center"
+                  >
+                    {metaId.getTruncatedMetaIdOwner(sessionIdentity.owner)}
+                  </Text>
+                </Box>
               )}
 
               {isRequesting && (
