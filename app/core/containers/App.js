@@ -47,6 +47,8 @@ class App extends Component {
         <View
           display="flex"
           flexDirection="column"
+          maxWidth="800px"
+          margin={[0, 'auto']}
           padding={['16px']}
           size={['100%', 'auto']}
         >

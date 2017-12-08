@@ -11,6 +11,7 @@ import { View as ViewPrimitive } from 'jaak-primitives'
 const StyledView = styled(ViewPrimitive)`
   display: ${({ display }) => display};
   flex-direction: ${({ flexDirection }) => flexDirection};
+  max-width: ${({ maxWidth }) => maxWidth};
 `
 
 /**
@@ -32,6 +33,7 @@ const View = ({ children, ...props }) => (
 View.defaultProps = {
   display: 'block',
   flexDirection: 'initial',
+  maxWidth: 'initial',
 }
 
 /**
@@ -44,6 +46,8 @@ View.propTypes = {
   display: PropTypes.string,
   /** Flex direction */
   flexDirection: PropTypes.string,
+  /** Maximum width */
+  maxWidth: PropTypes.string,
 }
 
 export default View
