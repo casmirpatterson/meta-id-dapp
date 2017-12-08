@@ -7,8 +7,6 @@ import * as Components from './components'
 
 class Home extends Component {
   render() {
-    console.log(this.props)
-
     return (
       <View>
         <Components.Search />
