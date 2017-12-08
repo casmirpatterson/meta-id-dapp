@@ -16,7 +16,7 @@ class Home extends Component {
 
   render() {
     return (
-      <View>
+      <View margin={['32px', 0, 0]}>
         <Components.Search submitSearch={this.onSubmitSearch} />
 
         <Box margin={[0, 'auto']} size={['auto', '148px']}>
