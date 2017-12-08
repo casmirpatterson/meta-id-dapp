@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Position } from 'jaak-primitives'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -6,13 +7,22 @@ import { createStructuredSelector } from 'reselect'
 import { ThemeProvider } from 'styled-components'
 
 import { Link, Logo } from 'core/components'
-import { Footer, Header, Image, Main, Text, View } from 'core/primitives'
+import {
+  Footer,
+  Header,
+  Image,
+  Loader,
+  Main,
+  Text,
+  View,
+} from 'core/primitives'
 import { routes } from 'core/routes'
 import { theme } from 'core/style'
 import {
   actions as SessionActions,
   selectors as SessionSelectors,
 } from 'domains/session'
+import { selectors as UISelectors } from 'domains/ui'
 
 class App extends Component {
   getChildContext() {
@@ -22,7 +32,7 @@ class App extends Component {
   }
 
   render() {
-    const { actions, children, sessionIdentity } = this.props
+    const { actions, children, isRequesting, sessionIdentity } = this.props
 
     return (
       <ThemeProvider theme={theme}>
@@ -42,6 +52,12 @@ class App extends Component {
                 <Text margin={['16px', '0']} textAlign="center">
                   {sessionIdentity.owner}
                 </Text>
+              )}
+
+              {isRequesting && (
+                <Position position="absolute" top="16px" right="16px">
+                  <Loader />
+                </Position>
               )}
             </Header>
 
@@ -84,6 +100,7 @@ App.childContextTypes = {
 
 export default connect(
   createStructuredSelector({
+    isRequesting: UISelectors.isRequesting,
     sessionIdentity: SessionSelectors.sessionIdentity,
   }),
   dispatch => ({
