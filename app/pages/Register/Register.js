@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { Text, View } from 'core/primitives'
 import { accounts } from 'core/util'
 import { actions as IdentityActions } from 'domains/identity'
 import { actions as SessionActions } from 'domains/session'
@@ -25,11 +26,18 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Register</h2>
+      <View margin={['32px', 0, 0]}>
+        <Text fontSize="24px" fontWeight={700} textAlign="center">
+          Create a new META-ID
+        </Text>
+
+        <Text margin={['8px', 0, '32px']} textAlign="center">
+          Choose a username and upload an Ethereum keystore file to create your
+          META-ID.
+        </Text>
 
         <Components.Form onSubmit={this.onFormSubmit} />
-      </div>
+      </View>
     )
   }
 }

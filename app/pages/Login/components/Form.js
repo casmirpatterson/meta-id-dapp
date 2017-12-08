@@ -13,6 +13,16 @@ const Form = ({ onSubmit, keystore, setKeystore, password, setPassword }) => (
       </Label>
 
       <Input
+        display="none"
+        id="uploadKeystore"
+        onChange={({ target: { files: [file] } }) =>
+          readFileAsText(file).then(setKeystore)
+        }
+        placeholder="Upload Keystore"
+        type="file"
+      />
+
+      <Input
         display="inline-block"
         onChange={({ target: { value } }) => setPassword(value)}
         placeholder="Unlock keystore"
@@ -20,16 +30,6 @@ const Form = ({ onSubmit, keystore, setKeystore, password, setPassword }) => (
         value={password}
       />
     </Box>
-
-    <Input
-      display="none"
-      id="uploadKeystore"
-      onChange={({ target: { files: [file] } }) =>
-        readFileAsText(file).then(setKeystore)
-      }
-      placeholder="Upload Keystore"
-      type="file"
-    />
 
     <Button
       backgroundColor="primary"

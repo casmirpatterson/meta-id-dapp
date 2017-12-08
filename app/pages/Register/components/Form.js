@@ -1,6 +1,8 @@
 import React from 'react'
+import { Box, Section } from 'jaak-primitives'
 import { compose, withState } from 'recompose'
 
+import { Button, Input, Label, Text } from 'core/primitives'
 import { readFileAsText } from 'core/util'
 
 const Form = ({
@@ -12,33 +14,53 @@ const Form = ({
   username,
   setUsername,
 }) => (
-  <div>
-    <input
+  <Section>
+    <Input
+      margin={[0, 'auto', '16px']}
       onChange={({ target: { value } }) => setUsername(value)}
-      placeholder="Username"
+      placeholder="Choose an 'id.meta' username"
+      size={['auto', '240px']}
       type="text"
       value={username}
     />
 
-    <input
-      onChange={({ target: { value } }) => setPassword(value)}
-      placeholder="Password"
-      type="password"
-      value={password}
-    />
+    <Box align="center">
+      <Label htmlFor="uploadKeystore" margin={[0, '16px', 0, 0]}>
+        Upload Keystore
+      </Label>
 
-    <input
-      onChange={({ target: { files: [file] } }) =>
-        readFileAsText(file).then(setKeystore)
-      }
-      placeholder="Upload Keystore"
-      type="file"
-    />
+      <Input
+        display="none"
+        id="uploadKeystore"
+        onChange={({ target: { files: [file] } }) =>
+          readFileAsText(file).then(setKeystore)
+        }
+        placeholder="Upload Keystore"
+        type="file"
+      />
 
-    <button onClick={() => onSubmit({ keystore, password, username })}>
-      Register
-    </button>
-  </div>
+      <Input
+        display="inline-block"
+        onChange={({ target: { value } }) => setPassword(value)}
+        placeholder="Unlock keystore"
+        type="password"
+        value={password}
+      />
+    </Box>
+
+    <Button
+      backgroundColor="primary"
+      borderRadius="40px"
+      borderWidth="0"
+      margin={['32px', 'auto', 0]}
+      padding={['16px', '24px']}
+      onClick={() => onSubmit({ keystore, password, username })}
+    >
+      <Text color="white" cursor="pointer" fontWeight={700}>
+        Create META-ID
+      </Text>
+    </Button>
+  </Section>
 )
 
 const enhance = compose(
