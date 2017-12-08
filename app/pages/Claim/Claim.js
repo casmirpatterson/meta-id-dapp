@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect'
 
 import { META_CLAIMS_SERVICES } from 'core/constants'
 import Protected from 'core/containers/Protected'
+import { Text } from 'core/primitives'
 import { metaId, spotify } from 'core/util'
 import { actions as ClaimsActions } from 'domains/claims'
 import {
@@ -64,17 +65,23 @@ class Claim extends Component {
 
     return (
       <Protected>
-        <h2>Claim</h2>
+        <Text fontSize="24px" fontWeight={700} textAlign="center">
+          Add a New Claim
+        </Text>
+
+        <Text margin={['8px', 0, '32px']} textAlign="center">
+          Select a META Claims Service to request verification of a claim.
+        </Text>
 
         <Components.ClaimsService
-          claimButtonText="JAAK META Claims Service"
+          claimDisplayText="JAAK META Claims Service"
           claimInputPlaceholder="META-ID"
           claimProvider="jaak"
           onClaimsServiceRequest={this.onMetaClaimsServiceCallback}
         />
 
         <Components.ClaimsService
-          claimButtonText="Spotify META Claims Service"
+          claimDisplayText="Spotify META Claims Service"
           claimInputDefaultValue={oAuthClaimMessage}
           claimInputPlaceholder="Spotify username"
           claimProvider="spotify"
