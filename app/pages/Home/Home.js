@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import { Link } from 'core/components'
 import { Button, Image, Text, View } from 'core/primitives'
@@ -6,10 +7,16 @@ import { routes } from 'core/routes'
 import * as Components from './components'
 
 class Home extends Component {
+  onSubmitSearch = searchInput => {
+    const { router } = this.context
+
+    return router.push(`${routes.search.path}/${searchInput}`)
+  }
+
   render() {
     return (
       <View>
-        <Components.Search />
+        <Components.Search submitSearch={this.onSubmitSearch} />
 
         <Link to={routes.register.path}>
           <Button
@@ -40,6 +47,10 @@ class Home extends Component {
       </View>
     )
   }
+}
+
+Home.contextTypes = {
+  router: PropTypes.object,
 }
 
 export default Home
