@@ -29,6 +29,7 @@ injectGlobal`
   }
 
   a {
+    color: ${theme.accent};
     text-decoration: none;
   }
 `
