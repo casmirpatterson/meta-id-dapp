@@ -1,18 +1,29 @@
 import React from 'react'
+import { Box, Section } from 'jaak-primitives'
 import { compose, withState } from 'recompose'
 
+import { Button, Input, Label, Text } from 'core/primitives'
 import { readFileAsText } from 'core/util'
 
 const Form = ({ onSubmit, keystore, setKeystore, password, setPassword }) => (
-  <div>
-    <input
-      onChange={({ target: { value } }) => setPassword(value)}
-      placeholder="Password"
-      type="password"
-      value={password}
-    />
+  <Section>
+    <Box align="center">
+      <Label htmlFor="uploadKeystore" margin={[0, '16px', 0, 0]}>
+        Upload Keystore
+      </Label>
 
-    <input
+      <Input
+        display="inline-block"
+        onChange={({ target: { value } }) => setPassword(value)}
+        placeholder="Unlock keystore"
+        type="password"
+        value={password}
+      />
+    </Box>
+
+    <Input
+      display="none"
+      id="uploadKeystore"
       onChange={({ target: { files: [file] } }) =>
         readFileAsText(file).then(setKeystore)
       }
@@ -20,8 +31,19 @@ const Form = ({ onSubmit, keystore, setKeystore, password, setPassword }) => (
       type="file"
     />
 
-    <button onClick={() => onSubmit({ keystore, password })}>Login</button>
-  </div>
+    <Button
+      backgroundColor="primary"
+      borderRadius="40px"
+      borderWidth="0"
+      margin={['32px', 'auto']}
+      onClick={() => onSubmit({ keystore, password })}
+      padding={['16px', '24px']}
+    >
+      <Text color="white" fontWeight={700}>
+        Login
+      </Text>
+    </Button>
+  </Section>
 )
 
 const enhance = compose(

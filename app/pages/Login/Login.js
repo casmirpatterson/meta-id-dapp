@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { Text, View } from 'core/primitives'
 import { accounts } from 'core/util'
 import { actions as SessionActions } from 'domains/session'
 import * as Components from './components'
@@ -22,11 +23,17 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Login</h2>
+      <View margin={['32px', 0, 0]}>
+        <Text fontSize="24px" fontWeight={700} textAlign="center">
+          Login
+        </Text>
+
+        <Text margin={['8px', 0, '32px']} textAlign="center">
+          Upload an Ethereum keystore file to access your META-ID.
+        </Text>
 
         <Components.Form onSubmit={this.onFormSubmit} />
-      </div>
+      </View>
     )
   }
 }
