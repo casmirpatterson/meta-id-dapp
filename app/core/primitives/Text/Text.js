@@ -11,6 +11,7 @@ import { Text as TextPrimitive } from 'jaak-primitives'
 const StyledText = styled(TextPrimitive)`
   color: ${({ color, theme }) => theme[color]};
   cursor: ${({ cursor }) => cursor};
+  font-style: ${({ fontStyle }) => fontStyle};
 `
 
 /**
@@ -32,6 +33,7 @@ const Text = ({ children, ...props }) => (
 Text.defaultProps = {
   color: 'primary',
   cursor: 'auto',
+  fontStyle: 'normal',
 }
 
 /**
@@ -44,6 +46,8 @@ Text.propTypes = {
   color: PropTypes.string,
   /** Cursor */
   cursor: PropTypes.string,
+  /** Font style */
+  fontStyle: PropTypes.string,
 }
 
 export default Text
