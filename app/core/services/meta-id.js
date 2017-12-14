@@ -65,12 +65,14 @@ export const readIdentity = variables => {
 /**
  * Add a new verifiable claim to the META Claims Index
  *
- * @param  {Object} variables           Query variables
- * @param  {String} variables.claim     Value of the claim
- * @param  {String} variables.issuer    Ethereum address of issuer
- * @param  {String} variables.signature Issuer's signature of the claim
- * @param  {String} variables.subject   Ethereum address of subject
- * @return {Object}                     Response data
+ * @param  {Object} variables                 Query variables
+ * @param  {Object} variables.claim           ClaimInput object
+ * @param  {String} variables.claim.claim     Value of the claim
+ * @param  {String} variables.claim.issuer    Ethereum address of issuer
+ * @param  {String} variables.claim.property  Key of the claim
+ * @param  {String} variables.claim.signature Issuer's signature of the claim
+ * @param  {String} variables.claim.subject   Ethereum address of subject
+ * @return {Object}                           Response data
  */
 export const createClaim = variables => {
   return metaNetworkRequest(
@@ -78,11 +80,40 @@ export const createClaim = variables => {
       mutation CreateClaim($claimInput: ClaimInput!) {
         createClaim(input: $claimInput) {
           id
+          claim
           issuer
           property
-          subject
-          claim
           signature
+          subject
+        }
+      }
+    `,
+    variables
+  )
+}
+
+/**
+ * Read all verifiable claims from the META Claims Index by `claim`, `issuer`, `property` or `subject`
+ *
+ * @param  {Object} variables                   Query variables
+ * @param  {Object} variables.filter            ClaimFilter object
+ * @param  {String} [variables.filter.claim]    Value of the claim
+ * @param  {String} [variables.filter.issuer]   Ethereum address of issuer
+ * @param  {String} [variables.filter.property] Key of the claim
+ * @param  {String} [variables.filter.subject]  Ethereum address of subject
+ * @return {Object}                             Response data
+ */
+export const readClaims = variables => {
+  return metaNetworkRequest(
+    `
+      query readClaims($filter: ClaimFilter!) {
+        claim (filter: $filter) {
+          id
+          claim
+          issuer
+          property
+          signature
+          subject
         }
       }
     `,
