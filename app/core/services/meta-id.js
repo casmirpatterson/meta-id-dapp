@@ -120,26 +120,3 @@ export const readClaims = variables => {
     variables
   )
 }
-
-/**
- * Read all verifiable claims from the META Claims Index by `subject`
- *
- * @param  {Object} variables         Query variables
- * @param  {String} variables.subject Ethereum address of META Identity
- * @return {Object}                   Response data
- */
-export const readClaimsBySubject = variables => {
-  return metaNetworkRequest(
-    `
-      query readClaimsBySubject($subject: String) {
-        claim (subject: $subject) {
-          id
-          issuer
-          subject
-          claim
-        }
-      }
-    `,
-    variables
-  )
-}
