@@ -63,28 +63,6 @@ export const readIdentity = variables => {
 }
 
 /**
- * Read a META Identity from the META Identity Index by `owner`
- *
- * @param  {Object} variables       Query variables
- * @param  {String} variables.owner Ethereum address of META Identity
- * @return {Object}                 Response data
- */
-export const readIdentityByOwner = variables => {
-  return metaNetworkRequest(
-    `
-      query readIdentity($owner: String!) {
-        identity(owner: $owner) {
-          id
-          owner
-          signature
-        }
-      }
-    `,
-    variables
-  )
-}
-
-/**
  * Add a new verifiable claim to the META Claims Index
  *
  * @param  {Object} variables           Query variables
