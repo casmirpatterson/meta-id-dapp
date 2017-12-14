@@ -14,7 +14,7 @@ const metaNetworkRequest = (query, variables) =>
  * Add a new META Identity to the META Identity Index
  *
  * @param  {Object} variables                    Query variables
- * @param  {String} variables.identity           IdentityInput object
+ * @param  {Object} variables.identity           IdentityInput object
  * @param  {String} variables.identity.owner     Ethereum address of META Identity
  * @param  {String} variables.identity.signature `username` signed with `owner` private key
  * @param  {String} variables.identity.username  Unique username
@@ -25,6 +25,32 @@ export const createIdentity = variables => {
     `
       mutation CreateIdentity($identity: IdentityInput!) {
         createIdentity(input: $identity) {
+          id
+          owner
+          signature
+          username
+        }
+      }
+    `,
+    variables
+  )
+}
+
+/**
+ * Read a META Identity from the META Identity Index by `id`, `owner` or `username`
+ *
+ * @param  {Object} variables                   Query variables
+ * @param  {Object} variables.filter            IdentityFilter object
+ * @param  {String} [variables.filter.id]       Hash of username `sha3(username)`
+ * @param  {String} [variables.filter.owner]    Ethereum address of META Identity
+ * @param  {String} [variables.filter.username] META-ID username
+ * @return {Object}                             Response data
+ */
+export const readIdentity = variables => {
+  return metaNetworkRequest(
+    `
+      query readIdentity($filter: IdentityFilter!) {
+        identity(filter: $filter) {
           id
           owner
           signature
