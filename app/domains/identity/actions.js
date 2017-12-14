@@ -13,7 +13,9 @@ import * as actions from './actionTypes'
  */
 export const createIdentity = (account, username) => ({
   type: actions.CREATE_IDENTITY,
-  promise: MetaId.createIdentity(metaId.createMetaIdObject(account, username)),
+  promise: MetaId.createIdentity({
+    identity: metaId.createMetaIdObject(account, username),
+  }),
 })
 
 /**
