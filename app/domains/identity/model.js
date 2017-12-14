@@ -8,6 +8,7 @@ const Identity = new Record({
   id: '',
   owner: '',
   signature: '',
+  username: '',
 })
 
 /**
