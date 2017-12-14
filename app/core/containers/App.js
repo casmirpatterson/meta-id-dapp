@@ -19,7 +19,6 @@ import {
 } from 'core/primitives'
 import { routes } from 'core/routes'
 import { theme } from 'core/style'
-import { metaId } from 'core/util'
 import {
   actions as SessionActions,
   selectors as SessionSelectors,
@@ -72,7 +71,7 @@ class App extends Component {
                     margin={[0, 0, '16px']}
                     textAlign="center"
                   >
-                    {metaId.getTruncatedMetaIdOwner(sessionIdentity.owner)}
+                    {sessionIdentity.username}
                   </Text>
                 </Box>
               )}
