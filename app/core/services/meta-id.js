@@ -75,20 +75,11 @@ export const readIdentity = variables => {
 export const createClaim = variables => {
   return metaNetworkRequest(
     `
-      mutation CreateClaim(
-        $issuer: String,
-        $subject: String,
-        $claim: String,
-        $signature: String
-      ) {
-        createClaim(
-          issuer: $issuer,
-          subject: $subject,
-          claim: $claim,
-          signature: $signature
-        ) {
+      mutation CreateClaim($claimInput: ClaimInput!) {
+        createClaim(input: $claimInput) {
           id
           issuer
+          property
           subject
           claim
           signature
