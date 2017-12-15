@@ -28,7 +28,7 @@ class Claim extends Component {
   }
 
   onMetaClaimsServiceCallback = (claimMessage, provider) => {
-    const { account, actions, location } = this.props
+    const { account, actions, location, sessionIdentity } = this.props
 
     const extraData = {}
 
@@ -40,8 +40,13 @@ class Claim extends Component {
       )
     }
 
-    // construct the verified claim object
-    const claim = metaId.createMetaClaimObject(account, claimMessage, extraData)
+    // construct the verifiable claim object
+    const claim = metaId.createMetaClaimObject(
+      account,
+      claimMessage,
+      sessionIdentity.id,
+      extraData
+    )
 
     // request verification of claim from META Claims Service
     // then add to index if verified
@@ -96,6 +101,7 @@ export default connect(
   createStructuredSelector({
     account: SessionSelectors.account,
     oAuthClaimMessage: SessionSelectors.oAuthClaimMessage,
+    sessionIdentity: SessionSelectors.sessionIdentity,
   }),
   dispatch => ({
     actions: bindActionCreators(
