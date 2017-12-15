@@ -17,18 +17,21 @@ export const getMetaIdFromUsername = username => bufferToHex(sha3(username))
  * @param  {String} account.address    Account Ethereum address
  * @param  {String} account.privateKey Account private key
  * @param  {Object} claimMessage       Raw claim message
+ * @param  {String} subject            META-ID `id` of subject (hash of `username`)
  * @param  {Object} extraData          Any extra properties to add to claim object
  * @return {Object}                    META Claim object
  */
 export const createMetaClaimObject = (
   account,
   claimMessage,
+  subject,
   extraData = {}
 ) => {
   return {
     address: account.address,
     claimHash: bufferToHex(sha3(claimMessage)),
     claimMessage: claimMessage,
+    subject: subject,
     signature: accounts.signMessage(claimMessage, account.privateKey),
     ...extraData,
   }
