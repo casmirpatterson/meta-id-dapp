@@ -22,11 +22,11 @@ class Search extends Component {
 
     let readIdentity
 
-    // check `id` route parameter for `owner` address or `username` string
+    // check `id` route parameter for `owner` address or `username` hash
     if (isValidAddress(routeParams.id)) {
       readIdentity = actions.readIdentityByOwner
     } else {
-      readIdentity = actions.readIdentityByUsername
+      readIdentity = actions.readIdentityById
     }
 
     // fetch identity by `owner` || `username`

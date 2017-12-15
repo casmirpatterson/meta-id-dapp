@@ -5,13 +5,16 @@ import { Box } from 'jaak-primitives'
 import { Link } from 'core/components'
 import { Button, Image, Text, View } from 'core/primitives'
 import { routes } from 'core/routes'
+import { metaId } from 'core/util'
 import * as Components from './components'
 
 class Home extends Component {
   onSubmitSearch = searchInput => {
     const { router } = this.context
 
-    return router.push(`${routes.search.path}/${searchInput}`)
+    return router.push(
+      `${routes.search.path}/${metaId.getMetaIdFromUsername(searchInput)}`
+    )
   }
 
   render() {
