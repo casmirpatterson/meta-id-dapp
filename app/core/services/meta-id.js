@@ -77,8 +77,8 @@ export const readIdentity = variables => {
 export const createClaim = variables => {
   return metaNetworkRequest(
     `
-      mutation CreateClaim($claimInput: ClaimInput!) {
-        createClaim(input: $claimInput) {
+      mutation CreateClaim($claim: ClaimInput!) {
+        createClaim(input: $claim) {
           id
           claim
           issuer
