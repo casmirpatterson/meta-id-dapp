@@ -55,7 +55,7 @@ class Search extends Component {
               fontSize="18px"
               fontWeight={700}
             >
-              {routeParams.id} ({metaId.getTruncatedMetaIdOwner(identity.owner)})
+              {routeParams.id} ({identity.username})
             </Text>
           </Card>
         )}
