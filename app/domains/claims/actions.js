@@ -24,7 +24,7 @@ export const createClaim = claim => ({
  */
 export const readClaimsByIssuer = issuer => ({
   type: actions.READ_CLAIMS,
-  promise: MetaId.readClaimsByIssuer({ issuer }),
+  promise: MetaId.readClaims({ filter: { issuer } }),
 })
 
 /**
@@ -35,7 +35,7 @@ export const readClaimsByIssuer = issuer => ({
  */
 export const readClaimsBySubject = subject => ({
   type: actions.READ_CLAIMS,
-  promise: MetaId.readClaimsBySubject({ subject }),
+  promise: MetaId.readClaims({ filter: { subject } }),
 })
 
 /**

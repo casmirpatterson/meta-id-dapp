@@ -13,24 +13,22 @@ const metaNetworkRequest = (query, variables) =>
 /**
  * Add a new META Identity to the META Identity Index
  *
- * @param  {Object} variables           Query variables
- * @param  {String} variables.owner     Ethereum address of META Identity
- * @param  {String} variables.signature `username` signed with `owner` private key
- * @param  {String} variables.username  Unique username
- * @return {Object}                     Response data
+ * @param  {Object} variables                    Query variables
+ * @param  {Object} variables.identity           IdentityInput object
+ * @param  {String} variables.identity.owner     Ethereum address of META Identity
+ * @param  {String} variables.identity.signature `username` signed with `owner` private key
+ * @param  {String} variables.identity.username  Unique username
+ * @return {Object}                              Response data
  */
 export const createIdentity = variables => {
   return metaNetworkRequest(
     `
-      mutation CreateIdentity(
-        $username: String,
-        $owner: String,
-        $signature: String
-      ) {
-        createIdentity(username: $username, owner: $owner, signature: $signature) {
+      mutation CreateIdentity($identity: IdentityInput!) {
+        createIdentity(input: $identity) {
           id
           owner
           signature
+          username
         }
       }
     `,
@@ -39,42 +37,24 @@ export const createIdentity = variables => {
 }
 
 /**
- * Read a META Identity from the META Identity Index by `id`
+ * Read a META Identity from the META Identity Index by `id`, `owner` or `username`
  *
- * @param  {Object} variables    Query variables
- * @param  {String} variables.id Hash of username `sha3(username)`
- * @return {Object}              Response data
+ * @param  {Object} variables                   Query variables
+ * @param  {Object} variables.filter            IdentityFilter object
+ * @param  {String} [variables.filter.id]       Hash of username `sha3(username)`
+ * @param  {String} [variables.filter.owner]    Ethereum address of META Identity
+ * @param  {String} [variables.filter.username] META-ID username
+ * @return {Object}                             Response data
  */
-export const readIdentityById = variables => {
+export const readIdentity = variables => {
   return metaNetworkRequest(
     `
-      query readIdentity($id: String!) {
-        identity(id: $id) {
+      query readIdentity($filter: IdentityFilter!) {
+        identity(filter: $filter) {
           id
           owner
           signature
-        }
-      }
-    `,
-    variables
-  )
-}
-
-/**
- * Read a META Identity from the META Identity Index by `owner`
- *
- * @param  {Object} variables       Query variables
- * @param  {String} variables.owner Ethereum address of META Identity
- * @return {Object}                 Response data
- */
-export const readIdentityByOwner = variables => {
-  return metaNetworkRequest(
-    `
-      query readIdentity($owner: String!) {
-        identity(owner: $owner) {
-          id
-          owner
-          signature
+          username
         }
       }
     `,
@@ -85,33 +65,26 @@ export const readIdentityByOwner = variables => {
 /**
  * Add a new verifiable claim to the META Claims Index
  *
- * @param  {Object} variables           Query variables
- * @param  {String} variables.claim     Value of the claim
- * @param  {String} variables.issuer    Ethereum address of issuer
- * @param  {String} variables.signature Issuer's signature of the claim
- * @param  {String} variables.subject   Ethereum address of subject
- * @return {Object}                     Response data
+ * @param  {Object} variables                 Query variables
+ * @param  {Object} variables.claim           ClaimInput object
+ * @param  {String} variables.claim.claim     Value of the claim
+ * @param  {String} variables.claim.issuer    Ethereum address of issuer
+ * @param  {String} variables.claim.property  Key of the claim
+ * @param  {String} variables.claim.signature Issuer's signature of the claim
+ * @param  {String} variables.claim.subject   Ethereum address of subject
+ * @return {Object}                           Response data
  */
 export const createClaim = variables => {
   return metaNetworkRequest(
     `
-      mutation CreateClaim(
-        $issuer: String,
-        $subject: String,
-        $claim: String,
-        $signature: String
-      ) {
-        createClaim(
-          issuer: $issuer,
-          subject: $subject,
-          claim: $claim,
-          signature: $signature
-        ) {
+      mutation CreateClaim($claimInput: ClaimInput!) {
+        createClaim(input: $claimInput) {
           id
-          issuer
-          subject
           claim
+          issuer
+          property
           signature
+          subject
         }
       }
     `,
@@ -120,44 +93,27 @@ export const createClaim = variables => {
 }
 
 /**
- * Read all verifiable claims from the META Claims Index by `issuer`
+ * Read all verifiable claims from the META Claims Index by `claim`, `issuer`, `property` or `subject`
  *
- * @param  {Object} variables        Query variables
- * @param  {String} variables.issuer Ethereum address of META Identity
- * @return {Object}                  Response data
+ * @param  {Object} variables                   Query variables
+ * @param  {Object} variables.filter            ClaimFilter object
+ * @param  {String} [variables.filter.claim]    Value of the claim
+ * @param  {String} [variables.filter.issuer]   Ethereum address of issuer
+ * @param  {String} [variables.filter.property] Key of the claim
+ * @param  {String} [variables.filter.subject]  Ethereum address of subject
+ * @return {Object}                             Response data
  */
-export const readClaimsByIssuer = variables => {
+export const readClaims = variables => {
   return metaNetworkRequest(
     `
-      query readClaimsByIssuer($issuer: String) {
-        claim (issuer: $issuer) {
+      query readClaims($filter: ClaimFilter!) {
+        claim (filter: $filter) {
           id
-          issuer
-          subject
           claim
-        }
-      }
-    `,
-    variables
-  )
-}
-
-/**
- * Read all verifiable claims from the META Claims Index by `subject`
- *
- * @param  {Object} variables         Query variables
- * @param  {String} variables.subject Ethereum address of META Identity
- * @return {Object}                   Response data
- */
-export const readClaimsBySubject = variables => {
-  return metaNetworkRequest(
-    `
-      query readClaimsBySubject($subject: String) {
-        claim (subject: $subject) {
-          id
           issuer
+          property
+          signature
           subject
-          claim
         }
       }
     `,

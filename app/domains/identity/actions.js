@@ -13,7 +13,24 @@ import * as actions from './actionTypes'
  */
 export const createIdentity = (account, username) => ({
   type: actions.CREATE_IDENTITY,
-  promise: MetaId.createIdentity(metaId.createMetaIdObject(account, username)),
+  promise: MetaId.createIdentity({
+    identity: metaId.createMetaIdObject(account, username),
+  }),
+})
+
+/**
+ * Retrieve a META Identity by `id`
+ *
+ * @param  {String} username Username of META Identity owner to hash into `id`
+ * @return {Object}          Flux Standard Action
+ */
+export const readIdentityById = username => ({
+  type: actions.READ_IDENTITY,
+  promise: MetaId.readIdentity({
+    filter: {
+      id: metaId.getMetaIdFromUsername(username),
+    },
+  }),
 })
 
 /**
@@ -24,7 +41,7 @@ export const createIdentity = (account, username) => ({
  */
 export const readIdentityByOwner = owner => ({
   type: actions.READ_IDENTITY,
-  promise: MetaId.readIdentityByOwner({ owner }),
+  promise: MetaId.readIdentity({ filter: { owner } }),
 })
 
 /**
@@ -35,7 +52,5 @@ export const readIdentityByOwner = owner => ({
  */
 export const readIdentityByUsername = username => ({
   type: actions.READ_IDENTITY,
-  promise: MetaId.readIdentityById({
-    id: metaId.getMetaIdFromUsername(username),
-  }),
+  promise: MetaId.readIdentity({ filter: { username } }),
 })

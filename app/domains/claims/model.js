@@ -8,6 +8,7 @@ const Claim = new Record({
   id: '',
   claim: '',
   issuer: '',
+  property: '',
   signature: '',
   subject: '',
 })
