@@ -34,7 +34,7 @@ class Search extends Component {
   }
 
   render() {
-    const { claims, identity, isSessionAccount, routeParams } = this.props
+    const { claims, identity, isSessionAccount } = this.props
 
     return (
       <View>
@@ -55,7 +55,7 @@ class Search extends Component {
               fontSize="18px"
               fontWeight={700}
             >
-              {routeParams.id} ({identity.username})
+              {identity.username} ({identity.owner})
             </Text>
           </Card>
         )}
