@@ -21,16 +21,12 @@ export const createIdentity = (account, username) => ({
 /**
  * Retrieve a META Identity by `id`
  *
- * @param  {String} username Username of META Identity owner to hash into `id`
- * @return {Object}          Flux Standard Action
+ * @param  {String} id Hash of META Identity username
+ * @return {Object}    Flux Standard Action
  */
-export const readIdentityById = username => ({
+export const readIdentityById = id => ({
   type: actions.READ_IDENTITY,
-  promise: MetaId.readIdentity({
-    filter: {
-      id: metaId.getMetaIdFromUsername(username),
-    },
-  }),
+  promise: MetaId.readIdentity({ filter: { id } }),
 })
 
 /**

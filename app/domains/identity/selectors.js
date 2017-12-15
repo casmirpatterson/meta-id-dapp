@@ -1,6 +1,5 @@
 import { isValidAddress } from 'ethereumjs-util'
 
-import { metaId } from 'core/util'
 import { name } from './constants'
 
 /**
@@ -24,7 +23,7 @@ const getAll = state => state.get(name)
 const getIdentityById = (state, { match: { params } }) => {
   let identity
 
-  // check `id` route parameter for `owner` address or `username` string
+  // check `id` route parameter for `owner` address or `username` hash
   if (isValidAddress(params.id)) {
     // select identity by `owner` address
     identity = state
@@ -32,7 +31,7 @@ const getIdentityById = (state, { match: { params } }) => {
       .find(identity => identity.get('owner') === params.id)
   } else {
     // select identity by `id` (`username` hash)
-    identity = state.getIn([name, metaId.getMetaIdFromUsername(params.id)])
+    identity = state.getIn([name, params.id])
   }
 
   return identity
