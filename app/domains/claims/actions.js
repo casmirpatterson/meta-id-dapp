@@ -13,7 +13,7 @@ import { MetaClaims, MetaId } from 'core/services'
  */
 export const createClaim = claim => ({
   type: actions.CREATE_CLAIM,
-  promise: MetaId.createClaim(claim),
+  promise: MetaId.createClaim({ claim }),
 })
 
 /**
