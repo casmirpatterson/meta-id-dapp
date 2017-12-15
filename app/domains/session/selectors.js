@@ -46,9 +46,7 @@ const getIsLoggedIn = createSelector([getAccount], account => {
 const getIsSessionAccount = createSelector(
   [getAccount, Identity.identityById],
   (account, identity) => {
-    return Boolean(
-      account && identity && account.address === identity.get('owner')
-    )
+    return Boolean(account && identity && account.address === identity.owner)
   }
 )
 
@@ -69,9 +67,9 @@ const getOAuthClaimMessage = createSelector([getAll], state => {
 const getSessionIdentity = createSelector(
   [getAccountAddress, Identity.identity],
   (address, identity) => {
-    const sessionIdentity = identity.find(id => id.get('owner') === address)
+    const sessionIdentity = identity.find(id => id.owner === address)
 
-    return sessionIdentity && sessionIdentity.toObject()
+    return sessionIdentity
   }
 )
 

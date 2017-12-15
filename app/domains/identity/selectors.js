@@ -29,6 +29,7 @@ const getIdentityById = (state, { match: { params } }) => {
     identity = state
       .get(name)
       .find(identity => identity.get('owner') === params.id)
+      .toObject()
   } else {
     // select identity by `id` (`username` hash)
     identity = state.getIn([name, params.id])
