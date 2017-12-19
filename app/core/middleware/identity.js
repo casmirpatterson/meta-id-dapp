@@ -10,7 +10,7 @@ const IdentityMiddleware = ({ dispatch }) => next => action => {
     identity.READ_IDENTITY === action.type &&
     hasAsyncActionSucceeded(action)
   ) {
-    dispatch(actions.readClaimsBySubject(action.payload.identity[0].owner))
+    dispatch(actions.readClaimsBySubject(action.payload.identity[0].id))
   }
 
   return next(action)
