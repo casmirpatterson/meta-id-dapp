@@ -67,9 +67,9 @@ const getOAuthClaimMessage = createSelector([getAll], state => {
 const getSessionIdentity = createSelector(
   [getAccountAddress, Identity.identity],
   (address, identity) => {
-    const sessionIdentity = identity.find(id => id.owner === address)
+    const sessionIdentity = identity.find(id => id.get('owner') === address)
 
-    return sessionIdentity
+    return sessionIdentity.toObject()
   }
 )
 
