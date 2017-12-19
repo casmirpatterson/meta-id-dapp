@@ -18,19 +18,37 @@ import { selectors as SessionSelectors } from 'domains/session'
 
 class Search extends Component {
   componentDidMount() {
-    const { actions, routeParams } = this.props
+    const { routeParams } = this.props
+
+    // fetch the searched META Identity
+    return this.fetchIdentity(routeParams.id)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { routeParams } = this.props
+    const { routeParams: nextRouteParams } = nextProps
+
+    // has `id` route param changed?
+    if (routeParams.id !== nextRouteParams.id) {
+      // fetch the searched META Identity
+      return this.fetchIdentity(nextRouteParams.id)
+    }
+  }
+
+  fetchIdentity = id => {
+    const { actions } = this.props
 
     let readIdentity
 
-    // check `id` route parameter for `owner` address or `username` hash
-    if (isValidAddress(routeParams.id)) {
+    // check `id` for `owner` address or `id` hash
+    if (isValidAddress(id)) {
       readIdentity = actions.readIdentityByOwner
     } else {
       readIdentity = actions.readIdentityById
     }
 
-    // fetch identity by `owner` || `username`
-    return readIdentity(routeParams.id)
+    // fetch identity by `owner` || `id`
+    return readIdentity(id)
   }
 
   render() {
