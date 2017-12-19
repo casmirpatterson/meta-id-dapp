@@ -92,6 +92,13 @@ class Claim extends Component {
           claimProvider="spotify"
           onClaimsServiceRequest={this.onSpotifyClaimsServiceRequest}
         />
+
+        <Components.ClaimsService
+          claimDisplayText="DDEX META Claims Service"
+          claimInputPlaceholder="DPID"
+          claimProvider="ddex"
+          onClaimsServiceRequest={this.onMetaClaimsServiceCallback}
+        />
       </Protected>
     )
   }
