@@ -12,6 +12,7 @@ const GLOBALS = {
       graphql.endpoints.development
     ),
     NODE_ENV: JSON.stringify('development'),
+    SWARM_HOST: JSON.stringify('http://localhost:5000'),
   },
 }
 

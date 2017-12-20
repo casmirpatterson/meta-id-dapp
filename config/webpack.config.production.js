@@ -10,6 +10,7 @@ const GLOBALS = {
   'process.env': {
     META_NETWORK_GRAPHQL_ENDPOINT: JSON.stringify(graphql.endpoints.production),
     NODE_ENV: JSON.stringify('production'),
+    SWARM_HOST: JSON.stringify('https://meta.pilots.jaak.io'),
   },
 }
 
