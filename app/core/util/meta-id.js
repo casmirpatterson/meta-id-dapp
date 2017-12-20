@@ -1,9 +1,8 @@
 import { bufferToHex, sha3 } from 'ethereumjs-util'
 import slugify from 'slugify'
 
+import { META_ID_USERNAME_SUFFIX } from 'core/constants'
 import { accounts } from 'core/util'
-
-const META_ID_USERNAME_SUFFIX = 'id.meta'
 
 /**
  * Utility function to convert `username` into META-ID `id`
