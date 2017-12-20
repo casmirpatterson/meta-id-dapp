@@ -69,7 +69,7 @@ const getSessionIdentity = createSelector(
   (address, identity) => {
     const sessionIdentity = identity.find(id => id.get('owner') === address)
 
-    return sessionIdentity.toObject()
+    return sessionIdentity && sessionIdentity.toObject()
   }
 )
 
