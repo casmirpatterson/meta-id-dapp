@@ -1,6 +1,9 @@
 import { bufferToHex, sha3 } from 'ethereumjs-util'
+import slugify from 'slugify'
 
 import { accounts } from 'core/util'
+
+const META_ID_USERNAME_SUFFIX = 'id.meta'
 
 /**
  * Utility function to convert `username` into META-ID `id`
@@ -63,3 +66,12 @@ export const createMetaIdObject = (account, username) => {
 export const getTruncatedMetaIdOwner = (owner = '') => {
   return `${owner.substring(0, 5)}...${owner.substring(39)}`
 }
+
+/**
+ * Get a META Identity `username` from a common name
+ *
+ * @param  {String} commonName Common name to use for META Identity username
+ * @return {String}            META Identity username
+ */
+export const getUsernameFromName = commonName =>
+  `${slugify(commonName.toLowerCase())}.${META_ID_USERNAME_SUFFIX}`
