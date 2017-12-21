@@ -87,6 +87,7 @@
     "redux-pack": "^0.1.5",
     "reselect": "^3.0.1",
     "slugify": "^1.2.7",
-    "styled-components": "^2.2.3"
+    "styled-components": "^2.2.3",
+    "swarm-js": "^0.1.37"
   }
 }
