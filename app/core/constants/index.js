@@ -4,6 +4,8 @@ import * as SPOTIFY from './spotify'
 export { META_CLAIMS_SERVICES, SPOTIFY }
 
 export const {
+  APP_URL,
+  BASE_NAME,
   META_NETWORK_GRAPHQL_ENDPOINT,
   NODE_ENV,
   SWARM_HOST,

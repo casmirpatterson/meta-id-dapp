@@ -6,11 +6,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const graphql = require('./graphql.config')
 
+const DIRECTORY = 'identity'
+const HOST = 'https://meta.pilots.jaak.io'
+const APP_URL = `${HOST}/${DIRECTORY}/`
+
 const GLOBALS = {
   'process.env': {
+    APP_URL: JSON.stringify(APP_URL),
+    BASE_NAME: JSON.stringify(`/${DIRECTORY}/`),
     META_NETWORK_GRAPHQL_ENDPOINT: JSON.stringify(graphql.endpoints.production),
     NODE_ENV: JSON.stringify('production'),
-    SWARM_HOST: JSON.stringify('https://meta.pilots.jaak.io'),
+    SWARM_HOST: JSON.stringify(HOST),
   },
 }
 
@@ -29,7 +35,7 @@ module.exports = {
   output: {
     path: PATHS.dist,
     filename: 'bundle.js',
-    publicPath: '/',
+    publicPath: `/${DIRECTORY}/`,
   },
 
   plugins: [
@@ -40,8 +46,9 @@ module.exports = {
     new CleanPlugin(['./**/*'], PATHS.dist),
     new CopyPlugin([{ from: PATHS.img, to: 'img' }]),
     new HtmlWebpackPlugin({
+      basename: APP_URL,
       favicon: path.resolve(PATHS.static, 'favicon.ico'),
-      template: path.resolve(PATHS.static, 'index.html'),
+      template: path.resolve(PATHS.static, 'index.ejs'),
     }),
   ],
 
