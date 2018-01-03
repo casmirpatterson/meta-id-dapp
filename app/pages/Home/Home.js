@@ -36,7 +36,7 @@ class Home extends Component {
               <Image
                 backgroundSize="cover"
                 size={['24px']}
-                src="/img/icon-add.svg"
+                src="img/icon-add.svg"
               />
             </Button>
 

@@ -7,7 +7,7 @@ const Logo = ({ maxWidth = 'auto', size = ['114px', 'auto'] }) => (
     margin={[0, 'auto']}
     maxWidth={maxWidth}
     size={size}
-    src="/img/meta-id.png"
+    src="img/meta-id.png"
   />
 )
 

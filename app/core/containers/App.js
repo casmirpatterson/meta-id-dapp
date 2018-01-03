@@ -62,7 +62,7 @@ class App extends Component {
                   <Image
                     backgroundSize="cover"
                     margin={['32px', 'auto', 0]}
-                    src="/img/icon-id.svg"
+                    src="img/icon-id.svg"
                     size={['32px']}
                   />
 
@@ -116,7 +116,7 @@ class App extends Component {
               display="inline-block"
               margin={[0, 0, 0, '4px']}
               size={['14px', '24px']}
-              src="/img/jaak.png"
+              src="img/jaak.png"
               verticalAlign="middle"
             />
           </Footer>

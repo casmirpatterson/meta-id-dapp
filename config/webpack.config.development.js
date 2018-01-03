@@ -6,13 +6,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const graphql = require('./graphql.config')
 
+const HOST = 'http://localhost'
+const PORT = 3000
+const APP_URL = `${HOST}:${PORT}/`
+
 const GLOBALS = {
   'process.env': {
+    APP_URL: JSON.stringify(APP_URL),
+    BASE_NAME: JSON.stringify('/'),
     META_NETWORK_GRAPHQL_ENDPOINT: JSON.stringify(
       graphql.endpoints.development
     ),
     NODE_ENV: JSON.stringify('development'),
-    SWARM_HOST: JSON.stringify('http://localhost:5000'),
+    SWARM_HOST: JSON.stringify(`${HOST}:5000`),
   },
 }
 
@@ -26,7 +32,7 @@ const PATHS = {
 module.exports = {
   devServer: {
     contentBase: PATHS.dist,
-    port: 3000,
+    port: PORT,
     stats: 'errors-only',
     historyApiFallback: true,
   },
@@ -46,8 +52,9 @@ module.exports = {
     new CleanPlugin(['./**/*'], PATHS.dist),
     new CopyPlugin([{ from: PATHS.img, to: 'img' }]),
     new HtmlWebpackPlugin({
+      basename: APP_URL,
       favicon: path.resolve(PATHS.static, 'favicon.ico'),
-      template: path.resolve(PATHS.static, 'index.html'),
+      template: path.resolve(PATHS.static, 'index.ejs'),
     }),
   ],
 
