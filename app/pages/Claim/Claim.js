@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 
-import { META_CLAIMS_SERVICES, NODE_ENV } from 'core/constants'
 import Protected from 'core/containers/Protected'
 import { Text } from 'core/primitives'
 import { metaId, spotify } from 'core/util'
@@ -51,7 +50,7 @@ class Claim extends Component {
     // request verification of claim from META Claims Service
     // then add to index if verified
     return actions
-      .verifyClaim(claim, META_CLAIMS_SERVICES[provider].endpoints[NODE_ENV])
+      .verifyClaim(claim, provider)
       .then(({ error, payload }) => !error && actions.createClaim(payload))
   }
 

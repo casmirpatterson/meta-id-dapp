@@ -41,11 +41,11 @@ export const readClaimsBySubject = subject => ({
 /**
  * Verify a META Claim with a META Claims Service
  *
- * @param  {Object} claim   Valid META Claim object
- * @param  {String} service META Claims Service URL
- * @return {Object}         Flux Standard Action
+ * @param  {Object} claim    Valid META Claim object
+ * @param  {String} provider META Claims Service provider key
+ * @return {Object}          Flux Standard Action
  */
-export const verifyClaim = (claim, service) => ({
+export const verifyClaim = (claim, provider) => ({
   type: actions.VERIFY_CLAIM,
-  promise: MetaClaims.verifyClaim(claim, service),
+  promise: MetaClaims.verifyClaim(claim, provider),
 })

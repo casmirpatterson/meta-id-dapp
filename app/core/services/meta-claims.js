@@ -1,3 +1,4 @@
+import { CREDENTIALS, META_CLAIMS_SERVICES, NODE_ENV } from 'core/constants'
 import { Fetch } from 'core/services'
 
 /**
@@ -7,9 +8,13 @@ import { Fetch } from 'core/services'
  * @param  {String} service META Claims Service URL
  * @return {Object}         META Claims Service verification response
  */
-export const verifyClaim = (claim, service) => {
+export const verifyClaim = (claim, provider) => {
   return new Promise(async (resolve, reject) => {
-    const res = await Fetch.post(claim, service)
+    const res = await Fetch.post(
+      claim,
+      META_CLAIMS_SERVICES[provider].endpoints[NODE_ENV],
+      { credentials: CREDENTIALS }
+    )
     const json = await res.json()
 
     if (json.errors) return reject(json)

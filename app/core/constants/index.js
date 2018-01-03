@@ -11,6 +11,8 @@ export const {
   SWARM_HOST,
 } = process.env
 
+export const CREDENTIALS = NODE_ENV === 'production' ? 'include' : null
+
 export const META_ID_USERNAME_SUFFIX = 'id.meta'
 
 export const STATE_KEY = '@MetaId:store'

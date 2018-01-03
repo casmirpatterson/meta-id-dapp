@@ -16,11 +16,12 @@ export const get = route => {
 /**
  * Fetch API POST request
  *
- * @param  {Object}  data  Request body
- * @param  {String}  route Request URL
- * @return {Promise}       Fetch request
+ * @param  {Object}  data      Request body
+ * @param  {String}  route     Request URL
+ * @param  {Object}  [options] Custom options
+ * @return {Promise}           Fetch request
  */
-export const post = (data, route) => {
+export const post = (data, route, options = {}) => {
   return fetch(route, {
     method: 'POST',
     headers: {
@@ -28,5 +29,6 @@ export const post = (data, route) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
+    ...options,
   })
 }
