@@ -39,6 +39,17 @@ export const readClaimsBySubject = subject => ({
 })
 
 /**
+ * Read verifiable claims from the META Claims Index by `subject` AND `property`
+ *
+ * @param  {String} subject Ethereum address of claim subject
+ * @return {Object}         Flux Standard Action
+ */
+export const readClaimsBySubjectAndProperty = (property, subject) => ({
+  type: actions.READ_CLAIMS,
+  promise: MetaId.readClaims({ filter: { property, subject } }),
+})
+
+/**
  * Verify a META Claim with a META Claims Service
  *
  * @param  {Object} claim    Valid META Claim object
