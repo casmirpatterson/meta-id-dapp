@@ -62,7 +62,7 @@ class Search extends Component {
               backgroundSize="cover"
               display="inline-block"
               margin={[0, '16px', 0, 0]}
-              src="/img/icon-person.svg"
+              src="img/icon-person.svg"
               size={['32px']}
               verticalAlign="middle"
             />
@@ -85,7 +85,7 @@ class Search extends Component {
                 <Image
                   backgroundSize="cover"
                   margin={[0, '16px', 0, 0]}
-                  src="/img/icon-verified-claim.svg"
+                  src="img/icon-verified-claim.svg"
                   size={['32px']}
                 />
 

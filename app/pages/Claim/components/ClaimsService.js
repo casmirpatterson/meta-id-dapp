@@ -44,7 +44,7 @@ const ClaimsService = ({
     >
       <Image
         backgroundSize="cover"
-        src="/img/icon-arrow-right.svg"
+        src="img/icon-arrow-right.svg"
         size={['24px']}
       />
     </Button>
