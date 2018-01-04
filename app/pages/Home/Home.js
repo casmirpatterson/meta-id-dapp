@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import { Box } from 'jaak-primitives'
 
 import { Link } from 'core/components'
 import { Button, Image, Text, View } from 'core/primitives'
 import { routes } from 'core/routes'
 import { metaId } from 'core/util'
+
+import { selectors as UISelectors } from 'domains/ui'
+
 import * as Components from './components'
 
 class Home extends Component {
@@ -23,8 +28,7 @@ class Home extends Component {
   }
 
   render() {
-    // TODO: Replace temporary Boolean with selector
-    const isSetupMetaIdModalOpen = false
+    const { isSetupMetaIdModalOpen } = this.props
 
     return (
       <View margin={['32px', 0, 0]}>
@@ -72,4 +76,8 @@ Home.contextTypes = {
   router: PropTypes.object,
 }
 
-export default Home
+export default connect(
+  createStructuredSelector({
+    isSetupMetaIdModalOpen: UISelectors.isSetupMetaIdModalOpen,
+  })
+)(Home)
