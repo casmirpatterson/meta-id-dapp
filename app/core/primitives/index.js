@@ -12,6 +12,7 @@ import Loader from './Loader'
 import Main from './Main'
 import PrimaryButton from './PrimaryButton'
 import Text from './Text'
+import TextInput from './TextInput'
 import View from './View'
 
 export {
@@ -29,5 +30,6 @@ export {
   Main,
   PrimaryButton,
   Text,
+  TextInput,
   View,
 }
