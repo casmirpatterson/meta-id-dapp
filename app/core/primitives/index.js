@@ -3,6 +3,7 @@ import Card from './Card'
 import Error from './Error'
 import Footer from './Footer'
 import Header from './Header'
+import HeaderLink from './HeaderLink'
 import Image from './Image'
 import Input from './Input'
 import Label from './Label'
@@ -17,6 +18,7 @@ export {
   Error,
   Footer,
   Header,
+  HeaderLink,
   Image,
   Input,
   Label,
