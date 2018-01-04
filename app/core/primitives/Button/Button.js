@@ -11,12 +11,11 @@ import { Button as ButtonPrimitive } from 'jaak-primitives'
 const StyledButton = styled(ButtonPrimitive)`
   background-color: ${({ backgroundColor, theme }) =>
     theme[backgroundColor] || backgroundColor};
-  box-shadow: ${({ boxShadow }) => boxShadow};
   display: ${({ display }) => display};
 `
 
 /**
- * @namespace Box
+ * @namespace Button
  * @desc Primitive component
  * @param {Object} props - Component props
  * @param {Object} props.children - Child components
@@ -33,7 +32,6 @@ const Button = ({ children, ...props }) => (
  */
 Button.defaultProps = {
   backgroundColor: 'none',
-  boxShadow: 'none',
   display: 'block',
 }
 
@@ -45,8 +43,6 @@ Button.defaultProps = {
 Button.propTypes = {
   /** Background colour */
   backgroundColor: PropTypes.string,
-  /** Box shadow */
-  boxShadow: PropTypes.string,
   /** Display */
   display: PropTypes.string,
 }
