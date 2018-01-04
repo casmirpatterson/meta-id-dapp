@@ -11,7 +11,7 @@ import { Button } from 'jaak-primitives'
 const StyledPrimaryButton = styled(Button)`
   background-color: ${({ backgroundColor, theme }) =>
     theme[backgroundColor] || backgroundColor};
-  color: ${({ color, theme }) => theme[color]};
+  color: ${({ color, theme }) => theme[color] || color};
   display: ${({ display }) => display};
   font-weight: ${({ fontWeight }) => fontWeight};
 `
