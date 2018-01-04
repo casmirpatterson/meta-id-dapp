@@ -10,6 +10,7 @@ import Input from './Input'
 import Label from './Label'
 import Loader from './Loader'
 import Main from './Main'
+import PrimaryButton from './PrimaryButton'
 import Text from './Text'
 import View from './View'
 
@@ -26,6 +27,7 @@ export {
   Label,
   Loader,
   Main,
+  PrimaryButton,
   Text,
   View,
 }
