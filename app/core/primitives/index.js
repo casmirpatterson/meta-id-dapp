@@ -5,6 +5,7 @@ import Footer from './Footer'
 import Header from './Header'
 import BodyLink from './BodyLink'
 import HeaderLink from './HeaderLink'
+import FileInputLabel from './FileInputLabel'
 import Image from './Image'
 import Input from './Input'
 import Label from './Label'
@@ -23,6 +24,7 @@ export {
   Footer,
   Header,
   HeaderLink,
+  FileInputLabel,
   Image,
   Input,
   Label,
