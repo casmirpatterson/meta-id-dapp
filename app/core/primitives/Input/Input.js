@@ -9,8 +9,9 @@ import { Input as InputPrimitive } from 'jaak-primitives'
  * @return {Function} React component
  */
 const StyledInput = styled(InputPrimitive)`
-  border-color: ${({ borderColor, theme }) => theme[borderColor]};
-  color: ${({ color, theme }) => theme[color]};
+  border-color: ${({ borderColor, theme }) =>
+    theme[borderColor] || borderColor};
+  color: ${({ color, theme }) => theme[color] || color};
 `
 
 /**
