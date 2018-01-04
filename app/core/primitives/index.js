@@ -3,6 +3,7 @@ import Card from './Card'
 import Error from './Error'
 import Footer from './Footer'
 import Header from './Header'
+import BodyLink from './BodyLink'
 import HeaderLink from './HeaderLink'
 import Image from './Image'
 import Input from './Input'
@@ -13,6 +14,7 @@ import Text from './Text'
 import View from './View'
 
 export {
+  BodyLink,
   Button,
   Card,
   Error,
