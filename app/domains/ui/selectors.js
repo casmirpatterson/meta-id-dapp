@@ -28,7 +28,17 @@ const getIsRequesting = createSelector([getAll], state => {
   return state.get('isRequesting')
 })
 
+/**
+ * Get open state of setup META-ID modal
+ *
+ * @todo
+ *
+ * @type {Boolean}
+ */
+const getIsSetupMetaIdModalOpen = () => false
+
 export default {
   error: getError,
   isRequesting: getIsRequesting,
+  isSetupMetaIdModalOpen: getIsSetupMetaIdModalOpen,
 }
