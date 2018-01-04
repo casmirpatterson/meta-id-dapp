@@ -9,6 +9,11 @@ import { metaId } from 'core/util'
 import * as Components from './components'
 
 class Home extends Component {
+  onSubmitSetup = displayName => {
+    // TODO: Handle setup submit
+    console.log(displayName)
+  }
+
   onSubmitSearch = searchInput => {
     const { router } = this.context
 
@@ -18,9 +23,17 @@ class Home extends Component {
   }
 
   render() {
+    // TODO: Replace temporary Boolean with selector
+    const isSetupMetaIdModalOpen = false
+
     return (
       <View margin={['32px', 0, 0]}>
         <Components.Search submitSearch={this.onSubmitSearch} />
+
+        <Components.SetupMetaId
+          isSetupMetaIdModalOpen={isSetupMetaIdModalOpen}
+          submitSetup={this.onSubmitSetup}
+        />
 
         <Box margin={[0, 'auto']} size={['auto', '148px']}>
           <Link to={routes.register.path}>
