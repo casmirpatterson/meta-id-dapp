@@ -9,12 +9,10 @@ import { Link } from 'core/components'
 import { Button, Card, Image, Text, View } from 'core/primitives'
 import { routes } from 'core/routes'
 import { metaId } from 'core/util'
-import { selectors as ClaimsSelectors } from 'domains/claims'
 import {
   actions as IdentityActions,
   selectors as IdentitySelectors,
 } from 'domains/identity'
-import { selectors as SessionSelectors } from 'domains/session'
 
 class Search extends Component {
   componentDidMount() {
@@ -52,7 +50,9 @@ class Search extends Component {
   }
 
   render() {
-    const { claims, identity, isSessionAccount } = this.props
+    const { identityWithClaims, routeParams } = this.props
+
+    const identity = identityWithClaims[routeParams.id]
 
     return (
       <View>
@@ -78,8 +78,8 @@ class Search extends Component {
           </Card>
         )}
 
-        {claims &&
-          claims.map((claim, key) => (
+        {identity.claims &&
+          Object.values(identity.claims).map((claim, key) => (
             <Card key={key}>
               <Box align="middle">
                 <Image
@@ -103,21 +103,19 @@ class Search extends Component {
             </Card>
           ))}
 
-        {isSessionAccount && (
-          <Link to={routes.claim.path}>
-            <Button
-              backgroundColor="primary"
-              borderRadius="40px"
-              borderWidth="0"
-              margin={['32px', 'auto']}
-              padding={['16px', '24px']}
-            >
-              <Text color="white" fontWeight={700}>
-                Add a new claim
-              </Text>
-            </Button>
-          </Link>
-        )}
+        <Link to={routes.claim.path}>
+          <Button
+            backgroundColor="primary"
+            borderRadius="40px"
+            borderWidth="0"
+            margin={['32px', 'auto']}
+            padding={['16px', '24px']}
+          >
+            <Text color="white" fontWeight={700}>
+              Add a new claim
+            </Text>
+          </Button>
+        </Link>
       </View>
     )
   }
@@ -125,9 +123,7 @@ class Search extends Component {
 
 export default connect(
   createStructuredSelector({
-    claims: ClaimsSelectors.claimsBySubject,
-    identity: IdentitySelectors.identityById,
-    isSessionAccount: SessionSelectors.isSessionAccount,
+    identityWithClaims: IdentitySelectors.identityWithClaims,
   }),
   dispatch => ({
     actions: bindActionCreators({ ...IdentityActions }, dispatch),
