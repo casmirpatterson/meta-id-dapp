@@ -1,17 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Text } from 'jaak-primitives'
+
+import Anchor from '../Anchor'
 
 /**
  * @namespace StyledBodyLink
  * @desc styled-component 💅
  * @return {Function} React component
  */
-const StyledBodyLink = styled(Text)`
-  color: ${({ color, theme }) => theme[color]};
-  cursor: ${({ cursor }) => cursor};
-`
+const StyledBodyLink = styled(Anchor)``
 
 /**
  * @namespace Box
@@ -32,7 +30,6 @@ const BodyLink = ({ children, ...props }) => (
 BodyLink.defaultProps = {
   activePropName: 'active',
   color: 'accent',
-  cursor: 'pointer',
 }
 
 /**
@@ -45,8 +42,6 @@ BodyLink.propTypes = {
   activePropName: PropTypes.string,
   /** Color */
   color: PropTypes.string,
-  /** Cursor */
-  cursor: PropTypes.string,
 }
 
 export default BodyLink

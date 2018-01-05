@@ -1,17 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Text } from 'jaak-primitives'
+
+import Anchor from '../Anchor'
 
 /**
  * @namespace StyledHeaderLink
  * @desc styled-component 💅
  * @return {Function} React component
  */
-const StyledHeaderLink = styled(Text)`
-  color: ${({ color, theme }) => theme[color]};
-  cursor: ${({ cursor }) => cursor};
-
+const StyledHeaderLink = styled(Anchor)`
   ${({ active, theme }) =>
     active &&
     `
