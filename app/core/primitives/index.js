@@ -1,3 +1,4 @@
+import Anchor from './Anchor'
 import Button from './Button'
 import Card from './Card'
 import Error from './Error'
@@ -17,6 +18,7 @@ import TextInput from './TextInput'
 import View from './View'
 
 export {
+  Anchor,
   BodyLink,
   Button,
   Card,
