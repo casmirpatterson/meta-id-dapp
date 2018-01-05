@@ -131,6 +131,16 @@ export const createVerifiedIdentityClaimObject = (
 }
 
 /**
+ * Filter all profile claims from a set of META Identity Claim objects
+ *
+ * @param  {Array} claims Set of META Identity Claim objects
+ * @return {Array}        Filtered profile claims
+ */
+export const getProfileClaimsFromMetaIdentityClaims = claims => {
+  return claims.filter(claim => isProfileClaim(claim))
+}
+
+/**
  * Truncate a META-ID owner
  *
  * @example 0x2f138CC4179cA8FF8504cbE74e52f321F855B541 => 0x2f1...541
@@ -150,3 +160,13 @@ export const getTruncatedMetaIdOwner = (owner = '') => {
  */
 export const getUsernameFromName = commonName =>
   `${slugify(commonName.toLowerCase())}.${META_ID_USERNAME_SUFFIX}`
+
+/**
+ * Check whether a claim is a profile claim
+ *
+ * @param  {Object}  claim META Identity Claim object
+ * @return {Boolean}       Profile claim boolean
+ */
+export const isProfileClaim = claim => {
+  return claim.property.startsWith(`${PROFILE_CLAIM_PREFIX}.`)
+}
