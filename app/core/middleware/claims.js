@@ -7,6 +7,7 @@ import {
   isDomainAction,
 } from 'core/util'
 import { actionTypes as claims } from 'domains/claims'
+import { actions as profile } from 'domains/profile'
 
 const ClaimsMiddleware = ({ dispatch }) => next => action => {
   // action not in namespace? abort!
@@ -23,6 +24,10 @@ const ClaimsMiddleware = ({ dispatch }) => next => action => {
     dispatch(
       farce.push(`${routes.search.path}/${action.payload.createClaim.subject}`)
     )
+  }
+
+  if (claims.READ_CLAIMS === action.type && hasAsyncActionSucceeded(action)) {
+    dispatch(profile.addProfileClaims(action.payload.claim))
   }
 
   return next(action)
