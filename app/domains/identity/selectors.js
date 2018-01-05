@@ -1,5 +1,7 @@
-import { isValidAddress } from 'ethereumjs-util'
+import Immutable from 'immutable'
+import { createSelector } from 'reselect'
 
+import { selectors as Claims } from 'domains/claims'
 import { name } from './constants'
 
 /**
@@ -11,33 +13,34 @@ import { name } from './constants'
 const getAll = state => state.get(name)
 
 /**
- * Select a META Identity by `id` or `owner` address
+ * Get all identities augmented with claim data
  *
- * @todo - need to test the efficiency of this selector
- * @see - https://github.com/reactjs/reselect/blob/master/README.md#accessing-react-props-in-selectors
- *
- * @param  {Object} state Redux store
- * @param  {Object} props React component props
- * @return {Object}       META Identity
+ * @return {Object}
  */
-const getIdentityById = (state, { match: { params } }) => {
-  let identity
+const getIdentityWithClaims = createSelector(
+  [Claims.claimsWithProfileData, getAll],
+  (claims, identities) => {
+    const identitiesWithClaims = identities.map(identity => {
+      // filter claims about this identity
+      const identityClaims = claims.filter(
+        claim => claim.get('subject') === identity.get('id')
+      )
 
-  // check `id` route parameter for `owner` address or `username` hash
-  if (isValidAddress(params.id)) {
-    // select identity by `owner` address
-    identity = state
-      .get(name)
-      .find(identity => identity.get('owner') === params.id)
-  } else {
-    // select identity by `id` (`username` hash)
-    identity = state.getIn([name, params.id])
+      // augment identity object with identity's claims
+      const identityWithClaims = Immutable.Map(identity).set(
+        'claims',
+        identityClaims
+      )
+
+      // return combined identity and claims object
+      return identityWithClaims
+    })
+
+    return identitiesWithClaims.toJS()
   }
-
-  return identity
-}
+)
 
 export default {
   identity: getAll,
-  identityById: getIdentityById,
+  identityWithClaims: getIdentityWithClaims,
 }
