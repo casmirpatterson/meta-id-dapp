@@ -1,7 +1,7 @@
 import { bufferToHex, ecsign, sha3, toBuffer, toRpcSig } from 'ethereumjs-util'
 import slugify from 'slugify'
 
-import { META_ID_USERNAME_SUFFIX } from 'core/constants'
+import { META_ID_USERNAME_SUFFIX, PROFILE_CLAIM_PREFIX } from 'core/constants'
 import { accounts } from 'core/util'
 
 /**
@@ -75,7 +75,7 @@ export const createProfileMetaIdentityClaim = (
     {
       id: issuer.id,
       privateKey: issuer.privateKey,
-      property: `profile.${subProperty}`,
+      property: `${PROFILE_CLAIM_PREFIX}.${subProperty}`,
     },
     issuer.id
   )
