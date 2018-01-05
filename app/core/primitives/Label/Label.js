@@ -16,14 +16,14 @@ const StyledLabel = styled(LabelPrimitive)`
   background-color: ${({ backgroundColor, theme }) =>
     theme[backgroundColor] || backgroundColor};
   border-radius: ${({ borderRadius }) => borderRadius};
-  box-shadow: ${({ boxShadow }) => boxShadow};
-  color: ${({ color }) => color};
+  color: ${({ color, theme }) => theme[color] || color};
   cursor: ${({ cursor }) => cursor};
   display: ${({ display }) => display};
+  font-weight: ${({ fontWeight }) => fontWeight};
 `
 
 /**
- * @namespace Box
+ * @namespace Label
  * @desc Primitive component
  * @param {Object} props - Component props
  * @param {Object} props.children - Child components
@@ -39,14 +39,14 @@ const Label = ({ children, ...props }) => (
  * @desc Primitive's default properties
  */
 Label.defaultProps = {
-  backgroundColor: 'primary',
-  borderRadius: '20px',
-  boxShadow: 'none',
-  color: 'white',
+  backgroundColor: 'none',
+  borderRadius: '0px',
+  color: 'inherit',
   cursor: 'pointer',
   display: 'inline-block',
+  fontWeight: 300,
   margin: ['0'],
-  padding: ['8px', '16px'],
+  padding: ['0'],
   size: ['auto'],
 }
 
@@ -60,14 +60,14 @@ Label.propTypes = {
   backgroundColor: PropTypes.string,
   /** Border radius */
   borderRadius: PropTypes.string,
-  /** Box shadow */
-  boxShadow: PropTypes.string,
   /** Colour */
   color: PropTypes.string,
   /** Cursor */
   cursor: PropTypes.string,
   /** Display */
   display: PropTypes.string,
+  /** Font weight */
+  fontWeight: PropTypes.number,
   /** [Margin shorthand](https://polished.js.org/docs/#margin) */
   margin: PropTypes.array,
   /** [Padding shorthand](https://polished.js.org/docs/#padding) */

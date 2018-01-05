@@ -1,50 +1,57 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Button as ButtonPrimitive } from 'jaak-primitives'
+import { Button } from 'jaak-primitives'
 
 /**
- * @namespace StyledButton
+ * @namespace StyledPrimaryButton
  * @desc styled-component 💅
  * @return {Function} React component
  */
-const StyledButton = styled(ButtonPrimitive)`
+const StyledPrimaryButton = styled(Button)`
   background-color: ${({ backgroundColor, theme }) =>
     theme[backgroundColor] || backgroundColor};
+  color: ${({ color, theme }) => theme[color] || color};
   display: ${({ display }) => display};
+  font-weight: ${({ fontWeight }) => fontWeight};
 `
 
 /**
- * @namespace Button
+ * @namespace PrimaryButton
  * @desc Primitive component
  * @param {Object} props - Component props
  * @param {Object} props.children - Child components
  * @return {Function} React component
  */
-const Button = ({ children, ...props }) => (
-  <StyledButton {...props}>{children}</StyledButton>
+const PrimaryButton = ({ children, ...props }) => (
+  <StyledPrimaryButton {...props}>{children}</StyledPrimaryButton>
 )
 
 /**
  * @name defaultProps
- * @memberof Button
+ * @memberof PrimaryButton
  * @desc Primitive's default properties
  */
-Button.defaultProps = {
-  backgroundColor: 'none',
+PrimaryButton.defaultProps = {
+  backgroundColor: 'accent',
+  borderRadius: '4px',
+  borderWidth: '0px',
+  color: 'white',
   display: 'block',
+  fontWeight: 700,
+  padding: ['12px', '24px'],
 }
 
 /**
  * @name propTypes
- * @memberof Button
+ * @memberof PrimaryButton
  * @desc Primitive's prop type definitions
  */
-Button.propTypes = {
-  /** Background colour */
-  backgroundColor: PropTypes.string,
+PrimaryButton.propTypes = {
   /** Display */
   display: PropTypes.string,
+  /** Font weight */
+  fontWeight: PropTypes.number,
 }
 
-export default Button
+export default PrimaryButton

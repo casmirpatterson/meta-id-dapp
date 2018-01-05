@@ -13,6 +13,7 @@ const customTheme = {
   accent: '#EF3581',
   primary: '#251E2F',
   jaak: '#F08F74',
+  grey: '#979797',
 }
 
 export default customTheme
