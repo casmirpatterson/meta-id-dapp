@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { placeholder } from 'polished'
 import styled from 'styled-components'
 import { Input } from 'jaak-primitives'
 
@@ -9,6 +10,8 @@ import { Input } from 'jaak-primitives'
  * @return {Function} React component
  */
 const StyledTextInput = styled(Input)`
+  ${({ placeholderColor, theme }) =>
+    placeholder({ color: theme[placeholderColor] || placeholderColor })};
   border-color: ${({ borderColor, theme }) =>
     theme[borderColor] || borderColor};
   color: ${({ color, theme }) => theme[color] || color};
@@ -39,6 +42,7 @@ TextInput.defaultProps = {
   fontFamily: 'inherit',
   fontWeight: 700,
   padding: ['12px', '16px'],
+  placeholderColor: 'grey',
   textAlign: 'left',
 }
 
@@ -54,6 +58,8 @@ TextInput.propTypes = {
   color: PropTypes.string,
   /** Font family */
   fontFamily: PropTypes.string,
+  /** Placeholder colour */
+  placeholderColor: PropTypes.string,
   /** Text align */
   textAlign: PropTypes.string,
 }
