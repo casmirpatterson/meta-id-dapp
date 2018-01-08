@@ -16,7 +16,7 @@ const getAll = state => state.get(name)
  *
  * @type {Object}
  */
-const getAccount = createSelector([getAll], state => {
+const getAccount = createSelector(getAll, state => {
   return state.get('account') && state.get('account').toObject()
 })
 
@@ -25,7 +25,7 @@ const getAccount = createSelector([getAll], state => {
  *
  * @type {String}
  */
-const getAccountAddress = createSelector([getAccount], account => {
+const getAccountAddress = createSelector(getAccount, account => {
   return account && account.address
 })
 
@@ -34,7 +34,7 @@ const getAccountAddress = createSelector([getAccount], account => {
  *
  * @type {Boolean}
  */
-const getIsLoggedIn = createSelector([getAccount], account => {
+const getIsLoggedIn = createSelector(getAccount, account => {
   return Boolean(account)
 })
 
@@ -43,7 +43,7 @@ const getIsLoggedIn = createSelector([getAccount], account => {
  *
  * @type {Boolean}
  */
-const getIsNewUser = createSelector([getAll], state => {
+const getIsNewUser = createSelector(getAll, state => {
   return state.get('isNewUser')
 })
 
@@ -52,7 +52,7 @@ const getIsNewUser = createSelector([getAll], state => {
  *
  * @type {String}
  */
-const getOAuthClaimMessage = createSelector([getAll], state => {
+const getOAuthClaimMessage = createSelector(getAll, state => {
   return state.get('oAuthClaimMessage')
 })
 
