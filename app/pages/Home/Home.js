@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 import { Box } from 'jaak-primitives'
 
@@ -9,14 +10,20 @@ import { Button, Image, Text, View } from 'core/primitives'
 import { routes } from 'core/routes'
 import { metaId } from 'core/util'
 
+import { actions as SessionActions } from 'domains/session'
 import { selectors as UISelectors } from 'domains/ui'
 
 import * as Components from './components'
 
 class Home extends Component {
   onSubmitSetup = displayName => {
+    const { actions } = this.props
+
     // TODO: Handle setup submit
     console.log(displayName)
+
+    // reset the newly created user flag so modal closes and is not reopened
+    return actions.setIsNewUser(false)
   }
 
   onSubmitSearch = searchInput => {
@@ -79,5 +86,8 @@ Home.contextTypes = {
 export default connect(
   createStructuredSelector({
     isSetupMetaIdModalOpen: UISelectors.isSetupMetaIdModalOpen,
+  }),
+  dispatch => ({
+    actions: bindActionCreators({ ...SessionActions }, dispatch),
   })
 )(Home)
