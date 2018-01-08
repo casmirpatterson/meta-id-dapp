@@ -131,6 +131,17 @@ export const createVerifiedIdentityClaimObject = (
 }
 
 /**
+ * Get a common name from a META Identity `username`
+ *
+ * @example getNameFromUsername('luke.id.meta') // => 'luke'
+ *
+ * @param  {String} username META Identity username
+ * @return {String}          Common name extracted from username
+ */
+export const getNameFromUsername = username =>
+  username.replace(new RegExp(META_ID_USERNAME_SUFFIX, 'i'), '')
+
+/**
  * Filter all profile claims from a set of META Identity Claim objects
  *
  * @param  {Array} claims Set of META Identity Claim objects
