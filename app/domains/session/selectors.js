@@ -39,6 +39,15 @@ const getIsLoggedIn = createSelector([getAccount], account => {
 })
 
 /**
+ * Get new user flag
+ *
+ * @type {Boolean}
+ */
+const getIsNewUser = createSelector([getAll], state => {
+  return state.get('isNewUser')
+})
+
+/**
  * Check if a META-ID matches the session account
  *
  * @type {Boolean}
@@ -77,6 +86,7 @@ export default {
   account: getAccount,
   accountAddress: getAccountAddress,
   isLoggedIn: getIsLoggedIn,
+  isNewUser: getIsNewUser,
   isSessionAccount: getIsSessionAccount,
   oAuthClaimMessage: getOAuthClaimMessage,
   sessionIdentity: getSessionIdentity,
