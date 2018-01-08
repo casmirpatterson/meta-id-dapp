@@ -8,6 +8,7 @@ const createAccount = account => model.accountFactory(account)
 
 export const initialState = Immutable.fromJS({
   account: null,
+  isNewUser: false,
   oAuthClaimMessage: null,
 })
 
@@ -15,6 +16,7 @@ export default createReducer(initialState, {
   [actions.LOGIN]: (state, action) =>
     state.merge({
       account: createAccount(action.payload.account),
+      isNewUser: action.payload.isNewUser,
     }),
 
   [actions.LOGOUT]: state => state.merge({ account: null }),
