@@ -1,14 +1,31 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { createStructuredSelector } from 'reselect'
 import { Box } from 'jaak-primitives'
 
 import { Link } from 'core/components'
 import { Button, Image, Text, View } from 'core/primitives'
 import { routes } from 'core/routes'
 import { metaId } from 'core/util'
+
+import { actions as SessionActions } from 'domains/session'
+import { selectors as UISelectors } from 'domains/ui'
+
 import * as Components from './components'
 
 class Home extends Component {
+  onSubmitSetup = displayName => {
+    const { actions } = this.props
+
+    // TODO: Handle setup submit
+    console.log(displayName)
+
+    // reset the newly created user flag so modal closes and is not reopened
+    return actions.setIsNewUser(false)
+  }
+
   onSubmitSearch = searchInput => {
     const { router } = this.context
 
@@ -18,9 +35,16 @@ class Home extends Component {
   }
 
   render() {
+    const { isSetupMetaIdModalOpen } = this.props
+
     return (
       <View margin={['32px', 0, 0]}>
         <Components.Search submitSearch={this.onSubmitSearch} />
+
+        <Components.SetupMetaId
+          isSetupMetaIdModalOpen={isSetupMetaIdModalOpen}
+          submitSetup={this.onSubmitSetup}
+        />
 
         <Box margin={[0, 'auto']} size={['auto', '148px']}>
           <Link to={routes.register.path}>
@@ -59,4 +83,11 @@ Home.contextTypes = {
   router: PropTypes.object,
 }
 
-export default Home
+export default connect(
+  createStructuredSelector({
+    isSetupMetaIdModalOpen: UISelectors.isSetupMetaIdModalOpen,
+  }),
+  dispatch => ({
+    actions: bindActionCreators({ ...SessionActions }, dispatch),
+  })
+)(Home)

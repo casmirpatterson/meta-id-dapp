@@ -3,12 +3,13 @@ import * as actions from './actionTypes'
 /**
  * Start session and set account
  *
- * @param  {Object} account Decrypted Ethereum keystore
- * @return {Object}         Flux Standard Action
+ * @param  {Object}  account         Decrypted Ethereum keystore
+ * @param  {Boolean} [isNewUser=false] Flag a newly created user during login process
+ * @return {Object}                  Flux Standard Action
  */
-export const login = account => ({
+export const login = (account, isNewUser = false) => ({
   type: actions.LOGIN,
-  payload: { account },
+  payload: { account, isNewUser },
 })
 
 /**
@@ -18,6 +19,17 @@ export const login = account => ({
  */
 export const logout = () => ({
   type: actions.LOGOUT,
+})
+
+/**
+ * Set the newly created user flag
+ *
+ * @param  {Boolean} isNewUser Newly created user flag
+ * @return {Object}            Flux Standard Action
+ */
+export const setIsNewUser = isNewUser => ({
+  type: actions.SET_IS_NEW_USER,
+  payload: { isNewUser },
 })
 
 /**

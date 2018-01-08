@@ -16,7 +16,7 @@ const getAll = state => state.get(name)
  *
  * @type {Object}
  */
-const getAccount = createSelector([getAll], state => {
+const getAccount = createSelector(getAll, state => {
   return state.get('account') && state.get('account').toObject()
 })
 
@@ -25,7 +25,7 @@ const getAccount = createSelector([getAll], state => {
  *
  * @type {String}
  */
-const getAccountAddress = createSelector([getAccount], account => {
+const getAccountAddress = createSelector(getAccount, account => {
   return account && account.address
 })
 
@@ -34,8 +34,17 @@ const getAccountAddress = createSelector([getAccount], account => {
  *
  * @type {Boolean}
  */
-const getIsLoggedIn = createSelector([getAccount], account => {
+const getIsLoggedIn = createSelector(getAccount, account => {
   return Boolean(account)
+})
+
+/**
+ * Get new user flag
+ *
+ * @type {Boolean}
+ */
+const getIsNewUser = createSelector(getAll, state => {
+  return state.get('isNewUser')
 })
 
 /**
@@ -43,7 +52,7 @@ const getIsLoggedIn = createSelector([getAccount], account => {
  *
  * @type {String}
  */
-const getOAuthClaimMessage = createSelector([getAll], state => {
+const getOAuthClaimMessage = createSelector(getAll, state => {
   return state.get('oAuthClaimMessage')
 })
 
@@ -65,6 +74,7 @@ export default {
   account: getAccount,
   accountAddress: getAccountAddress,
   isLoggedIn: getIsLoggedIn,
+  isNewUser: getIsNewUser,
   oAuthClaimMessage: getOAuthClaimMessage,
   sessionIdentity: getSessionIdentity,
 }
