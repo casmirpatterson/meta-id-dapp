@@ -13,6 +13,7 @@ import Label from './Label'
 import Loader from './Loader'
 import Main from './Main'
 import PrimaryButton from './PrimaryButton'
+import Span from './Span'
 import Text from './Text'
 import TextInput from './TextInput'
 import View from './View'
@@ -33,6 +34,7 @@ export {
   Loader,
   Main,
   PrimaryButton,
+  Span,
   Text,
   TextInput,
   View,
