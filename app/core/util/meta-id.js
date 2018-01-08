@@ -1,7 +1,7 @@
 import { bufferToHex, ecsign, sha3, toBuffer, toRpcSig } from 'ethereumjs-util'
 import slugify from 'slugify'
 
-import { META_ID_USERNAME_SUFFIX } from 'core/constants'
+import { META_ID_USERNAME_SUFFIX, PROFILE_CLAIM_PREFIX } from 'core/constants'
 import { accounts } from 'core/util'
 
 /**
@@ -75,7 +75,7 @@ export const createProfileMetaIdentityClaim = (
     {
       id: issuer.id,
       privateKey: issuer.privateKey,
-      property: `profile.${subProperty}`,
+      property: `${PROFILE_CLAIM_PREFIX}.${subProperty}`,
     },
     issuer.id
   )
@@ -131,6 +131,16 @@ export const createVerifiedIdentityClaimObject = (
 }
 
 /**
+ * Filter all profile claims from a set of META Identity Claim objects
+ *
+ * @param  {Array} claims Set of META Identity Claim objects
+ * @return {Array}        Filtered profile claims
+ */
+export const getProfileClaimsFromMetaIdentityClaims = claims => {
+  return claims.filter(claim => isProfileClaim(claim))
+}
+
+/**
  * Truncate a META-ID owner
  *
  * @example 0x2f138CC4179cA8FF8504cbE74e52f321F855B541 => 0x2f1...541
@@ -150,3 +160,13 @@ export const getTruncatedMetaIdOwner = (owner = '') => {
  */
 export const getUsernameFromName = commonName =>
   `${slugify(commonName.toLowerCase())}.${META_ID_USERNAME_SUFFIX}`
+
+/**
+ * Check whether a claim is a profile claim
+ *
+ * @param  {Object}  claim META Identity Claim object
+ * @return {Boolean}       Profile claim boolean
+ */
+export const isProfileClaim = claim => {
+  return claim.property.startsWith(`${PROFILE_CLAIM_PREFIX}.`)
+}

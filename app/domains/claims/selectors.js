@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect'
 
+import { metaId } from 'core/util'
+import { selectors as Profile } from 'domains/profile'
 import { name } from './constants'
-import { selectors as Identity } from 'domains/identity'
 
 /**
  * Select the entire domain from the store by `name`
@@ -12,24 +13,31 @@ import { selectors as Identity } from 'domains/identity'
 const getAll = state => state.get(name)
 
 /**
- * Get all claims where META-ID is the `subject`
+ * Get all claims augmented with resolved profile claim data
  *
- * @param  {Object} state Redux store
- * @param  {Object} props React component props
- * @return {Array}        Claims about META-ID
+ * @return {Object}
  */
-const getClaimsBySubject = createSelector(
-  [getAll, Identity.identityById],
-  (claims, identity) => {
-    return (
-      identity &&
-      claims
-        .filter(claim => claim.get('subject') === identity.get('id'))
-        .toArray()
-    )
+const getClaimsWithProfileData = createSelector(
+  [getAll, Profile.profile],
+  (claims, profile) => {
+    const claimsWithProfileData = claims.map(claim => {
+      // check for profile claim
+      if (metaId.isProfileClaim(claim.toObject())) {
+        // replace claim hash with resolved claim data from `profile`
+        const profileClaim = claim.set('claim', profile.get(claim.get('claim')))
+
+        // return profile claim
+        return profileClaim
+      }
+
+      // otherwise just return original claim
+      return claim
+    })
+
+    return claimsWithProfileData
   }
 )
 
 export default {
-  claimsBySubject: getClaimsBySubject,
+  claimsWithProfileData: getClaimsWithProfileData,
 }

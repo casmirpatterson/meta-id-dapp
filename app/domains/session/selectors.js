@@ -48,18 +48,6 @@ const getIsNewUser = createSelector([getAll], state => {
 })
 
 /**
- * Check if a META-ID matches the session account
- *
- * @type {Boolean}
- */
-const getIsSessionAccount = createSelector(
-  [getAccount, Identity.identityById],
-  (account, identity) => {
-    return Boolean(account && identity && account.address === identity.owner)
-  }
-)
-
-/**
  * Get OAuth claim message
  *
  * @type {String}
@@ -87,7 +75,6 @@ export default {
   accountAddress: getAccountAddress,
   isLoggedIn: getIsLoggedIn,
   isNewUser: getIsNewUser,
-  isSessionAccount: getIsSessionAccount,
   oAuthClaimMessage: getOAuthClaimMessage,
   sessionIdentity: getSessionIdentity,
 }

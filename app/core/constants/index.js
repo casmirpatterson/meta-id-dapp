@@ -15,4 +15,6 @@ export const CREDENTIALS = NODE_ENV === 'production' ? 'include' : null
 
 export const META_ID_USERNAME_SUFFIX = 'id.meta'
 
+export const PROFILE_CLAIM_PREFIX = 'profile'
+
 export const STATE_KEY = '@MetaId:store'

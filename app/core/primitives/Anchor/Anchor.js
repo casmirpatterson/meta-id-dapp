@@ -1,17 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Input as InputPrimitive } from 'jaak-primitives'
 
 /**
- * @namespace StyledInput
+ * @namespace StyledAnchor
  * @desc styled-component 💅
  * @return {Function} React component
  */
-const StyledInput = styled(InputPrimitive)`
-  border-color: ${({ borderColor, theme }) =>
-    theme[borderColor] || borderColor};
+const StyledAnchor = styled('a')`
   color: ${({ color, theme }) => theme[color] || color};
+  cursor: ${({ cursor }) => cursor};
 `
 
 /**
@@ -21,30 +19,30 @@ const StyledInput = styled(InputPrimitive)`
  * @param {Object} props.children - Child components
  * @return {Function} React component
  */
-const Input = ({ children, ...props }) => (
-  <StyledInput {...props}>{children}</StyledInput>
+const Anchor = ({ children, ...props }) => (
+  <StyledAnchor {...props}>{children}</StyledAnchor>
 )
 
 /**
  * @name defaultProps
- * @memberof Input
+ * @memberof Anchor
  * @desc Primitive's default properties
  */
-Input.defaultProps = {
-  borderColor: 'primary',
-  color: 'primary',
+Anchor.defaultProps = {
+  color: 'inherit',
+  cursor: 'pointer',
 }
 
 /**
  * @name propTypes
- * @memberof Input
+ * @memberof Anchor
  * @desc Primitive's prop type definitions
  */
-Input.propTypes = {
-  /** Border colour */
-  borderColor: PropTypes.string,
+Anchor.propTypes = {
   /** Color */
   color: PropTypes.string,
+  /** Cursor */
+  cursor: PropTypes.string,
 }
 
-export default Input
+export default Anchor
