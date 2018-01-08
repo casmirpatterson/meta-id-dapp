@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 
+import { selectors as Session } from 'domains/session'
 import { name } from './constants'
 
 /**
@@ -31,11 +32,12 @@ const getIsRequesting = createSelector([getAll], state => {
 /**
  * Get open state of setup META-ID modal
  *
- * @todo
- *
  * @type {Boolean}
  */
-const getIsSetupMetaIdModalOpen = () => false
+const getIsSetupMetaIdModalOpen = createSelector(
+  Session.isNewUser,
+  isNewUser => isNewUser
+)
 
 export default {
   error: getError,
