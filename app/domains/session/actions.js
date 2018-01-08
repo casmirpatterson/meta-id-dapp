@@ -22,6 +22,17 @@ export const logout = () => ({
 })
 
 /**
+ * Set the newly created user flag
+ *
+ * @param  {Boolean} isNewUser Newly created user flag
+ * @return {Object}            Flux Standard Action
+ */
+export const setIsNewUser = isNewUser => ({
+  type: actions.SET_IS_NEW_USER,
+  payload: { isNewUser },
+})
+
+/**
  * Store a claim message sent to an OAuth provider for retrieval after callback
  *
  * @param  {String} oAuthClaimMessage Raw claim message
