@@ -9,6 +9,7 @@ import styled from 'styled-components'
  */
 const StyledSpan = styled('span')`
   color: ${({ color, theme }) => theme[color] || color};
+  font-weight: ${({ fontWeight }) => fontWeight};
 `
 
 /**
@@ -29,6 +30,7 @@ const Span = ({ children, ...props }) => (
  */
 Span.defaultProps = {
   color: 'inherit',
+  fontWeight: 300,
 }
 
 /**
@@ -39,6 +41,8 @@ Span.defaultProps = {
 Span.propTypes = {
   /** Color */
   color: PropTypes.string,
+  /** Font weight */
+  fontWeight: PropTypes.number,
 }
 
 export default Span
