@@ -54,6 +54,7 @@ export const configureStore = (state = persistState) => {
     WebStorage.setSessionItem(STATE_KEY, {
       claims: store.getState().get('claims'),
       identity: store.getState().get('identity'),
+      profile: store.getState().get('profile'),
       session: store.getState().get('session'),
     })
   })
