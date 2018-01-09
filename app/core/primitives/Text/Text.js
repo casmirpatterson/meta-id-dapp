@@ -31,7 +31,7 @@ const Text = ({ children, ...props }) => (
  * @desc Primitive's default properties
  */
 Text.defaultProps = {
-  color: 'primary',
+  color: 'white',
   cursor: 'auto',
   fontStyle: 'normal',
 }

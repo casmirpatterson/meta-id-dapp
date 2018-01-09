@@ -15,6 +15,14 @@ const StyledTextInput = styled(Input)`
     placeholder({ color: theme[placeholderColor] || placeholderColor })};
   border-color: ${({ borderColor, theme }) =>
     theme[borderColor] || borderColor};
+  border-bottom-left-radius: ${({ borderRadius, borderBottomLeftRadius }) =>
+    borderBottomLeftRadius || borderRadius};
+  border-bottom-right-radius: ${({ borderRadius, borderBottomRightRadius }) =>
+    borderBottomRightRadius || borderRadius};
+  border-top-left-radius: ${({ borderRadius, borderTopLeftRadius }) =>
+    borderTopLeftRadius || borderRadius};
+  border-top-right-radius: ${({ borderRadius, borderTopRightRadius }) =>
+    borderTopRightRadius || borderRadius};
   color: ${({ color, theme }) => theme[color] || color};
   font-family: ${({ fontFamily }) => fontFamily};
   text-align: ${({ textAlign }) => textAlign};
@@ -39,6 +47,10 @@ const TextInput = ({ children, ...props }) => (
 TextInput.defaultProps = {
   borderColor: 'grey',
   borderRadius: '4px',
+  borderRadiusBottomLeft: null,
+  borderRadiusBottomRight: null,
+  borderRadiusTopLeft: null,
+  borderRadiusTopRight: null,
   color: 'primary',
   fontFamily: 'inherit',
   fontWeight: 700,
@@ -55,6 +67,14 @@ TextInput.defaultProps = {
 TextInput.propTypes = {
   /** Border colour */
   borderColor: PropTypes.string,
+  /** Border bottom left radius */
+  borderBottomLeftRadius: PropTypes.string,
+  /** Border bottom right radius */
+  borderBottomRightRadius: PropTypes.string,
+  /** Border top left radius */
+  borderTopLeftRadius: PropTypes.string,
+  /** Border top right radius */
+  borderTopRightRadius: PropTypes.string,
   /** Color */
   color: PropTypes.string,
   /** Font family */

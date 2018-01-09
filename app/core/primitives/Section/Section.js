@@ -1,16 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Button } from 'jaak-primitives'
+import { Section as SectionPrimitive } from 'jaak-primitives'
 
 /**
- * @namespace StyledPrimaryButton
+ * @namespace StyledSection
  * @desc styled-component 💅
  * @return {Function} React component
  */
-const StyledPrimaryButton = styled(Button)`
+const StyledSection = styled(SectionPrimitive)`
   background-color: ${({ backgroundColor, theme }) =>
     theme[backgroundColor] || backgroundColor};
+  border-radius: ${({ borderRadius }) => borderRadius};
   border-bottom-left-radius: ${({ borderRadius, borderBottomLeftRadius }) =>
     borderBottomLeftRadius || borderRadius};
   border-bottom-right-radius: ${({ borderRadius, borderBottomRightRadius }) =>
@@ -19,47 +20,43 @@ const StyledPrimaryButton = styled(Button)`
     borderTopLeftRadius || borderRadius};
   border-top-right-radius: ${({ borderRadius, borderTopRightRadius }) =>
     borderTopRightRadius || borderRadius};
-  color: ${({ color, theme }) => theme[color] || color};
-  display: ${({ display }) => display};
-  font-weight: ${({ fontWeight }) => fontWeight};
 `
 
 /**
- * @namespace PrimaryButton
+ * @namespace Section
  * @desc Primitive component
  * @param {Object} props - Component props
  * @param {Object} props.children - Child components
  * @return {Function} React component
  */
-const PrimaryButton = ({ children, ...props }) => (
-  <StyledPrimaryButton {...props}>{children}</StyledPrimaryButton>
+const Section = ({ children, ...props }) => (
+  <StyledSection {...props}>{children}</StyledSection>
 )
 
 /**
  * @name defaultProps
- * @memberof PrimaryButton
+ * @memberof Section
  * @desc Primitive's default properties
  */
-PrimaryButton.defaultProps = {
-  backgroundColor: 'accent',
+Section.defaultProps = {
+  backgroundColor: 'none',
   borderRadius: '4px',
   borderRadiusBottomLeft: null,
   borderRadiusBottomRight: null,
   borderRadiusTopLeft: null,
   borderRadiusTopRight: null,
-  borderWidth: '0px',
-  color: 'white',
-  display: 'block',
-  fontWeight: 700,
-  padding: ['12px', '24px'],
 }
 
 /**
  * @name propTypes
- * @memberof PrimaryButton
+ * @memberof Section
  * @desc Primitive's prop type definitions
  */
-PrimaryButton.propTypes = {
+Section.propTypes = {
+  /** Background color */
+  backgroundColor: PropTypes.string,
+  /** Border radius */
+  borderRadius: PropTypes.string,
   /** Border bottom left radius */
   borderBottomLeftRadius: PropTypes.string,
   /** Border bottom right radius */
@@ -68,10 +65,6 @@ PrimaryButton.propTypes = {
   borderTopLeftRadius: PropTypes.string,
   /** Border top right radius */
   borderTopRightRadius: PropTypes.string,
-  /** Display */
-  display: PropTypes.string,
-  /** Font weight */
-  fontWeight: PropTypes.number,
 }
 
-export default PrimaryButton
+export default Section

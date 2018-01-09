@@ -2,6 +2,7 @@ import Anchor from './Anchor'
 import Box from './Box'
 import Button from './Button'
 import Card from './Card'
+import CenteredPosition from './CenteredPosition'
 import Error from './Error'
 import Footer from './Footer'
 import Header from './Header'
@@ -14,6 +15,7 @@ import Label from './Label'
 import Loader from './Loader'
 import Main from './Main'
 import PrimaryButton from './PrimaryButton'
+import Section from './Section'
 import Span from './Span'
 import Text from './Text'
 import TextInput from './TextInput'
@@ -25,6 +27,7 @@ export {
   Box,
   Button,
   Card,
+  CenteredPosition,
   Error,
   Footer,
   Header,
@@ -36,6 +39,7 @@ export {
   Loader,
   Main,
   PrimaryButton,
+  Section,
   Span,
   Text,
   TextInput,
