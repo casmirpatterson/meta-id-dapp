@@ -46,35 +46,22 @@ class App extends Component {
         <View
           display="flex"
           flexDirection="column"
-          maxWidth="800px"
+          maxWidth="1280px"
           margin={[0, 'auto']}
           padding={['16px']}
           size={['100%', 'auto']}
         >
           <Main>
             <Header padding={['16px']}>
-              <Link to={routes.home.path}>
-                <Logo maxWidth="314px" size={['58px', 'auto']} />
-              </Link>
-
-              {sessionIdentity && (
-                <Box align="center" flexDirection="column">
-                  <Image
-                    backgroundSize="cover"
-                    margin={['32px', 'auto', 0]}
-                    src="img/icon-id.svg"
-                    size={['32px']}
-                  />
-
-                  <Text
-                    fontWeight={700}
-                    margin={[0, 0, '16px']}
-                    textAlign="center"
-                  >
-                    {sessionIdentity.username}
-                  </Text>
+              <Box>
+                <Box>
+                  <Link to={routes.home.path}>
+                    <Logo maxWidth="157px" size={['29px', '157px']} />
+                  </Link>
                 </Box>
-              )}
+
+                <Box />
+              </Box>
 
               {isRequesting && (
                 <Position position="absolute" top="16px" right="16px">
