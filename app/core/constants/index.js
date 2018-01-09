@@ -17,4 +17,8 @@ export const META_ID_USERNAME_SUFFIX = 'id.meta'
 
 export const PROFILE_CLAIM_PREFIX = 'profile'
 
+export const PROFILE_CLAIM_SUB_PROPERTY = {
+  name: 'name',
+}
+
 export const STATE_KEY = '@MetaId:store'

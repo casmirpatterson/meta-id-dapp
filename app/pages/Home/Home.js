@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect'
 import { Box } from 'jaak-primitives'
 
 import { Link } from 'core/components'
+import { PROFILE_CLAIM_SUB_PROPERTY } from 'core/constants'
 import { Button, Image, Text, View } from 'core/primitives'
 import { routes } from 'core/routes'
 import { Swarm } from 'core/services'
@@ -32,7 +33,7 @@ class Home extends Component {
         metaId.createProfileMetaIdentityClaim(
           hash,
           { id: sessionIdentity.id, privateKey: account.privateKey },
-          'name'
+          PROFILE_CLAIM_SUB_PROPERTY.name
         )
       )
       .then(claim => actions.createClaim(claim))
