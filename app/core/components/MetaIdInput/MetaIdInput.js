@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import { META_ID_USERNAME_SUFFIX } from 'core/constants'
 import { Box, Span, TextInput } from 'core/primitives'
 
-const MetaIdInput = () => (
+const MetaIdInput = ({ onChange }) => (
   <Fragment>
     <Box
       align="center"
@@ -12,17 +12,20 @@ const MetaIdInput = () => (
       borderStyle="solid"
       borderWidth="1px"
       padding={['12px', '16px']}
-      size={['auto', '188px']}
+      size={['auto', '100%']}
     >
       <TextInput
         display="inline"
+        onChange={({ target: { value } }) => onChange(value)}
         padding={[0]}
         placeholder="username"
         size={['auto', '85px']}
         textAlign="right"
         borderWidth="0px"
       />
-      <Span fontWeight={700}>.{META_ID_USERNAME_SUFFIX}</Span>
+      <Span color="primary" fontWeight={700}>
+        .{META_ID_USERNAME_SUFFIX}
+      </Span>
     </Box>
   </Fragment>
 )
