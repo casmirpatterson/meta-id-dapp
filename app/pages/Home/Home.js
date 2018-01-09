@@ -8,7 +8,6 @@ import { Box } from 'jaak-primitives'
 import { Link } from 'core/components'
 import { Button, Image, Text, View } from 'core/primitives'
 import { routes } from 'core/routes'
-import { metaId } from 'core/util'
 
 import { actions as SessionActions } from 'domains/session'
 import { selectors as UISelectors } from 'domains/ui'
@@ -26,21 +25,11 @@ class Home extends Component {
     return actions.setIsNewUser(false)
   }
 
-  onSubmitSearch = searchInput => {
-    const { router } = this.context
-
-    return router.push(
-      `${routes.search.path}/${metaId.getMetaIdFromUsername(searchInput)}`
-    )
-  }
-
   render() {
     const { isSetupMetaIdModalOpen } = this.props
 
     return (
       <View margin={['32px', 0, 0]}>
-        <Components.Search submitSearch={this.onSubmitSearch} />
-
         <Components.SetupMetaId
           isSetupMetaIdModalOpen={isSetupMetaIdModalOpen}
           submitSetup={this.onSubmitSetup}
