@@ -1,4 +1,5 @@
 import React from 'react'
+import { margin } from 'polished'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -8,8 +9,11 @@ import styled from 'styled-components'
  * @return {Function} React component
  */
 const StyledAnchor = styled('a')`
+  ${props => margin(...props.margin)};
   color: ${({ color, theme }) => theme[color] || color};
   cursor: ${({ cursor }) => cursor};
+  font-size: ${({ fontSize }) => fontSize};
+  font-weight: ${({ fontWeight }) => fontWeight};
 `
 
 /**
@@ -31,6 +35,9 @@ const Anchor = ({ children, ...props }) => (
 Anchor.defaultProps = {
   color: 'inherit',
   cursor: 'pointer',
+  fontSize: '16px',
+  fontWeight: 300,
+  margin: ['0'],
 }
 
 /**
@@ -43,6 +50,12 @@ Anchor.propTypes = {
   color: PropTypes.string,
   /** Cursor */
   cursor: PropTypes.string,
+  /** Font size */
+  fontSize: PropTypes.string,
+  /** Font weight */
+  fontWeight: PropTypes.number,
+  /** [Margin shorthand](https://polished.js.org/docs/#margin) */
+  margin: PropTypes.array,
 }
 
 export default Anchor
