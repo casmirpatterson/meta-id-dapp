@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Box, Position } from 'jaak-primitives'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -60,22 +60,26 @@ class App extends Component {
                     <Logo maxWidth="157px" size={['29px', '157px']} />
                   </Link>
 
-                  <Link
-                    activePropName={HeaderLink.defaultProps.activePropName}
-                    Component={HeaderLink}
-                    exact
-                    to={routes.home.path}
-                  >
-                    My ID
-                  </Link>
+                  {sessionIdentity && (
+                    <Fragment>
+                      <Link
+                        activePropName={HeaderLink.defaultProps.activePropName}
+                        Component={HeaderLink}
+                        exact
+                        to={routes.home.path}
+                      >
+                        My ID
+                      </Link>
 
-                  <Link
-                    activePropName={HeaderLink.defaultProps.activePropName}
-                    Component={HeaderLink}
-                    to={routes.claim.path}
-                  >
-                    Providers
-                  </Link>
+                      <Link
+                        activePropName={HeaderLink.defaultProps.activePropName}
+                        Component={HeaderLink}
+                        to={routes.claim.path}
+                      >
+                        Providers
+                      </Link>
+                    </Fragment>
+                  )}
                 </Box>
 
                 <Box />
