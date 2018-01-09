@@ -65,7 +65,7 @@ class App extends Component {
           size={['100%', 'auto']}
         >
           <Main>
-            <Header padding={['16px']}>
+            <Header padding={['32px', '16px', '16px']}>
               <Box>
                 <CustomBox align="middle" margin={[0, 0, '32px']}>
                   <Link to={routes.home.path}>
@@ -106,7 +106,7 @@ class App extends Component {
                       </PrimaryButton>
                     ) : (
                       <Link to={routes.login.path}>
-                        <PrimaryButton>Login</PrimaryButton>
+                        <PrimaryButton>Log In</PrimaryButton>
                       </Link>
                     )}
                   </Box>
