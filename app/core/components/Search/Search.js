@@ -9,7 +9,7 @@ const Search = ({ searchInput, setSearchInput, submitSearch }) => (
     placeholder="Search"
     onChange={({ target: { value } }) => setSearchInput(value)}
     onKeyUp={({ keyCode }) => keyCode === 13 && submitSearch(searchInput)}
-    size={['auto', '100%']}
+    size={['40px', '100%']}
     value={searchInput}
   />
 )
