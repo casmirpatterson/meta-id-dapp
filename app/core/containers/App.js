@@ -11,6 +11,7 @@ import {
   Error,
   Footer,
   Header,
+  HeaderLink,
   Image,
   Loader,
   Main,
@@ -54,9 +55,26 @@ class App extends Component {
           <Main>
             <Header padding={['16px']}>
               <Box>
-                <Box>
+                <Box align="middle">
                   <Link to={routes.home.path}>
                     <Logo maxWidth="157px" size={['29px', '157px']} />
+                  </Link>
+
+                  <Link
+                    activePropName={HeaderLink.defaultProps.activePropName}
+                    Component={HeaderLink}
+                    exact
+                    to={routes.home.path}
+                  >
+                    My ID
+                  </Link>
+
+                  <Link
+                    activePropName={HeaderLink.defaultProps.activePropName}
+                    Component={HeaderLink}
+                    to={routes.claim.path}
+                  >
+                    Providers
                   </Link>
                 </Box>
 
