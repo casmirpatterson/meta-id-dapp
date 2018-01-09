@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import { media } from 'core/style'
 import Anchor from '../Anchor'
 
 /**
@@ -18,6 +19,9 @@ const StyledHeaderLink = styled(Anchor)`
   `} &:hover, &:focus {
     color: ${({ theme }) => theme.accent};
   }
+  ${media.sm`
+    margin-left: 16px;
+  `};
 `
 
 /**
@@ -40,6 +44,9 @@ HeaderLink.defaultProps = {
   activePropName: 'active',
   color: 'white',
   cursor: 'pointer',
+  fontSize: '14px',
+  fontWeight: 700,
+  margin: [0, 0, 0, '32px'],
 }
 
 /**
@@ -50,10 +57,6 @@ HeaderLink.defaultProps = {
 HeaderLink.propTypes = {
   /** Name of prop to inject when Link is active */
   activePropName: PropTypes.string,
-  /** Color */
-  color: PropTypes.string,
-  /** Cursor */
-  cursor: PropTypes.string,
 }
 
 export default HeaderLink

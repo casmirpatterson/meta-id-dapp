@@ -9,6 +9,8 @@ import { Input as InputPrimitive } from 'jaak-primitives'
  * @return {Function} React component
  */
 const StyledInput = styled(InputPrimitive)`
+  background-color: ${({ backgroundColor, theme }) =>
+    theme[backgroundColor] || backgroundColor};
   border-color: ${({ borderColor, theme }) =>
     theme[borderColor] || borderColor};
   color: ${({ color, theme }) => theme[color] || color};
@@ -31,6 +33,7 @@ const Input = ({ children, ...props }) => (
  * @desc Primitive's default properties
  */
 Input.defaultProps = {
+  backgroundColor: 'white',
   borderColor: 'primary',
   color: 'primary',
 }
@@ -41,6 +44,8 @@ Input.defaultProps = {
  * @desc Primitive's prop type definitions
  */
 Input.propTypes = {
+  /** Background colour */
+  backgroundColor: PropTypes.string,
   /** Border colour */
   borderColor: PropTypes.string,
   /** Color */

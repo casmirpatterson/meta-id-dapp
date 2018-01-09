@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Box as BoxPrimitive } from 'jaak-primitives'
 
+import { media } from 'core/style'
+
 /**
  * @namespace StyledBox
  * @desc styled-component 💅
@@ -14,6 +16,10 @@ const StyledBox = styled(BoxPrimitive)`
   border-radius: ${({ borderRadius }) => borderRadius};
   border-style: ${({ borderStyle }) => borderStyle};
   border-width: ${({ borderWidth }) => borderWidth};
+
+  ${media.sm`
+    flex: 0 0 100%;
+  `};
 `
 
 /**
