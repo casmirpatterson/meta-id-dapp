@@ -9,9 +9,7 @@ const SessionMiddleware = ({ dispatch }) => next => action => {
   if (!isDomainAction(name, action.type)) return next(action)
 
   if (session.LOGIN === action.type) {
-    dispatch(
-      farce.push(`${routes.search.path}/${action.payload.account.address}`)
-    )
+    dispatch(farce.push(routes.home.path))
   }
 
   return next(action)
