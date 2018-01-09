@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import { media } from 'core/style'
 import Anchor from '../Anchor'
 
 /**
@@ -18,6 +19,9 @@ const StyledHeaderLink = styled(Anchor)`
   `} &:hover, &:focus {
     color: ${({ theme }) => theme.accent};
   }
+  ${media.sm`
+    margin-left: 16px;
+  `};
 `
 
 /**
