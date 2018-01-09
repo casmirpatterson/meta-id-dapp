@@ -40,6 +40,9 @@ HeaderLink.defaultProps = {
   activePropName: 'active',
   color: 'white',
   cursor: 'pointer',
+  fontSize: '14px',
+  fontWeight: 700,
+  margin: [0, 0, 0, '32px'],
 }
 
 /**
@@ -50,10 +53,6 @@ HeaderLink.defaultProps = {
 HeaderLink.propTypes = {
   /** Name of prop to inject when Link is active */
   activePropName: PropTypes.string,
-  /** Color */
-  color: PropTypes.string,
-  /** Cursor */
-  cursor: PropTypes.string,
 }
 
 export default HeaderLink
