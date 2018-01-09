@@ -6,20 +6,37 @@ import { createStructuredSelector } from 'reselect'
 import { Box } from 'jaak-primitives'
 
 import { Link } from 'core/components'
+import { PROFILE_CLAIM_SUB_PROPERTY } from 'core/constants'
 import { Button, Image, Text, View } from 'core/primitives'
 import { routes } from 'core/routes'
+import { Swarm } from 'core/services'
+import { metaId } from 'core/util'
 
-import { actions as SessionActions } from 'domains/session'
+import { actions as ClaimsActions } from 'domains/claims'
+import {
+  actions as SessionActions,
+  selectors as SessionSelectors,
+} from 'domains/session'
 import { selectors as UISelectors } from 'domains/ui'
 
 import * as Components from './components'
 
 class Home extends Component {
   onSubmitSetup = displayName => {
-    const { actions } = this.props
+    const { account, actions, sessionIdentity } = this.props
 
-    // TODO: Handle setup submit
-    console.log(displayName)
+    // upload display name profile claim data to Swarm
+    // then create a self-issued verified profile claim object
+    // then push the profile claim to the META Claims index
+    Swarm.upload(displayName)
+      .then(hash =>
+        metaId.createProfileMetaIdentityClaim(
+          hash,
+          { id: sessionIdentity.id, privateKey: account.privateKey },
+          PROFILE_CLAIM_SUB_PROPERTY.name
+        )
+      )
+      .then(claim => actions.createClaim(claim))
 
     // reset the newly created user flag so modal closes and is not reopened
     return actions.setIsNewUser(false)
@@ -74,9 +91,14 @@ Home.contextTypes = {
 
 export default connect(
   createStructuredSelector({
+    account: SessionSelectors.account,
     isSetupMetaIdModalOpen: UISelectors.isSetupMetaIdModalOpen,
+    sessionIdentity: SessionSelectors.sessionIdentity,
   }),
   dispatch => ({
-    actions: bindActionCreators({ ...SessionActions }, dispatch),
+    actions: bindActionCreators(
+      { ...ClaimsActions, ...SessionActions },
+      dispatch
+    ),
   })
 )(Home)

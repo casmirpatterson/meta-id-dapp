@@ -58,6 +58,7 @@ const Form = ({ onSubmit, keystore, setKeystore, password, setPassword }) => (
     <PrimaryButton
       borderTopLeftRadius="0"
       borderTopRightRadius="0"
+      fontSize="16px"
       onClick={() => onSubmit({ keystore, password })}
       padding={['20px']}
       size={['auto', '100%']}

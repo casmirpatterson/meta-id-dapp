@@ -1,8 +1,15 @@
-import React from 'react'
-import { Box, Section } from 'jaak-primitives'
+import React, { Fragment } from 'react'
 import { compose, withState } from 'recompose'
 
-import { Button, Input, Label, Text } from 'core/primitives'
+import { MetaIdInput } from 'core/components'
+import {
+  Input,
+  FileInputLabel,
+  PrimaryButton,
+  Section,
+  Text,
+  TextInput,
+} from 'core/primitives'
 import { readFileAsText } from 'core/util'
 
 const Form = ({
@@ -14,20 +21,31 @@ const Form = ({
   username,
   setUsername,
 }) => (
-  <Section>
-    <Input
-      margin={[0, 'auto', '16px']}
-      onChange={({ target: { value } }) => setUsername(value)}
-      placeholder="Choose an 'id.meta' username"
-      size={['auto', '240px']}
-      type="text"
-      value={username}
-    />
+  <Fragment>
+    <Section
+      backgroundColor="white"
+      borderBottomLeftRadius="0"
+      borderBottomRightRadius="0"
+      padding={['24px', '16px']}
+    >
+      <Text color="primary" fontWeight={700} margin={[0, 0, '16px']}>
+        Choose a username
+      </Text>
 
-    <Box align="center">
-      <Label htmlFor="uploadKeystore" margin={[0, '16px', 0, 0]}>
-        Upload Keystore
-      </Label>
+      <MetaIdInput onChange={value => setUsername(value)} />
+
+      <Text color="primary" fontWeight={700} margin={['16px', 0, '16px']}>
+        Upload an Ethereum keystore file
+      </Text>
+
+      <FileInputLabel
+        borderBottomLeftRadius="0"
+        borderBottomRightRadius="0"
+        display="block"
+        htmlFor="uploadKeystore"
+      >
+        Select File
+      </FileInputLabel>
 
       <Input
         display="none"
@@ -39,28 +57,30 @@ const Form = ({
         type="file"
       />
 
-      <Input
-        display="inline-block"
+      <TextInput
+        borderTopLeftRadius="0"
+        borderTopRightRadius="0"
+        fontSize="14px"
         onChange={({ target: { value } }) => setPassword(value)}
-        placeholder="Unlock keystore"
+        placeholder="Enter Password"
+        size={['auto', '100%']}
+        textAlign="center"
         type="password"
         value={password}
       />
-    </Box>
+    </Section>
 
-    <Button
-      backgroundColor="primary"
-      borderRadius="40px"
-      borderWidth="0"
-      margin={['32px', 'auto', 0]}
-      padding={['16px', '24px']}
+    <PrimaryButton
+      borderTopLeftRadius="0"
+      borderTopRightRadius="0"
+      fontSize="16px"
       onClick={() => onSubmit({ keystore, password, username })}
+      padding={['20px']}
+      size={['auto', '100%']}
     >
-      <Text color="white" cursor="pointer" fontWeight={700}>
-        Create META-ID
-      </Text>
-    </Button>
-  </Section>
+      Create META ID
+    </PrimaryButton>
+  </Fragment>
 )
 
 const enhance = compose(

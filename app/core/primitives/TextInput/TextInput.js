@@ -25,6 +25,7 @@ const StyledTextInput = styled(Input)`
     borderTopRightRadius || borderRadius};
   color: ${({ color, theme }) => theme[color] || color};
   font-family: ${({ fontFamily }) => fontFamily};
+  font-style: ${({ fontStyle }) => fontStyle};
   text-align: ${({ textAlign }) => textAlign};
 `
 
@@ -53,6 +54,7 @@ TextInput.defaultProps = {
   borderRadiusTopRight: null,
   color: 'primary',
   fontFamily: 'inherit',
+  fontStyle: 'normal',
   fontWeight: 700,
   padding: ['12px', '16px'],
   placeholderColor: 'grey',
@@ -79,6 +81,8 @@ TextInput.propTypes = {
   color: PropTypes.string,
   /** Font family */
   fontFamily: PropTypes.string,
+  /** Font style */
+  fontStyle: PropTypes.string,
   /** Placeholder colour */
   placeholderColor: PropTypes.string,
   /** Text align */
