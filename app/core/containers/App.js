@@ -15,6 +15,7 @@ import {
   Image,
   Loader,
   Main,
+  PrimaryButton,
   Text,
   View,
 } from 'core/primitives'
@@ -92,7 +93,21 @@ class App extends Component {
                 </Box>
 
                 <Box align="middle">
-                  <Search submitSearch={this.onSubmitSearch} />
+                  <Box margin={[0, '16px', 0, 0]}>
+                    <Search submitSearch={this.onSubmitSearch} />
+                  </Box>
+
+                  <Box flex="none" size={['auto', '100px']}>
+                    {sessionIdentity ? (
+                      <PrimaryButton onClick={() => actions.logout()}>
+                        Logout
+                      </PrimaryButton>
+                    ) : (
+                      <Link to={routes.login.path}>
+                        <PrimaryButton>Login</PrimaryButton>
+                      </Link>
+                    )}
+                  </Box>
                 </Box>
               </Box>
 
@@ -117,16 +132,6 @@ class App extends Component {
           </Main>
 
           <Footer>
-            {sessionIdentity ? (
-              <Text cursor="pointer" onClick={() => actions.logout()}>
-                Logout
-              </Text>
-            ) : (
-              <Link to={routes.login.path}>
-                <Text cursor="pointer">Login</Text>
-              </Link>
-            )}
-
             <Text color="jaak" display="inline-block" fontSize="12px">
               &#60; &#47;&#62; by
             </Text>
