@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { placeholder } from 'polished'
 import styled from 'styled-components'
-import { Input } from 'jaak-primitives'
+
+import Input from '../Input'
 
 /**
  * @namespace StyledTextInput
