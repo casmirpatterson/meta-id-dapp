@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { Link, Logo, Search } from 'core/components'
 import {
+  Anchor,
   Error,
   Footer,
   Header,
@@ -132,18 +133,16 @@ class App extends Component {
           </Main>
 
           <Footer>
-            <Text color="jaak" display="inline-block" fontSize="12px">
-              &#60; &#47;&#62; by
-            </Text>
-
-            <Image
-              backgroundSize="contain"
-              display="inline-block"
-              margin={[0, 0, 0, '4px']}
-              size={['14px', '24px']}
-              src="img/jaak.png"
-              verticalAlign="middle"
-            />
+            <Anchor href="https://jaak.io/" target="_blank">
+              <Image
+                backgroundSize="contain"
+                display="inline-block"
+                margin={[0, 0, 0, '4px']}
+                size={['14px', '24px']}
+                src="img/jaak.png"
+                verticalAlign="middle"
+              />
+            </Anchor>
           </Footer>
         </View>
       </ThemeProvider>
