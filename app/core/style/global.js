@@ -18,13 +18,14 @@ injectGlobal`
     height: 100%;
     min-height: 100%;
     font-family: 'Montserrat', helvetica, sans-serif;
+    background-color: ${theme.primary};
   }
 
   body {
     font-size: 16px;
     letter-spacing: 0.1px;
     line-height: 1.625;
-    color: ${theme.primary};
+    color: ${theme.white};
     -webkit-font-smoothing: antialiased;
   }
 
