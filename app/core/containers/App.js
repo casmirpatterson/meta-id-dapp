@@ -9,6 +9,7 @@ import { ThemeProvider } from 'styled-components'
 import { Link, Logo, Search } from 'core/components'
 import {
   Anchor,
+  Box as CustomBox,
   Error,
   Footer,
   Header,
@@ -66,7 +67,7 @@ class App extends Component {
           <Main>
             <Header padding={['16px']}>
               <Box>
-                <Box align="middle">
+                <CustomBox align="middle" margin={[0, 0, '32px']}>
                   <Link to={routes.home.path}>
                     <Logo maxWidth="157px" size={['29px', '157px']} />
                   </Link>
@@ -91,9 +92,9 @@ class App extends Component {
                       </Link>
                     </Fragment>
                   )}
-                </Box>
+                </CustomBox>
 
-                <Box align="middle">
+                <CustomBox align="middle" margin={[0, 0, '32px']}>
                   <Box margin={[0, '16px', 0, 0]}>
                     <Search submitSearch={this.onSubmitSearch} />
                   </Box>
@@ -109,7 +110,7 @@ class App extends Component {
                       </Link>
                     )}
                   </Box>
-                </Box>
+                </CustomBox>
               </Box>
 
               {isRequesting && (
