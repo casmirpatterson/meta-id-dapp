@@ -1,16 +1,36 @@
-import React from 'react'
-import { Box, Section } from 'jaak-primitives'
+import React, { Fragment } from 'react'
 import { compose, withState } from 'recompose'
 
-import { Button, Input, Label, Text } from 'core/primitives'
+import {
+  Input,
+  FileInputLabel,
+  PrimaryButton,
+  Section,
+  Text,
+  TextInput,
+} from 'core/primitives'
 import { readFileAsText } from 'core/util'
 
 const Form = ({ onSubmit, keystore, setKeystore, password, setPassword }) => (
-  <Section>
-    <Box align="center">
-      <Label htmlFor="uploadKeystore" margin={[0, '16px', 0, 0]}>
-        Upload Keystore
-      </Label>
+  <Fragment>
+    <Section
+      backgroundColor="white"
+      borderBottomLeftRadius="0"
+      borderBottomRightRadius="0"
+      padding={['24px', '16px']}
+    >
+      <Text color="primary" fontWeight={700} margin={[0, 0, '16px']}>
+        Upload an Ethereum keystore file
+      </Text>
+
+      <FileInputLabel
+        borderBottomLeftRadius="0"
+        borderBottomRightRadius="0"
+        display="block"
+        htmlFor="uploadKeystore"
+      >
+        Select File
+      </FileInputLabel>
 
       <Input
         display="none"
@@ -22,28 +42,29 @@ const Form = ({ onSubmit, keystore, setKeystore, password, setPassword }) => (
         type="file"
       />
 
-      <Input
-        display="inline-block"
+      <TextInput
+        borderTopLeftRadius="0"
+        borderTopRightRadius="0"
+        fontSize="14px"
         onChange={({ target: { value } }) => setPassword(value)}
-        placeholder="Unlock keystore"
+        placeholder="Enter Password"
+        size={['auto', '100%']}
+        textAlign="center"
         type="password"
         value={password}
       />
-    </Box>
+    </Section>
 
-    <Button
-      backgroundColor="primary"
-      borderRadius="40px"
-      borderWidth="0"
-      margin={['32px', 'auto']}
+    <PrimaryButton
+      borderTopLeftRadius="0"
+      borderTopRightRadius="0"
       onClick={() => onSubmit({ keystore, password })}
-      padding={['16px', '24px']}
+      padding={['20px']}
+      size={['auto', '100%']}
     >
-      <Text color="white" fontWeight={700}>
-        Login
-      </Text>
-    </Button>
-  </Section>
+      Log In
+    </PrimaryButton>
+  </Fragment>
 )
 
 const enhance = compose(
