@@ -11,6 +11,14 @@ import { Button } from 'jaak-primitives'
 const StyledPrimaryButton = styled(Button)`
   background-color: ${({ backgroundColor, theme }) =>
     theme[backgroundColor] || backgroundColor};
+  border-bottom-left-radius: ${({ borderRadius, borderBottomLeftRadius }) =>
+    borderBottomLeftRadius || borderRadius};
+  border-bottom-right-radius: ${({ borderRadius, borderBottomRightRadius }) =>
+    borderBottomRightRadius || borderRadius};
+  border-top-left-radius: ${({ borderRadius, borderTopLeftRadius }) =>
+    borderTopLeftRadius || borderRadius};
+  border-top-right-radius: ${({ borderRadius, borderTopRightRadius }) =>
+    borderTopRightRadius || borderRadius};
   color: ${({ color, theme }) => theme[color] || color};
   display: ${({ display }) => display};
   font-weight: ${({ fontWeight }) => fontWeight};
@@ -35,6 +43,10 @@ const PrimaryButton = ({ children, ...props }) => (
 PrimaryButton.defaultProps = {
   backgroundColor: 'accent',
   borderRadius: '4px',
+  borderRadiusBottomLeft: null,
+  borderRadiusBottomRight: null,
+  borderRadiusTopLeft: null,
+  borderRadiusTopRight: null,
   borderWidth: '0px',
   color: 'white',
   display: 'block',
@@ -48,6 +60,14 @@ PrimaryButton.defaultProps = {
  * @desc Primitive's prop type definitions
  */
 PrimaryButton.propTypes = {
+  /** Border bottom left radius */
+  borderBottomLeftRadius: PropTypes.string,
+  /** Border bottom right radius */
+  borderBottomRightRadius: PropTypes.string,
+  /** Border top left radius */
+  borderTopLeftRadius: PropTypes.string,
+  /** Border top right radius */
+  borderTopRightRadius: PropTypes.string,
   /** Display */
   display: PropTypes.string,
   /** Font weight */

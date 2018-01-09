@@ -3,6 +3,8 @@ import { margin, padding, size } from 'polished'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import { media } from 'core/style'
+
 /**
  * @namespace StyledHeader
  * @desc styled-component 💅
@@ -12,6 +14,10 @@ const StyledHeader = styled.header`
   ${props => margin(...props.margin)};
   ${props => padding(...props.padding)};
   ${props => size(...props.size)};
+
+  ${media.sm`
+    padding: 16px 0;
+  `};
 `
 
 /**

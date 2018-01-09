@@ -18,6 +18,7 @@ const StyledFileInputLabel = styled(Label)`
     borderTopLeftRadius || borderRadius};
   border-top-right-radius: ${({ borderRadius, borderTopRightRadius }) =>
     borderTopRightRadius || borderRadius};
+  text-align: ${({ textAlign }) => textAlign};
 `
 
 /**
@@ -46,6 +47,7 @@ FileInputLabel.defaultProps = {
   color: 'white',
   fontWeight: 700,
   padding: ['12px', '24px'],
+  textAlign: 'center',
 }
 
 /**
@@ -62,6 +64,8 @@ FileInputLabel.propTypes = {
   borderTopLeftRadius: PropTypes.string,
   /** Border top right radius */
   borderTopRightRadius: PropTypes.string,
+  /** Text align */
+  textAlign: PropTypes.string,
 }
 
 export default FileInputLabel
