@@ -21,4 +21,6 @@ export const PROFILE_CLAIM_SUB_PROPERTY = {
   name: 'name',
 }
 
+export const PROFILE_IMAGE_DEFAULT = 'img/default-profile.png'
+
 export const STATE_KEY = '@MetaId:store'
