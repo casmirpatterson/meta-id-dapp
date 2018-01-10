@@ -13,6 +13,12 @@ export const {
 
 export const CREDENTIALS = NODE_ENV === 'production' ? 'include' : null
 
+export const META_CLAIMS_SERVICES_BY_PROPERTY = {
+  dpid: 'ddex',
+  spotifyId: 'spotify',
+  // twitterId: 'twitter',
+}
+
 export const META_ID_USERNAME_SUFFIX = 'id.meta'
 
 export const PROFILE_CLAIM_PREFIX = 'profile'
