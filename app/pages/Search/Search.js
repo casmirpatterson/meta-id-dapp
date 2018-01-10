@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 import { isValidAddress } from 'ethereumjs-util'
-import { Box } from 'jaak-primitives'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 
-import { Link } from 'core/components'
-import { Button, Card, Image, Text, View } from 'core/primitives'
-import { routes } from 'core/routes'
-import { metaId } from 'core/util'
+import { View } from 'core/primitives'
 import {
   actions as IdentityActions,
   selectors as IdentitySelectors,
 } from 'domains/identity'
+import { Identity } from './components'
 
 class Search extends Component {
   componentDidMount() {
@@ -55,68 +52,8 @@ class Search extends Component {
     const identity = identityWithClaims[routeParams.id]
 
     return (
-      <View>
-        {identity && (
-          <Card backgroundColor="primary">
-            <Image
-              backgroundSize="cover"
-              display="inline-block"
-              margin={[0, '16px', 0, 0]}
-              src="img/icon-person.svg"
-              size={['32px']}
-              verticalAlign="middle"
-            />
-
-            <Text
-              color="white"
-              display="inline-block"
-              fontSize="18px"
-              fontWeight={700}
-            >
-              {identity.username} ({identity.owner})
-            </Text>
-          </Card>
-        )}
-
-        {identity &&
-          identity.claims &&
-          Object.values(identity.claims).map((claim, key) => (
-            <Card key={key}>
-              <Box align="middle">
-                <Image
-                  backgroundSize="cover"
-                  margin={[0, '16px', 0, 0]}
-                  src="img/icon-verified-claim.svg"
-                  size={['32px']}
-                />
-
-                <Box flexDirection="column">
-                  <Text fontWeight={700}>Claim: {claim.claim}</Text>
-
-                  <Text>
-                    Verified by:&nbsp;
-                    <Link to={`${routes.search.path}/${claim.issuer}`}>
-                      {metaId.getTruncatedMetaIdOwner(claim.issuer)}
-                    </Link>
-                  </Text>
-                </Box>
-              </Box>
-            </Card>
-          ))}
-
-        <Link to={routes.claim.path}>
-          <Button
-            backgroundColor="primary"
-            borderRadius="40px"
-            borderWidth="0"
-            margin={['32px', 'auto']}
-            padding={['16px', '24px']}
-          >
-            <Text color="white" fontWeight={700}>
-              Add a new claim
-            </Text>
-          </Button>
-        </Link>
+      <View size={['100%', 'auto']}>
+        <Identity identity={identity} />
       </View>
     )
   }
