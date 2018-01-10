@@ -21,10 +21,20 @@ import * as Components from './components'
 
 class Home extends Component {
   onProfileImageChange = profileImage => {
-    // TODO - handle new profileImage
-    console.log(profileImage)
+    const { account, actions, sessionIdentity } = this.props
 
-    return
+    // upload profile image to Swarm
+    // then create a self-issued verified profile claim object
+    // then push the profile claim to the META Claims index
+    return Swarm.upload(profileImage)
+      .then(hash =>
+        metaId.createProfileMetaIdentityClaim(
+          hash,
+          { id: sessionIdentity.id, privateKey: account.privateKey },
+          PROFILE_CLAIM_SUB_PROPERTY.image
+        )
+      )
+      .then(claim => actions.createClaim(claim))
   }
 
   onSubmitSetup = displayName => {
