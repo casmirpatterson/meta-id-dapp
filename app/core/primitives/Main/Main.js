@@ -1,4 +1,5 @@
 import React from 'react'
+import { size } from 'polished'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -8,6 +9,7 @@ import styled from 'styled-components'
  * @return {Function} React component
  */
 const StyledMain = styled.main`
+  ${props => size(...props.size)};
   flex: ${({ flex }) => flex};
 `
 
@@ -29,6 +31,7 @@ const Main = ({ children, ...props }) => (
  */
 Main.defaultProps = {
   flex: '1 0 auto',
+  size: ['100%', 'auto'],
 }
 
 /**
@@ -39,6 +42,8 @@ Main.defaultProps = {
 Main.propTypes = {
   /** Flex */
   flex: PropTypes.string,
+  /** [Size shorthand](https://polished.js.org/docs/#size) */
+  size: PropTypes.array,
 }
 
 export default Main

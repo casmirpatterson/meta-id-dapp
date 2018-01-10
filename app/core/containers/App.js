@@ -61,7 +61,6 @@ class App extends Component {
           flexDirection="column"
           maxWidth="1280px"
           margin={[0, 'auto']}
-          padding={['16px']}
           size={['100%', 'auto']}
         >
           <Main>

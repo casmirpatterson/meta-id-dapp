@@ -11,6 +11,7 @@ import { Image as ImagePrimitive } from 'jaak-primitives'
 const StyledImage = styled(ImagePrimitive)`
   display: ${({ display }) => display};
   max-width: ${({ maxWidth }) => maxWidth};
+  min-height: ${({ minHeight }) => minHeight};
   vertical-align: ${({ verticalAlign }) => verticalAlign};
 `
 
@@ -33,6 +34,7 @@ const Image = ({ children, ...props }) => (
 Image.defaultProps = {
   display: 'block',
   maxWidth: 'auto',
+  minHeight: 'auto',
   verticalAlign: 'baseline',
 }
 
@@ -46,6 +48,8 @@ Image.propTypes = {
   display: PropTypes.string,
   /** Maximum width */
   maxWidth: PropTypes.string,
+  /** Minimum height */
+  minHeight: PropTypes.string,
   /** Vertical alignment */
   verticalAlign: PropTypes.string,
 }
