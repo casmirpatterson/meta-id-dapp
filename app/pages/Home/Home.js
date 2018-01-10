@@ -64,7 +64,7 @@ class Home extends Component {
       sessionIdentity,
     } = this.props
 
-    const identity = identityWithClaims[sessionIdentity.id]
+    const identity = sessionIdentity && identityWithClaims[sessionIdentity.id]
 
     return (
       <View size={['100%', 'auto']}>
