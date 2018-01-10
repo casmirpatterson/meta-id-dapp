@@ -3,6 +3,7 @@ import { Box } from 'jaak-primitives'
 
 import { MetaIdentity } from 'core/components'
 import { Text } from 'core/primitives'
+import { Claims } from './'
 
 const Onymous = ({ identity }) => {
   return (
@@ -20,7 +21,9 @@ const Onymous = ({ identity }) => {
         </Text>
       </Box>
 
-      <Box backgroundColor="white">Claims go here</Box>
+      <Box backgroundColor="white" padding={['32px', '16px', 0]}>
+        <Claims claims={identity.claims} />
+      </Box>
     </Box>
   )
 }
