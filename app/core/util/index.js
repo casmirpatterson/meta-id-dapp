@@ -49,6 +49,28 @@ export const hasAsyncActionStarted = action =>
 export const hasAsyncActionSucceeded = action =>
   action.meta && action.meta['redux-pack/LIFECYCLE'] === 'success'
 
+/**
+ * Read a File from an <input> as a base64 encoded string
+ *
+ * @param  {Object} file File object
+ * @return {String}      Contents of `file` as a base64 encoded string
+ */
+export const readFileAsDataURL = file =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader()
+
+    reader.onload = ({ target: { error, result } }) =>
+      error ? reject(error) : resolve(result)
+
+    reader.readAsDataURL(file)
+  })
+
+/**
+ * Read a File from an <input> as text
+ *
+ * @param  {Object} file File object
+ * @return {String}      Contents of `file` as text
+ */
 export const readFileAsText = file =>
   new Promise((resolve, reject) => {
     const reader = new FileReader()
