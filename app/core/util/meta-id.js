@@ -1,7 +1,12 @@
 import { bufferToHex, ecsign, sha3, toBuffer, toRpcSig } from 'ethereumjs-util'
 import slugify from 'slugify'
 
-import { META_ID_USERNAME_SUFFIX, PROFILE_CLAIM_PREFIX } from 'core/constants'
+import {
+  META_CLAIMS_SERVICES,
+  META_CLAIMS_SERVICES_BY_PROPERTY,
+  META_ID_USERNAME_SUFFIX,
+  PROFILE_CLAIM_PREFIX,
+} from 'core/constants'
 import { accounts } from 'core/util'
 
 /**
@@ -128,6 +133,24 @@ export const createVerifiedIdentityClaimObject = (
     signature: signature,
     subject: subject,
   }
+}
+
+/**
+ * Get profile data for a set of META Identity Claims
+ *
+ * @todo Claim issuer profile data should be resolved from the profile claim Swarm hash
+ *       This is a temporary hack
+ *
+ * @param  {Array} claims Set of META Identity Claim objects
+ * @return {Array}        Claim issuer profile data
+ */
+export const getClaimIssuerProfilesFromClaims = claims => {
+  return claims
+    .map(
+      claim =>
+        META_CLAIMS_SERVICES[META_CLAIMS_SERVICES_BY_PROPERTY[claim.property]]
+    )
+    .filter(claim => claim)
 }
 
 /**
