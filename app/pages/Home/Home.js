@@ -10,6 +10,7 @@ import { Swarm } from 'core/services'
 import { metaId } from 'core/util'
 
 import { actions as ClaimsActions } from 'domains/claims'
+import { selectors as IdentitySelectors } from 'domains/identity'
 import {
   actions as SessionActions,
   selectors as SessionSelectors,
@@ -40,7 +41,13 @@ class Home extends Component {
   }
 
   render() {
-    const { isSetupMetaIdModalOpen, sessionIdentity } = this.props
+    const {
+      identityWithClaims,
+      isSetupMetaIdModalOpen,
+      sessionIdentity,
+    } = this.props
+
+    const identity = identityWithClaims[sessionIdentity.id]
 
     return (
       <View size={['100%', 'auto']}>
@@ -49,7 +56,11 @@ class Home extends Component {
           submitSetup={this.onSubmitSetup}
         />
 
-        {!sessionIdentity && <Components.Anonymous />}
+        {sessionIdentity ? (
+          <Components.Onymous identity={identity} />
+        ) : (
+          <Components.Anonymous />
+        )}
       </View>
     )
   }
@@ -62,6 +73,7 @@ Home.contextTypes = {
 export default connect(
   createStructuredSelector({
     account: SessionSelectors.account,
+    identityWithClaims: IdentitySelectors.identityWithClaims,
     isSetupMetaIdModalOpen: UISelectors.isSetupMetaIdModalOpen,
     sessionIdentity: SessionSelectors.sessionIdentity,
   }),
