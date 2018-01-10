@@ -17,6 +17,7 @@ const StyledText = styled(TextPrimitive)`
   color: ${({ color, theme }) => theme[color] || color};
   cursor: ${({ cursor }) => cursor};
   font-style: ${({ fontStyle }) => fontStyle};
+  max-width: ${({ maxWidth }) => maxWidth};
 `
 
 /**
@@ -43,6 +44,7 @@ Text.defaultProps = {
   color: 'white',
   cursor: 'auto',
   fontStyle: 'normal',
+  maxWidth: 'initial',
 }
 
 /**
@@ -65,6 +67,8 @@ Text.propTypes = {
   cursor: PropTypes.string,
   /** Font style */
   fontStyle: PropTypes.string,
+  /** Maximum width */
+  maxWidth: PropTypes.string,
 }
 
 export default Text
