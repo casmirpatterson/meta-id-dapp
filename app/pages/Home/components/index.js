@@ -1,3 +1,4 @@
+import Anonymous from './Anonymous.js'
 import SetupMetaId from './SetupMetaId.js'
 
-export { SetupMetaId }
+export { Anonymous, SetupMetaId }
