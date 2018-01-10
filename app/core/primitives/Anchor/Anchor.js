@@ -35,8 +35,8 @@ const Anchor = ({ children, ...props }) => (
 Anchor.defaultProps = {
   color: 'inherit',
   cursor: 'pointer',
-  fontSize: '16px',
-  fontWeight: 300,
+  fontSize: 'inherit',
+  fontWeight: 'inherit',
   margin: ['0'],
 }
 
@@ -53,7 +53,7 @@ Anchor.propTypes = {
   /** Font size */
   fontSize: PropTypes.string,
   /** Font weight */
-  fontWeight: PropTypes.number,
+  fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** [Margin shorthand](https://polished.js.org/docs/#margin) */
   margin: PropTypes.array,
 }
