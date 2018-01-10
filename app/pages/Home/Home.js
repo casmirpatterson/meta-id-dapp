@@ -20,6 +20,13 @@ import { selectors as UISelectors } from 'domains/ui'
 import * as Components from './components'
 
 class Home extends Component {
+  onProfileImageChange = profileImage => {
+    // TODO - handle new profileImage
+    console.log(profileImage)
+
+    return
+  }
+
   onSubmitSetup = displayName => {
     const { account, actions, sessionIdentity } = this.props
 
@@ -57,7 +64,10 @@ class Home extends Component {
         />
 
         {sessionIdentity ? (
-          <Components.Onymous identity={identity} />
+          <Components.Onymous
+            identity={identity}
+            onProfileImageChange={this.onProfileImageChange}
+          />
         ) : (
           <Components.Anonymous />
         )}

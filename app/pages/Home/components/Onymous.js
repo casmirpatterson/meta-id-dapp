@@ -5,11 +5,14 @@ import { MetaIdentity } from 'core/components'
 import { Text } from 'core/primitives'
 import { Claims } from './'
 
-const Onymous = ({ identity }) => {
+const Onymous = ({ identity, onProfileImageChange }) => {
   return (
     <Box flexDirection="column" size={['100%', 'auto']}>
       <Box flex="0 1 auto" flexDirection="column" padding={['16px']}>
-        <MetaIdentity identity={identity} />
+        <MetaIdentity
+          identity={identity}
+          onProfileImageChange={onProfileImageChange}
+        />
 
         <Text
           fontSize="20px"
