@@ -78,7 +78,8 @@ class Search extends Component {
           </Card>
         )}
 
-        {identity.claims &&
+        {identity &&
+          identity.claims &&
           Object.values(identity.claims).map((claim, key) => (
             <Card key={key}>
               <Box align="middle">
