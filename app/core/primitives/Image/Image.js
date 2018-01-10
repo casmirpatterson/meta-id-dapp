@@ -33,7 +33,7 @@ const Image = ({ children, ...props }) => (
  */
 Image.defaultProps = {
   display: 'block',
-  maxWidth: 'auto',
+  maxWidth: 'initial',
   minHeight: 'auto',
   verticalAlign: 'baseline',
 }

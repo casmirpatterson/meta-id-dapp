@@ -30,7 +30,7 @@ const Span = ({ children, ...props }) => (
  */
 Span.defaultProps = {
   color: 'inherit',
-  fontWeight: 300,
+  fontWeight: 'inherit',
 }
 
 /**
@@ -42,7 +42,7 @@ Span.propTypes = {
   /** Color */
   color: PropTypes.string,
   /** Font weight */
-  fontWeight: PropTypes.number,
+  fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 }
 
 export default Span

@@ -11,6 +11,7 @@ import { Button as ButtonPrimitive } from 'jaak-primitives'
 const StyledButton = styled(ButtonPrimitive)`
   background-color: ${({ backgroundColor, theme }) =>
     theme[backgroundColor] || backgroundColor};
+  cursor: ${({ cursor }) => cursor};
   display: ${({ display }) => display};
 `
 
@@ -32,6 +33,7 @@ const Button = ({ children, ...props }) => (
  */
 Button.defaultProps = {
   backgroundColor: 'none',
+  cursor: 'pointer',
   display: 'block',
 }
 
@@ -43,6 +45,8 @@ Button.defaultProps = {
 Button.propTypes = {
   /** Background colour */
   backgroundColor: PropTypes.string,
+  /** Cursor */
+  cursor: PropTypes.string,
   /** Display */
   display: PropTypes.string,
 }

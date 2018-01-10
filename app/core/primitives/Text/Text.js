@@ -9,9 +9,15 @@ import { Text as TextPrimitive } from 'jaak-primitives'
  * @return {Function} React component
  */
 const StyledText = styled(TextPrimitive)`
-  color: ${({ color, theme }) => theme[color]};
+  border-color: ${({ borderColor, theme }) =>
+    theme[borderColor] || borderColor};
+  border-radius: ${({ borderRadius }) => borderRadius};
+  border-style: ${({ borderStyle }) => borderStyle};
+  border-width: ${({ borderWidth }) => borderWidth};
+  color: ${({ color, theme }) => theme[color] || color};
   cursor: ${({ cursor }) => cursor};
   font-style: ${({ fontStyle }) => fontStyle};
+  max-width: ${({ maxWidth }) => maxWidth};
 `
 
 /**
@@ -31,9 +37,14 @@ const Text = ({ children, ...props }) => (
  * @desc Primitive's default properties
  */
 Text.defaultProps = {
+  borderColor: 'primary',
+  borderRadius: '0',
+  borderStyle: 'solid',
+  borderWidth: '0',
   color: 'white',
   cursor: 'auto',
   fontStyle: 'normal',
+  maxWidth: 'initial',
 }
 
 /**
@@ -42,12 +53,22 @@ Text.defaultProps = {
  * @desc Primitive's prop type definitions
  */
 Text.propTypes = {
+  /** Border colour */
+  borderColor: PropTypes.string,
+  /** Border radius */
+  borderRadius: PropTypes.string,
+  /** Border style */
+  borderStyle: PropTypes.string,
+  /** Border width */
+  borderWidth: PropTypes.string,
   /** Color */
   color: PropTypes.string,
   /** Cursor */
   cursor: PropTypes.string,
   /** Font style */
   fontStyle: PropTypes.string,
+  /** Maximum width */
+  maxWidth: PropTypes.string,
 }
 
 export default Text

@@ -1,7 +1,12 @@
 import { bufferToHex, ecsign, sha3, toBuffer, toRpcSig } from 'ethereumjs-util'
 import slugify from 'slugify'
 
-import { META_ID_USERNAME_SUFFIX, PROFILE_CLAIM_PREFIX } from 'core/constants'
+import {
+  META_CLAIMS_SERVICES,
+  META_CLAIMS_SERVICES_BY_PROPERTY,
+  META_ID_USERNAME_SUFFIX,
+  PROFILE_CLAIM_PREFIX,
+} from 'core/constants'
 import { accounts } from 'core/util'
 
 /**
@@ -131,6 +136,24 @@ export const createVerifiedIdentityClaimObject = (
 }
 
 /**
+ * Get profile data for a set of META Identity Claims
+ *
+ * @todo Claim issuer profile data should be resolved from the profile claim Swarm hash
+ *       This is a temporary hack
+ *
+ * @param  {Array} claims Set of META Identity Claim objects
+ * @return {Array}        Claim issuer profile data
+ */
+export const getClaimIssuerProfilesFromClaims = claims => {
+  return claims
+    .map(
+      claim =>
+        META_CLAIMS_SERVICES[META_CLAIMS_SERVICES_BY_PROPERTY[claim.property]]
+    )
+    .filter(claim => claim)
+}
+
+/**
  * Get a common name from a META Identity `username`
  *
  * @example getNameFromUsername('luke.id.meta') // => 'luke'
@@ -149,6 +172,34 @@ export const getNameFromUsername = username =>
  */
 export const getProfileClaimsFromMetaIdentityClaims = claims => {
   return claims.filter(claim => isProfileClaim(claim))
+}
+
+/**
+ * Convert array of profile claims into object keyed by claim sub-property
+ *
+ * @param  {Array}  claims Set of META Identity Profile Claim objects
+ * @return {Object}        Profile claims object keyed by claim sub-property
+ */
+export const getProfileClaimsKeyedBySubProperty = claims => {
+  return claims.reduce(
+    (obj, claim) =>
+      Object.assign({}, obj, {
+        [getProfileClaimSubPropertyFromProperty(claim.property)]: claim,
+      }),
+    {}
+  )
+}
+
+/**
+ * Get the sub-property of a META Identity Profile Claim from the claim's property
+ *
+ * @example getProfileClaimSubPropertyFromProperty('profile.name') // => 'name'
+ *
+ * @param  {String} property Profile claim property
+ * @return {String}          Profile claim sub-property
+ */
+export const getProfileClaimSubPropertyFromProperty = property => {
+  return property.replace(new RegExp(`${PROFILE_CLAIM_PREFIX}.`, 'i'), '')
 }
 
 /**

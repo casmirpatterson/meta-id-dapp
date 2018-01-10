@@ -10,6 +10,7 @@ import { Swarm } from 'core/services'
 import { metaId } from 'core/util'
 
 import { actions as ClaimsActions } from 'domains/claims'
+import { selectors as IdentitySelectors } from 'domains/identity'
 import {
   actions as SessionActions,
   selectors as SessionSelectors,
@@ -19,6 +20,23 @@ import { selectors as UISelectors } from 'domains/ui'
 import * as Components from './components'
 
 class Home extends Component {
+  onProfileImageChange = profileImage => {
+    const { account, actions, sessionIdentity } = this.props
+
+    // upload profile image to Swarm
+    // then create a self-issued verified profile claim object
+    // then push the profile claim to the META Claims index
+    return Swarm.upload(profileImage)
+      .then(hash =>
+        metaId.createProfileMetaIdentityClaim(
+          hash,
+          { id: sessionIdentity.id, privateKey: account.privateKey },
+          PROFILE_CLAIM_SUB_PROPERTY.image
+        )
+      )
+      .then(claim => actions.createClaim(claim))
+  }
+
   onSubmitSetup = displayName => {
     const { account, actions, sessionIdentity } = this.props
 
@@ -40,7 +58,13 @@ class Home extends Component {
   }
 
   render() {
-    const { isSetupMetaIdModalOpen, sessionIdentity } = this.props
+    const {
+      identityWithClaims,
+      isSetupMetaIdModalOpen,
+      sessionIdentity,
+    } = this.props
+
+    const identity = identityWithClaims[sessionIdentity.id]
 
     return (
       <View size={['100%', 'auto']}>
@@ -49,7 +73,14 @@ class Home extends Component {
           submitSetup={this.onSubmitSetup}
         />
 
-        {!sessionIdentity && <Components.Anonymous />}
+        {sessionIdentity ? (
+          <Components.Onymous
+            identity={identity}
+            onProfileImageChange={this.onProfileImageChange}
+          />
+        ) : (
+          <Components.Anonymous />
+        )}
       </View>
     )
   }
@@ -62,6 +93,7 @@ Home.contextTypes = {
 export default connect(
   createStructuredSelector({
     account: SessionSelectors.account,
+    identityWithClaims: IdentitySelectors.identityWithClaims,
     isSetupMetaIdModalOpen: UISelectors.isSetupMetaIdModalOpen,
     sessionIdentity: SessionSelectors.sessionIdentity,
   }),
