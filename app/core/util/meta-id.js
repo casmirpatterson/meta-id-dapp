@@ -152,6 +152,34 @@ export const getProfileClaimsFromMetaIdentityClaims = claims => {
 }
 
 /**
+ * Convert array of profile claims into object keyed by claim sub-property
+ *
+ * @param  {Array}  claims Set of META Identity Profile Claim objects
+ * @return {Object}        Profile claims object keyed by claim sub-property
+ */
+export const getProfileClaimsKeyedBySubProperty = claims => {
+  return claims.reduce(
+    (obj, claim) =>
+      Object.assign({}, obj, {
+        [getProfileClaimSubPropertyFromProperty(claim.property)]: claim,
+      }),
+    {}
+  )
+}
+
+/**
+ * Get the sub-property of a META Identity Profile Claim from the claim's property
+ *
+ * @example getProfileClaimSubPropertyFromProperty('profile.name') // => 'name'
+ *
+ * @param  {String} property Profile claim property
+ * @return {String}          Profile claim sub-property
+ */
+export const getProfileClaimSubPropertyFromProperty = property => {
+  return property.replace(new RegExp(`${PROFILE_CLAIM_PREFIX}.`, 'i'), '')
+}
+
+/**
  * Truncate a META-ID owner
  *
  * @example 0x2f138CC4179cA8FF8504cbE74e52f321F855B541 => 0x2f1...541
