@@ -8,7 +8,8 @@ const IdentityMiddleware = ({ dispatch }) => next => action => {
 
   if (
     identity.READ_IDENTITY === action.type &&
-    hasAsyncActionSucceeded(action)
+    hasAsyncActionSucceeded(action) &&
+    action.payload.identity.length > 0
   ) {
     dispatch(actions.readClaimsBySubject(action.payload.identity[0].id))
   }

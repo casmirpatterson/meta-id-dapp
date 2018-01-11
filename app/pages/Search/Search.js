@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 
-import { View } from 'core/primitives'
+import { Text, View } from 'core/primitives'
 import {
   actions as IdentityActions,
   selectors as IdentitySelectors,
@@ -53,7 +53,18 @@ class Search extends Component {
 
     return (
       <View size={['100%', 'auto']}>
-        <Identity identity={identity} />
+        {identity ? (
+          <Identity identity={identity} />
+        ) : (
+          <Text
+            fontSize="22px"
+            fontWeight={700}
+            margin={['32px', 0, 0]}
+            textAlign="center"
+          >
+            No META ID found
+          </Text>
+        )}
       </View>
     )
   }
