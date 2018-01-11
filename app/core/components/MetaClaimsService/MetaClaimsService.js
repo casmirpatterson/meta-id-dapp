@@ -1,9 +1,61 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { compose, withState } from 'recompose'
 import { Position } from 'jaak-primitives'
 
-import { Anchor, Box, Image, PrimaryButton, Text } from 'core/primitives'
+import {
+  Anchor,
+  Box,
+  Image,
+  PrimaryButton,
+  Text,
+  TextInput,
+} from 'core/primitives'
 
-const MetaClaimsService = ({ claimsService }) => {
+const MetaClaimsService = ({
+  claimInput,
+  claimsService,
+  onClaimsServiceRequest,
+  setClaimInput,
+}) => {
+  const renderCTA = onClaimsServiceRequest ? (
+    <Fragment>
+      <TextInput
+        display="inline-block"
+        margin={[0, 0, '16px']}
+        onChange={({ target: { value } }) => setClaimInput(value)}
+        padding={['8px', '12px']}
+        placeholder={claimsService.property}
+        size={['auto', '100%']}
+        value={claimInput}
+      />
+
+      <PrimaryButton
+        fontSize="16px"
+        margin={[0, 0, '16px']}
+        onClick={() => onClaimsServiceRequest(claimInput)}
+        padding={['8px']}
+      >
+        Connect
+      </PrimaryButton>
+    </Fragment>
+  ) : (
+    <PrimaryButton cursor="auto" margin={[0, 0, '16px']} padding={['8px']}>
+      <Position position="relative">
+        <Text fontSize="16px" fontWeight={700} textTransform="uppercase">
+          {claimsService.property}
+        </Text>
+
+        <Position position="absolute" right="0" top="-3px">
+          <Image
+            backgroundSize="cover"
+            src="img/icon-tick.svg"
+            size={['24px']}
+          />
+        </Position>
+      </Position>
+    </PrimaryButton>
+  )
+
   return (
     <Box
       flex="none"
@@ -13,31 +65,13 @@ const MetaClaimsService = ({ claimsService }) => {
     >
       <Image
         backgroundSize="contain"
+        boxShadow="0px 4px 60px rgba(0, 0, 0, 0.4)"
         margin={[0, 0, '32px', 0]}
         size={['180px', '100%']}
         src={claimsService.image}
       />
 
-      <PrimaryButton cursor="auto" margin={[0, 0, '16px']} padding={['8px']}>
-        <Position position="relative">
-          <Text
-            display="inline"
-            fontSize="16px"
-            fontWeight={700}
-            textTransform="uppercase"
-          >
-            {claimsService.property}
-          </Text>
-
-          <Position position="absolute" right="0" top="-3px">
-            <Image
-              backgroundSize="cover"
-              src="img/icon-tick.svg"
-              size={['24px']}
-            />
-          </Position>
-        </Position>
-      </PrimaryButton>
+      {renderCTA}
 
       <Text color="primary" fontSize="22px" fontWeight={700}>
         {claimsService.displayName}
@@ -54,4 +88,12 @@ const MetaClaimsService = ({ claimsService }) => {
   )
 }
 
-export default MetaClaimsService
+const enhance = compose(
+  withState(
+    'claimInput',
+    'setClaimInput',
+    ({ claimInputDefaultValue }) => claimInputDefaultValue || ''
+  )
+)
+
+export default enhance(MetaClaimsService)

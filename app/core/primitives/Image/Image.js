@@ -9,6 +9,7 @@ import { Image as ImagePrimitive } from 'jaak-primitives'
  * @return {Function} React component
  */
 const StyledImage = styled(ImagePrimitive)`
+  box-shadow: ${({ boxShadow }) => boxShadow};
   display: ${({ display }) => display};
   max-width: ${({ maxWidth }) => maxWidth};
   min-height: ${({ minHeight }) => minHeight};
@@ -32,6 +33,7 @@ const Image = ({ children, ...props }) => (
  * @desc Primitive's default properties
  */
 Image.defaultProps = {
+  boxShadow: 'none',
   display: 'block',
   maxWidth: 'initial',
   minHeight: 'auto',
@@ -44,6 +46,8 @@ Image.defaultProps = {
  * @desc Primitive's prop type definitions
  */
 Image.propTypes = {
+  /** Box shadow */
+  boxShadow: PropTypes.string,
   /** Display */
   display: PropTypes.string,
   /** Maximum width */
