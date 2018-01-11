@@ -1,7 +1,8 @@
 import META_CLAIMS_SERVICES from './metaClaimsServices'
 import * as SPOTIFY from './spotify'
+import * as TWITTER from './twitter'
 
-export { META_CLAIMS_SERVICES, SPOTIFY }
+export { META_CLAIMS_SERVICES, SPOTIFY, TWITTER }
 
 export const {
   APP_URL,

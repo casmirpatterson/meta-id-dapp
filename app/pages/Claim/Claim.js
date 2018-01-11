@@ -10,7 +10,7 @@ import { META_CLAIMS_SERVICES } from 'core/constants'
 import Protected from 'core/containers/Protected'
 import { Text } from 'core/primitives'
 import { breakpoints } from 'core/style'
-import { metaId, spotify } from 'core/util'
+import { metaId, spotify, twitter } from 'core/util'
 import { actions as ClaimsActions } from 'domains/claims'
 import {
   actions as SessionActions,
@@ -65,6 +65,16 @@ class Claim extends Component {
 
     // redirect to Spotify OAuth gateway
     return (window.location.href = spotify.generateOAuthURL())
+  }
+
+  onTwitterClaimsServiceRequest = claimMessage => {
+    const { actions } = this.props
+
+    // store claim message to persist over OAuth flow
+    actions.setOAuthClaimMessage(claimMessage)
+
+    // redirect to Twitter OAuth gateway
+    return (window.location.href = twitter.generateOAuthURL())
   }
 
   render() {
@@ -156,6 +166,18 @@ class Claim extends Component {
                     onClaimsServiceRequest={claimMessage =>
                       this.onMetaClaimsServiceCallback(claimMessage, 'ddex')
                     }
+                  />
+
+                  <MetaClaimsService
+                    claimsService={META_CLAIMS_SERVICES.ppl}
+                    onClaimsServiceRequest={claimMessage =>
+                      this.onMetaClaimsServiceCallback(claimMessage, 'ppl')
+                    }
+                  />
+
+                  <MetaClaimsService
+                    claimsService={META_CLAIMS_SERVICES.twitter}
+                    onClaimsServiceRequest={this.onTwitterClaimsServiceRequest}
                   />
                 </Box>
               </Box>
