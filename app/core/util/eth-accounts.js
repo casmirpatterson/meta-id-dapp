@@ -17,20 +17,25 @@ const removeHexPrefix = str => str.substring(0, 2) === '0x' && str.substring(2)
  * @return {Object}                   Constructed Ethereum account
  */
 export const create = (encryptedKeystore, password) => {
-  // decrypt `keystore` with `password`
-  const decryptedKeystore = fromV3(encryptedKeystore, password)
+  try {
+    // decrypt `keystore` with `password`
+    const decryptedKeystore = fromV3(encryptedKeystore, password)
 
-  // extract private key from decrypted keystore
-  const privateKey = removeHexPrefix(
-    bufferToHex(decryptedKeystore.getPrivateKey())
-  )
+    // extract private key from decrypted keystore
+    const privateKey = removeHexPrefix(
+      bufferToHex(decryptedKeystore.getPrivateKey())
+    )
 
-  // extract checksum hex address from decrypted keystore
-  const address = decryptedKeystore.getChecksumAddressString()
+    // extract checksum hex address from decrypted keystore
+    const address = decryptedKeystore.getChecksumAddressString()
 
-  return {
-    address,
-    privateKey,
+    return {
+      address,
+      privateKey,
+    }
+  } catch (e) {
+    // catch keystore decryption errors
+    return e
   }
 }
 
