@@ -12,7 +12,7 @@ export default {
     website: 'ddex.net',
   },
   ppl: {
-    address: '',
+    address: '0x6Eb4c4bdd7Fb7cc3dA65b93fF3eB0ca00fdD62aA',
     displayName: 'PPL',
     endpoints: {
       development: 'http://localhost:7002',
@@ -36,7 +36,7 @@ export default {
     website: 'spotify.com',
   },
   twitter: {
-    address: '',
+    address: '0xE1301Efd8C59D4D937fb3DCe45E659FC26ee936F',
     displayName: 'Twitter',
     endpoints: {
       development: 'http://localhost:7004',
