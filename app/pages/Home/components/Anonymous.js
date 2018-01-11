@@ -9,7 +9,13 @@ import { breakpoints } from 'core/style'
 
 const Anonymous = () => (
   <Box flexDirection="column" size={['100%', 'auto']}>
-    <Box flex="0 1 auto" padding={['16px', '16px', '32px']}>
+    <Box
+      flex="0 1 auto"
+      margin={[0, 'auto']}
+      padding={['16px', '16px', '32px']}
+      size={['auto', '100%']}
+      style={{ maxWidth: '1280px' }}
+    >
       <Box>
         <Box>
           <Text

@@ -12,6 +12,7 @@ const StyledHeader = styled.header`
   ${props => margin(...props.margin)};
   ${props => padding(...props.padding)};
   ${props => size(...props.size)};
+  max-width: ${({ maxWidth }) => maxWidth};
 `
 
 /**
@@ -32,6 +33,7 @@ const Header = ({ children, ...props }) => (
  */
 Header.defaultProps = {
   margin: ['0'],
+  maxWidth: 'initial',
   padding: ['0'],
   size: ['auto'],
 }
@@ -44,6 +46,8 @@ Header.defaultProps = {
 Header.propTypes = {
   /** [Margin shorthand](https://polished.js.org/docs/#margin) */
   margin: PropTypes.array,
+  /** Maximum width */
+  maxWidth: PropTypes.string,
   /** [Padding shorthand](https://polished.js.org/docs/#padding) */
   padding: PropTypes.array,
   /** [Size shorthand](https://polished.js.org/docs/#size) */

@@ -35,7 +35,7 @@ class Protected extends Component {
   render() {
     const { children } = this.props
 
-    return <View>{children}</View>
+    return <View size={['100%', 'auto']}>{children}</View>
   }
 }
 

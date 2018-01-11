@@ -73,72 +73,91 @@ class Claim extends Component {
     return (
       <Protected>
         <Box flexDirection="column" size={['100%', 'auto']}>
-          <Text
-            fontSize="20px"
-            fontWeight={900}
-            margin={['8px', 0]}
+          <Box
+            flex="0 1 auto"
+            flexDirection="column"
+            margin={[0, 'auto']}
             padding={['16px']}
-            textTransform="uppercase"
+            size={['auto', '100%']}
+            style={{ maxWidth: '1280px' }}
           >
-            Providers
-          </Text>
+            <Text
+              fontSize="20px"
+              fontWeight={900}
+              margin={['8px', 0]}
+              textTransform="uppercase"
+            >
+              Providers
+            </Text>
+          </Box>
 
-          <Box backgroundColor="white" padding={['32px', '16px', 0]}>
-            <MediaQuery query={`(${breakpoints.MEDIUM})`}>
-              <Box flex="none" size={['auto', '200px']}>
-                <List>
-                  <Text color="accent" fontWeight={700} padding={[0, 0, '8px']}>
-                    All
-                  </Text>
-                  <Text
-                    color="primary"
-                    fontWeight={700}
-                    padding={[0, 0, '8px']}
-                  >
-                    Music
-                  </Text>
-                  <Text
-                    color="primary"
-                    fontWeight={700}
-                    padding={[0, 0, '8px']}
-                  >
-                    Social
-                  </Text>
-                  <Text
-                    color="primary"
-                    fontWeight={700}
-                    padding={[0, 0, '8px']}
-                  >
-                    Media
-                  </Text>
-                </List>
-              </Box>
-            </MediaQuery>
+          <Box backgroundColor="white">
+            <Box
+              margin={[0, 'auto']}
+              padding={['32px', '16px', 0]}
+              size={['auto', '100%']}
+              style={{ maxWidth: '1280px' }}
+            >
+              <MediaQuery query={`(${breakpoints.MEDIUM})`}>
+                <Box flex="none" size={['auto', '200px']}>
+                  <List>
+                    <Text
+                      color="accent"
+                      fontWeight={700}
+                      padding={[0, 0, '8px']}
+                    >
+                      All
+                    </Text>
+                    <Text
+                      color="primary"
+                      fontWeight={700}
+                      padding={[0, 0, '8px']}
+                    >
+                      Music
+                    </Text>
+                    <Text
+                      color="primary"
+                      fontWeight={700}
+                      padding={[0, 0, '8px']}
+                    >
+                      Social
+                    </Text>
+                    <Text
+                      color="primary"
+                      fontWeight={700}
+                      padding={[0, 0, '8px']}
+                    >
+                      Media
+                    </Text>
+                  </List>
+                </Box>
+              </MediaQuery>
 
-            <Box flexDirection="column">
-              <Text
-                color="primary"
-                fontSize="20px"
-                fontWeight={900}
-                margin={[0, 0, '16px']}
-                textTransform="uppercase"
-              >
-                Featured
-              </Text>
+              <Box flexDirection="column">
+                <Text
+                  color="primary"
+                  fontSize="20px"
+                  fontWeight={900}
+                  margin={[0, 0, '16px']}
+                  textTransform="uppercase"
+                >
+                  Featured
+                </Text>
 
-              <Box>
-                <MetaClaimsService
-                  claimInputDefaultValue={oAuthClaimMessage}
-                  claimsService={META_CLAIMS_SERVICES.spotify}
-                  onClaimsServiceRequest={this.onSpotifyClaimsServiceRequest}
-                />
+                <Box>
+                  <MetaClaimsService
+                    claimInputDefaultValue={oAuthClaimMessage}
+                    claimsService={META_CLAIMS_SERVICES.spotify}
+                    onClaimsServiceRequest={this.onSpotifyClaimsServiceRequest}
+                  />
 
-                <MetaClaimsService
-                  claimsService={META_CLAIMS_SERVICES.ddex}
-                  onClaimsServiceRequest={claimMessage =>
-                    this.onMetaClaimsServiceCallback(claimMessage, 'ddex')
-                  }
-                />
+                  <MetaClaimsService
+                    claimsService={META_CLAIMS_SERVICES.ddex}
+                    onClaimsServiceRequest={claimMessage =>
+                      this.onMetaClaimsServiceCallback(claimMessage, 'ddex')
+                    }
+                  />
+                </Box>
               </Box>
             </Box>
           </Box>

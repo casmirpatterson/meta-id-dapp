@@ -56,15 +56,13 @@ class App extends Component {
 
     return (
       <ThemeProvider theme={theme}>
-        <View
-          display="flex"
-          flexDirection="column"
-          maxWidth="1280px"
-          margin={[0, 'auto']}
-          size={['100%', 'auto']}
-        >
+        <View display="flex" flexDirection="column" size={['100%', 'auto']}>
           <Main>
-            <Header padding={['32px', '16px', '16px']}>
+            <Header
+              maxWidth="1280px"
+              margin={[0, 'auto']}
+              padding={['32px', '16px', '16px']}
+            >
               <Box>
                 <CustomBox align="middle" margin={[0, 0, '32px']}>
                   <Link to={routes.home.path}>
