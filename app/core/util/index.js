@@ -87,4 +87,5 @@ export const readFileAsText = file =>
  * @param  {String} str String to capitalise
  * @return {String}     Capitalised string
  */
-export const toCapitalised = str => str.replace(/\b\w/g, l => l.toUpperCase())
+export const toCapitalised = (str = '') =>
+  str.replace(/\b\w/g, l => l.toUpperCase())
