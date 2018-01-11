@@ -5,6 +5,7 @@ import {
   hasAsyncActionFailed,
   hasAsyncActionSucceeded,
   isDomainAction,
+  metaId,
 } from 'core/util'
 import { actionTypes as claims } from 'domains/claims'
 import { actions as profile } from 'domains/profile'
@@ -17,14 +18,23 @@ const ClaimsMiddleware = ({ dispatch }) => next => action => {
     (hasAsyncActionFailed(action) && claims.CREATE_CLAIM === action.type) ||
     (hasAsyncActionFailed(action) && claims.VERIFY_CLAIM === action.type)
   ) {
+    // redirect to Claim page
     dispatch(farce.push(`${routes.claim.path}`))
   }
 
   if (claims.CREATE_CLAIM === action.type && hasAsyncActionSucceeded(action)) {
+    // check if new claim is a profile claim
+    if (metaId.isProfileClaim(action.payload.createClaim)) {
+      // resolve new profile claim hash
+      dispatch(profile.addProfileClaims([action.payload.createClaim]))
+    }
+
+    // redirect to Home page
     dispatch(farce.push(routes.home.path))
   }
 
   if (claims.READ_CLAIMS === action.type && hasAsyncActionSucceeded(action)) {
+    // resolve any profile claim hashes
     dispatch(profile.addProfileClaims(action.payload.claim))
   }
 
