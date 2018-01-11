@@ -21,9 +21,7 @@ const ClaimsMiddleware = ({ dispatch }) => next => action => {
   }
 
   if (claims.CREATE_CLAIM === action.type && hasAsyncActionSucceeded(action)) {
-    dispatch(
-      farce.push(`${routes.search.path}/${action.payload.createClaim.subject}`)
-    )
+    dispatch(farce.push(routes.home.path))
   }
 
   if (claims.READ_CLAIMS === action.type && hasAsyncActionSucceeded(action)) {
