@@ -157,6 +157,13 @@ class Claim extends Component {
                       this.onMetaClaimsServiceCallback(claimMessage, 'ddex')
                     }
                   />
+
+                  <MetaClaimsService
+                    claimsService={META_CLAIMS_SERVICES.ppl}
+                    onClaimsServiceRequest={claimMessage =>
+                      this.onMetaClaimsServiceCallback(claimMessage, 'ppl')
+                    }
+                  />
                 </Box>
               </Box>
             </Box>
