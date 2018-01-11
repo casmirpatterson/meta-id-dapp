@@ -2,17 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
+import MediaQuery from 'react-responsive'
+import { Box, List } from 'jaak-primitives'
 
+import { MetaClaimsService } from 'core/components'
+import { META_CLAIMS_SERVICES } from 'core/constants'
 import Protected from 'core/containers/Protected'
 import { Text } from 'core/primitives'
+import { breakpoints } from 'core/style'
 import { metaId, spotify } from 'core/util'
 import { actions as ClaimsActions } from 'domains/claims'
 import {
   actions as SessionActions,
   selectors as SessionSelectors,
 } from 'domains/session'
-
-import * as Components from './components'
 
 class Claim extends Component {
   componentDidMount() {
@@ -69,35 +72,77 @@ class Claim extends Component {
 
     return (
       <Protected>
-        <Text fontSize="24px" fontWeight={700} textAlign="center">
-          Add a New Claim
-        </Text>
+        <Box flexDirection="column" size={['100%', 'auto']}>
+          <Text
+            fontSize="20px"
+            fontWeight={900}
+            margin={['8px', 0]}
+            padding={['16px']}
+            textTransform="uppercase"
+          >
+            Providers
+          </Text>
 
-        <Text margin={['8px', 0, '32px']} textAlign="center">
-          Select a META Claims Service to request verification of a claim.
-        </Text>
+          <Box backgroundColor="white" padding={['32px', '16px', 0]}>
+            <MediaQuery query={`(${breakpoints.MEDIUM})`}>
+              <Box flex="none" size={['auto', '200px']}>
+                <List>
+                  <Text color="accent" fontWeight={700} padding={[0, 0, '8px']}>
+                    All
+                  </Text>
+                  <Text
+                    color="primary"
+                    fontWeight={700}
+                    padding={[0, 0, '8px']}
+                  >
+                    Music
+                  </Text>
+                  <Text
+                    color="primary"
+                    fontWeight={700}
+                    padding={[0, 0, '8px']}
+                  >
+                    Social
+                  </Text>
+                  <Text
+                    color="primary"
+                    fontWeight={700}
+                    padding={[0, 0, '8px']}
+                  >
+                    Media
+                  </Text>
+                </List>
+              </Box>
+            </MediaQuery>
 
-        <Components.ClaimsService
-          claimDisplayText="JAAK META Claims Service"
-          claimInputPlaceholder="META-ID"
-          claimProvider="jaak"
-          onClaimsServiceRequest={this.onMetaClaimsServiceCallback}
-        />
+            <Box flexDirection="column">
+              <Text
+                color="primary"
+                fontSize="20px"
+                fontWeight={900}
+                margin={[0, 0, '16px']}
+                textTransform="uppercase"
+              >
+                Featured
+              </Text>
 
-        <Components.ClaimsService
-          claimDisplayText="Spotify META Claims Service"
-          claimInputDefaultValue={oAuthClaimMessage}
-          claimInputPlaceholder="Spotify username"
-          claimProvider="spotify"
-          onClaimsServiceRequest={this.onSpotifyClaimsServiceRequest}
-        />
+              <Box>
+                <MetaClaimsService
+                  claimInputDefaultValue={oAuthClaimMessage}
+                  claimsService={META_CLAIMS_SERVICES.spotify}
+                  onClaimsServiceRequest={this.onSpotifyClaimsServiceRequest}
+                />
 
-        <Components.ClaimsService
-          claimDisplayText="DDEX META Claims Service"
-          claimInputPlaceholder="DPID"
-          claimProvider="ddex"
-          onClaimsServiceRequest={this.onMetaClaimsServiceCallback}
-        />
+                <MetaClaimsService
+                  claimsService={META_CLAIMS_SERVICES.ddex}
+                  onClaimsServiceRequest={claimMessage =>
+                    this.onMetaClaimsServiceCallback(claimMessage, 'ddex')
+                  }
+                />
+              </Box>
+            </Box>
+          </Box>
+        </Box>
       </Protected>
     )
   }
