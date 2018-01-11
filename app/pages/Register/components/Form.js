@@ -73,6 +73,7 @@ const Form = ({
     <PrimaryButton
       borderTopLeftRadius="0"
       borderTopRightRadius="0"
+      disabled={!keystore || !password || !username}
       fontSize="16px"
       onClick={() => onSubmit({ keystore, password, username })}
       padding={['20px']}
