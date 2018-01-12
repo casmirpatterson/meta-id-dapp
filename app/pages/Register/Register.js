@@ -31,7 +31,7 @@ class Register extends Component {
     // create a new META-ID and log the new account in
     return actions
       .createIdentity(account, username)
-      .then(() => actions.login(account, true))
+      .then(({ error }) => !error && actions.login(account, true))
   }
 
   render() {
