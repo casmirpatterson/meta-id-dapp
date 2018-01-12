@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 
-import { PROFILE_CLAIM_SUB_PROPERTY } from 'core/constants'
+import { EXAMPLE_IDENTITY, PROFILE_CLAIM_SUB_PROPERTY } from 'core/constants'
 import { View } from 'core/primitives'
 import { Swarm } from 'core/services'
 import { metaId } from 'core/util'
@@ -79,7 +79,7 @@ class Home extends Component {
             onProfileImageChange={this.onProfileImageChange}
           />
         ) : (
-          <Components.Anonymous />
+          <Components.Anonymous exampleIdentity={EXAMPLE_IDENTITY} />
         )}
       </View>
     )

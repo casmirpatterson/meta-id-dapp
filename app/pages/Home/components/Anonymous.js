@@ -2,12 +2,12 @@ import React from 'react'
 import MediaQuery from 'react-responsive'
 import { Box } from 'jaak-primitives'
 
-import { Link } from 'core/components'
-import { PrimaryButton, Image, Text } from 'core/primitives'
+import { Link, MetaIdentity } from 'core/components'
+import { PrimaryButton, Image, Section, Text } from 'core/primitives'
 import { routes } from 'core/routes'
 import { breakpoints } from 'core/style'
 
-const Anonymous = () => (
+const Anonymous = ({ exampleIdentity }) => (
   <Box flexDirection="column" size={['100%', 'auto']}>
     <Box
       flex="0 1 auto"
@@ -39,7 +39,14 @@ const Anonymous = () => (
         </Box>
 
         <MediaQuery query={`(${breakpoints.MEDIUM})`}>
-          <Box margin={[0, 0, 0, '32px']}>Example META-ID goes here?</Box>
+          <Section
+            borderColor="white"
+            borderWidth="1px"
+            margin={[0, 0, 0, '32px']}
+            padding={['32px', '24px']}
+          >
+            <MetaIdentity identity={exampleIdentity} />
+          </Section>
         </MediaQuery>
       </Box>
     </Box>

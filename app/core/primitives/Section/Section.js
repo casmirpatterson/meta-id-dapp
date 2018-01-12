@@ -12,6 +12,8 @@ const StyledSection = styled(SectionPrimitive)`
   background-color: ${({ backgroundColor, theme }) =>
     theme[backgroundColor] || backgroundColor};
   border-radius: ${({ borderRadius }) => borderRadius};
+  border-style: ${({ borderStyle }) => borderStyle};
+  border-width: ${({ borderWidth }) => borderWidth};
   border-bottom-left-radius: ${({ borderRadius, borderBottomLeftRadius }) =>
     borderBottomLeftRadius || borderRadius};
   border-bottom-right-radius: ${({ borderRadius, borderBottomRightRadius }) =>
@@ -41,6 +43,8 @@ const Section = ({ children, ...props }) => (
 Section.defaultProps = {
   backgroundColor: 'none',
   borderRadius: '4px',
+  borderStyle: 'solid',
+  borderWidth: '0',
   borderRadiusBottomLeft: null,
   borderRadiusBottomRight: null,
   borderRadiusTopLeft: null,
@@ -57,6 +61,10 @@ Section.propTypes = {
   backgroundColor: PropTypes.string,
   /** Border radius */
   borderRadius: PropTypes.string,
+  /** Border style */
+  borderStyle: PropTypes.string,
+  /** Border width */
+  borderWidth: PropTypes.string,
   /** Border bottom left radius */
   borderBottomLeftRadius: PropTypes.string,
   /** Border bottom right radius */
