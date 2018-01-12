@@ -19,7 +19,11 @@ const removeHexPrefix = str => str.substring(0, 2) === '0x' && str.substring(2)
 export const create = (encryptedKeystore, password) => {
   try {
     // decrypt `keystore` with `password`
-    const decryptedKeystore = fromV3(encryptedKeystore, password)
+    const decryptedKeystore = fromV3(
+      JSON.stringify(encryptedKeystore),
+      password,
+      true
+    )
 
     // extract private key from decrypted keystore
     const privateKey = removeHexPrefix(
