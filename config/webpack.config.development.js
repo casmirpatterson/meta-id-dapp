@@ -18,6 +18,9 @@ const GLOBALS = {
       graphql.endpoints.development
     ),
     NODE_ENV: JSON.stringify('development'),
+    SENTRY_DATA_SOURCE_NAME: JSON.stringify(
+      'https://db8bdca5895449dbbf204e4c5143e305@sentry.io/273752'
+    ),
     SWARM_HOST: JSON.stringify(`${HOST}:5000`),
   },
 }
