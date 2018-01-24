@@ -20,10 +20,6 @@ export const META_CLAIMS_SERVICES_BY_PROPERTY = {
   'twitter.id': 'twitter',
 }
 
-export const META_ID_USERNAME_SUFFIX = 'id.meta'
-
-export const PROFILE_CLAIM_PREFIX = 'profile'
-
 export const PROFILE_CLAIM_SUB_PROPERTY = {
   image: 'image',
   name: 'name',

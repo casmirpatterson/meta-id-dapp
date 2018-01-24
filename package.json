@@ -73,6 +73,7 @@
     "graphql-request": "^1.4.0",
     "immutable": "^3.8.2",
     "jaak-primitives": "0.0.12",
+    "meta.js": "^1.0.0-alpha.3",
     "polished": "^1.9.0",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.1",

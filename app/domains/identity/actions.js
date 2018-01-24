@@ -1,5 +1,6 @@
+import { identity } from 'meta.js'
+
 import { MetaId } from 'core/services'
-import { metaId } from 'core/util'
 import * as actions from './actionTypes'
 
 /**
@@ -14,9 +15,9 @@ import * as actions from './actionTypes'
 export const createIdentity = (account, username) => ({
   type: actions.CREATE_IDENTITY,
   promise: MetaId.createIdentity({
-    identity: metaId.createMetaIdObject(
+    identity: identity.createIdentityObject(
       account,
-      metaId.getUsernameFromName(username)
+      identity.getUsernameFromName(username)
     ),
   }),
 })

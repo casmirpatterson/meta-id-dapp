@@ -1,6 +1,6 @@
+import { identityClaims } from 'meta.js'
 import { createSelector } from 'reselect'
 
-import { metaId } from 'core/util'
 import { selectors as Profile } from 'domains/profile'
 import { name } from './constants'
 
@@ -22,7 +22,7 @@ const getClaimsWithProfileData = createSelector(
   (claims, profile) => {
     const claimsWithProfileData = claims.map(claim => {
       // check for profile claim
-      if (metaId.isProfileClaim(claim.toObject())) {
+      if (identityClaims.isProfileClaim(claim.toObject())) {
         // replace claim hash with resolved claim data from `profile`
         const profileClaim = claim.set('claim', profile.get(claim.get('claim')))
 

@@ -4,13 +4,14 @@ import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 import MediaQuery from 'react-responsive'
 import { Box, List } from 'jaak-primitives'
+import { identityClaims } from 'meta.js'
 
 import { MetaClaimsService } from 'core/components'
 import { META_CLAIMS_SERVICES } from 'core/constants'
 import Protected from 'core/containers/Protected'
 import { Text } from 'core/primitives'
 import { breakpoints } from 'core/style'
-import { metaId, spotify } from 'core/util'
+import { spotify } from 'core/util'
 import { actions as ClaimsActions } from 'domains/claims'
 import {
   actions as SessionActions,
@@ -43,7 +44,7 @@ class Claim extends Component {
     }
 
     // construct the verifiable claim object
-    const claim = metaId.createMetaClaimObject(
+    const claim = identityClaims.createVerifiableIdentityClaimObject(
       account,
       claimMessage,
       sessionIdentity.id,
