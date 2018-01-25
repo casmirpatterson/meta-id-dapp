@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { compose, withState } from 'recompose'
 
+import { FILE_INPUT_LABEL_DEFAULT } from 'core/constants'
 import { MetaIdInput } from 'core/components'
 import {
   Input,
@@ -13,13 +14,15 @@ import {
 import { readFileAsText } from 'core/util'
 
 const Form = ({
-  onSubmit,
+  filename,
   keystore,
-  setKeystore,
+  onSubmit,
   password,
+  setFilename,
+  setKeystore,
   setPassword,
-  username,
   setUsername,
+  username,
 }) => (
   <Fragment>
     <Section
@@ -44,15 +47,19 @@ const Form = ({
         display="block"
         htmlFor="uploadKeystore"
       >
-        Select File
+        {filename}
       </FileInputLabel>
 
       <Input
         display="none"
         id="uploadKeystore"
-        onChange={({ target: { files: [file] } }) =>
-          readFileAsText(file).then(setKeystore)
-        }
+        onChange={({ target: { files: [file] } }) => {
+          if (!file) return setFilename(FILE_INPUT_LABEL_DEFAULT)
+
+          return readFileAsText(file)
+            .then(setKeystore)
+            .then(() => setFilename(file.name))
+        }}
         placeholder="Upload Keystore"
         type="file"
       />
@@ -85,6 +92,7 @@ const Form = ({
 )
 
 const enhance = compose(
+  withState('filename', 'setFilename', FILE_INPUT_LABEL_DEFAULT),
   withState('keystore', 'setKeystore', null),
   withState('password', 'setPassword', ''),
   withState('username', 'setUsername', '')
