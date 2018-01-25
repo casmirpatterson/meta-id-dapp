@@ -23,73 +23,79 @@ const Form = ({
   setPassword,
   setUsername,
   username,
-}) => (
-  <Fragment>
-    <Section
-      backgroundColor="white"
-      borderBottomLeftRadius="0"
-      borderBottomRightRadius="0"
-      padding={['24px', '16px']}
-    >
-      <Text color="primary" fontWeight={700} margin={[0, 0, '16px']}>
-        Choose a username
-      </Text>
+}) => {
+  const onFileUpload = file => {
+    return readFileAsText(file)
+      .then(setKeystore)
+      .then(() => setFilename(file.name))
+  }
 
-      <MetaIdInput onChange={value => setUsername(value)} />
-
-      <Text color="primary" fontWeight={700} margin={['16px', 0, '16px']}>
-        Upload an Ethereum keystore file
-      </Text>
-
-      <FileInputLabel
+  return (
+    <Fragment>
+      <Section
+        backgroundColor="white"
         borderBottomLeftRadius="0"
         borderBottomRightRadius="0"
-        display="block"
-        htmlFor="uploadKeystore"
+        padding={['24px', '16px']}
       >
-        {filename}
-      </FileInputLabel>
+        <Text color="primary" fontWeight={700} margin={[0, 0, '16px']}>
+          Choose a username
+        </Text>
 
-      <Input
-        display="none"
-        id="uploadKeystore"
-        onChange={({ target: { files: [file] } }) => {
-          if (!file) return setFilename(FILE_INPUT_LABEL_DEFAULT)
+        <MetaIdInput onChange={value => setUsername(value)} />
 
-          return readFileAsText(file)
-            .then(setKeystore)
-            .then(() => setFilename(file.name))
-        }}
-        placeholder="Upload Keystore"
-        type="file"
-      />
+        <Text color="primary" fontWeight={700} margin={['16px', 0, '16px']}>
+          Upload an Ethereum keystore file
+        </Text>
 
-      <TextInput
+        <FileInputLabel
+          borderBottomLeftRadius="0"
+          borderBottomRightRadius="0"
+          display="block"
+          htmlFor="uploadKeystore"
+        >
+          {filename}
+        </FileInputLabel>
+
+        <Input
+          display="none"
+          id="uploadKeystore"
+          onChange={({ target: { files: [file] } }) => {
+            if (!file) return setFilename(FILE_INPUT_LABEL_DEFAULT)
+
+            return onFileUpload(file)
+          }}
+          placeholder="Upload Keystore"
+          type="file"
+        />
+
+        <TextInput
+          borderTopLeftRadius="0"
+          borderTopRightRadius="0"
+          fontSize="14px"
+          onChange={({ target: { value } }) => setPassword(value)}
+          placeholder="Enter Password"
+          size={['auto', '100%']}
+          textAlign="center"
+          type="password"
+          value={password}
+        />
+      </Section>
+
+      <PrimaryButton
         borderTopLeftRadius="0"
         borderTopRightRadius="0"
-        fontSize="14px"
-        onChange={({ target: { value } }) => setPassword(value)}
-        placeholder="Enter Password"
+        disabled={!keystore || !password || !username}
+        fontSize="16px"
+        onClick={() => onSubmit({ keystore, password, username })}
+        padding={['20px']}
         size={['auto', '100%']}
-        textAlign="center"
-        type="password"
-        value={password}
-      />
-    </Section>
-
-    <PrimaryButton
-      borderTopLeftRadius="0"
-      borderTopRightRadius="0"
-      disabled={!keystore || !password || !username}
-      fontSize="16px"
-      onClick={() => onSubmit({ keystore, password, username })}
-      padding={['20px']}
-      size={['auto', '100%']}
-    >
-      Create META ID
-    </PrimaryButton>
-  </Fragment>
-)
+      >
+        Create META ID
+      </PrimaryButton>
+    </Fragment>
+  )
+}
 
 const enhance = compose(
   withState('filename', 'setFilename', FILE_INPUT_LABEL_DEFAULT),

@@ -20,67 +20,73 @@ const Form = ({
   setFilename,
   setKeystore,
   setPassword,
-}) => (
-  <Fragment>
-    <Section
-      backgroundColor="white"
-      borderBottomLeftRadius="0"
-      borderBottomRightRadius="0"
-      padding={['24px', '16px']}
-    >
-      <Text color="primary" fontWeight={700} margin={[0, 0, '16px']}>
-        Upload an Ethereum keystore file
-      </Text>
+}) => {
+  const onFileUpload = file => {
+    return readFileAsText(file)
+      .then(setKeystore)
+      .then(() => setFilename(file.name))
+  }
 
-      <FileInputLabel
+  return (
+    <Fragment>
+      <Section
+        backgroundColor="white"
         borderBottomLeftRadius="0"
         borderBottomRightRadius="0"
-        display="block"
-        htmlFor="uploadKeystore"
+        padding={['24px', '16px']}
       >
-        {filename}
-      </FileInputLabel>
+        <Text color="primary" fontWeight={700} margin={[0, 0, '16px']}>
+          Upload an Ethereum keystore file
+        </Text>
 
-      <Input
-        display="none"
-        id="uploadKeystore"
-        onChange={({ target: { files: [file] } }) => {
-          if (!file) return setFilename(FILE_INPUT_LABEL_DEFAULT)
+        <FileInputLabel
+          borderBottomLeftRadius="0"
+          borderBottomRightRadius="0"
+          display="block"
+          htmlFor="uploadKeystore"
+        >
+          {filename}
+        </FileInputLabel>
 
-          return readFileAsText(file)
-            .then(setKeystore)
-            .then(() => setFilename(file.name))
-        }}
-        placeholder="Upload Keystore"
-        type="file"
-      />
+        <Input
+          display="none"
+          id="uploadKeystore"
+          onChange={({ target: { files: [file] } }) => {
+            if (!file) return setFilename(FILE_INPUT_LABEL_DEFAULT)
 
-      <TextInput
+            return onFileUpload(file)
+          }}
+          placeholder="Upload Keystore"
+          type="file"
+        />
+
+        <TextInput
+          borderTopLeftRadius="0"
+          borderTopRightRadius="0"
+          fontSize="14px"
+          onChange={({ target: { value } }) => setPassword(value)}
+          placeholder="Enter Password"
+          size={['auto', '100%']}
+          textAlign="center"
+          type="password"
+          value={password}
+        />
+      </Section>
+
+      <PrimaryButton
         borderTopLeftRadius="0"
         borderTopRightRadius="0"
-        fontSize="14px"
-        onChange={({ target: { value } }) => setPassword(value)}
-        placeholder="Enter Password"
+        disabled={!keystore || !password}
+        fontSize="16px"
+        onClick={() => onSubmit({ keystore, password })}
+        padding={['20px']}
         size={['auto', '100%']}
-        textAlign="center"
-        type="password"
-        value={password}
-      />
-    </Section>
-
-    <PrimaryButton
-      borderTopLeftRadius="0"
-      borderTopRightRadius="0"
-      disabled={!keystore || !password}
-      fontSize="16px"
-      onClick={() => onSubmit({ keystore, password })}
-      padding={['20px']}
-      size={['auto', '100%']}
-    >
-      Log In
-    </PrimaryButton>
-  </Fragment>
-)
+      >
+        Log In
+      </PrimaryButton>
+    </Fragment>
+  )
+}
 
 const enhance = compose(
   withState('filename', 'setFilename', FILE_INPUT_LABEL_DEFAULT),
