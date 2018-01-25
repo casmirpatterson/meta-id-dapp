@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { identityClaims } from 'meta.js'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -7,7 +8,6 @@ import { createStructuredSelector } from 'reselect'
 import { EXAMPLE_IDENTITY, PROFILE_CLAIM_SUB_PROPERTY } from 'core/constants'
 import { View } from 'core/primitives'
 import { Swarm } from 'core/services'
-import { metaId } from 'core/util'
 
 import { actions as ClaimsActions } from 'domains/claims'
 import { selectors as IdentitySelectors } from 'domains/identity'
@@ -28,7 +28,7 @@ class Home extends Component {
     // then push the profile claim to the META Claims index
     return Swarm.upload(profileImage)
       .then(hash =>
-        metaId.createProfileMetaIdentityClaim(
+        identityClaims.createProfileMetaIdentityClaim(
           hash,
           { id: sessionIdentity.id, privateKey: account.privateKey },
           PROFILE_CLAIM_SUB_PROPERTY.image
@@ -45,7 +45,7 @@ class Home extends Component {
     // then push the profile claim to the META Claims index
     Swarm.upload(displayName)
       .then(hash =>
-        metaId.createProfileMetaIdentityClaim(
+        identityClaims.createProfileMetaIdentityClaim(
           hash,
           { id: sessionIdentity.id, privateKey: account.privateKey },
           PROFILE_CLAIM_SUB_PROPERTY.name

@@ -1,11 +1,11 @@
 import { Actions as farce } from 'farce'
+import { identityClaims } from 'meta.js'
 
 import { routes } from 'core/routes'
 import {
   hasAsyncActionFailed,
   hasAsyncActionSucceeded,
   isDomainAction,
-  metaId,
 } from 'core/util'
 import { actionTypes as claims } from 'domains/claims'
 import { actions as profile } from 'domains/profile'
@@ -24,7 +24,7 @@ const ClaimsMiddleware = ({ dispatch }) => next => action => {
 
   if (claims.CREATE_CLAIM === action.type && hasAsyncActionSucceeded(action)) {
     // check if new claim is a profile claim
-    if (metaId.isProfileClaim(action.payload.createClaim)) {
+    if (identityClaims.isProfileClaim(action.payload.createClaim)) {
       // resolve new profile claim hash
       dispatch(profile.addProfileClaims([action.payload.createClaim]))
     }

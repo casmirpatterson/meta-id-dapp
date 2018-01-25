@@ -1,4 +1,4 @@
-import { bufferToHex, ecsign, sha3, toRpcSig } from 'ethereumjs-util'
+import { bufferToHex } from 'ethereumjs-util'
 import { fromV3 } from 'ethereumjs-wallet'
 
 /**
@@ -41,27 +41,4 @@ export const create = (encryptedKeystore, password) => {
     // catch keystore decryption errors
     return e
   }
-}
-
-/**
- * Generate a valid ECDSA signature for use with Ethereum RPC clients
- *
- * @param  {String} message    Message to sign
- * @param  {String} privateKey Private key to sign message with
- * @return {String}            ECDSA signature
- */
-export const signMessage = (message, privateKey) => {
-  // convert privateKey hex string to Buffer
-  const bufferPrivateKey = Buffer.from(privateKey, 'hex')
-
-  // create a sha3 hash of the message
-  const msgHash = sha3(message)
-
-  // generate signature of the message hash using the private key Buffer
-  const signature = ecsign(msgHash, bufferPrivateKey)
-
-  // convert signature to a hex string accepted by Ethereum RPC clients
-  const rpcSignature = toRpcSig(signature.v, signature.r, signature.s)
-
-  return rpcSignature
 }

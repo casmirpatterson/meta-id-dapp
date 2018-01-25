@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Box, Position } from 'jaak-primitives'
+import { identity } from 'meta.js'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -23,7 +24,6 @@ import {
 } from 'core/primitives'
 import { routes } from 'core/routes'
 import { theme } from 'core/style'
-import { metaId } from 'core/util'
 import {
   actions as SessionActions,
   selectors as SessionSelectors,
@@ -41,7 +41,7 @@ class App extends Component {
     const { router } = this.props
 
     return router.push(
-      `${routes.search.path}/${metaId.getMetaIdFromUsername(searchInput)}`
+      `${routes.search.path}/${identity.getIdFromUsername(searchInput)}`
     )
   }
 
