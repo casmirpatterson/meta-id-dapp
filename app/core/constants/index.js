@@ -8,6 +8,7 @@ export const {
   BASE_NAME,
   META_NETWORK_GRAPHQL_ENDPOINT,
   NODE_ENV,
+  SENTRY_DATA_SOURCE_NAME,
   SWARM_HOST,
 } = process.env
 
