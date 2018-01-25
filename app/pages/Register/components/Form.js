@@ -37,6 +37,14 @@ const Form = ({
         borderBottomLeftRadius="0"
         borderBottomRightRadius="0"
         padding={['24px', '16px']}
+        onDragOver={e => e.preventDefault()}
+        onDrop={e => {
+          e.preventDefault()
+
+          const [file] = e.dataTransfer.files
+
+          if (file) return onFileUpload(file)
+        }}
       >
         <Text color="primary" fontWeight={700} margin={[0, 0, '16px']}>
           Choose a username
