@@ -22,7 +22,7 @@
   "scripts": {
     "lint:staged": "lint-staged",
     "build": "webpack --config config/webpack.config.production.js --progress",
-    "deploy": "npm run build",
+    "deploy": "npm run build && git push flynn HEAD:master",
     "start": "webpack-dev-server --config ./config/webpack.config.development.js"
   },
   "repository": {
