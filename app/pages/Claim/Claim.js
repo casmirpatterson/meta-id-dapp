@@ -10,6 +10,7 @@ import { MetaClaimsService } from 'core/components'
 import { META_CLAIMS_SERVICES } from 'core/constants'
 import Protected from 'core/containers/Protected'
 import { Text } from 'core/primitives'
+import { Facebook } from 'core/services'
 import { breakpoints } from 'core/style'
 import { spotify } from 'core/util'
 import { actions as ClaimsActions } from 'domains/claims'
@@ -30,10 +31,8 @@ class Claim extends Component {
     }
   }
 
-  onMetaClaimsServiceCallback = (claimMessage, provider) => {
+  onMetaClaimsServiceCallback = (claimMessage, provider, extraData = {}) => {
     const { account, actions, location, sessionIdentity } = this.props
-
-    const extraData = {}
 
     // TODO - this should be smarter 🤓
     if (provider === 'spotify') {
@@ -56,6 +55,18 @@ class Claim extends Component {
     return actions
       .verifyClaim(claim, provider)
       .then(({ error, payload }) => !error && actions.createClaim(payload))
+  }
+
+  onFacebookClaimsServiceRequest = async claimMessage => {
+    try {
+      const response = await Facebook.login()
+
+      return this.onMetaClaimsServiceCallback(claimMessage, 'facebook', {
+        oAuthToken: response.authResponse.accessToken,
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   onSpotifyClaimsServiceRequest = claimMessage => {
@@ -150,6 +161,11 @@ class Claim extends Component {
                     claimInputDefaultValue={oAuthClaimMessage}
                     claimsService={META_CLAIMS_SERVICES.spotify}
                     onClaimsServiceRequest={this.onSpotifyClaimsServiceRequest}
+                  />
+
+                  <MetaClaimsService
+                    claimsService={META_CLAIMS_SERVICES.facebook}
+                    onClaimsServiceRequest={this.onFacebookClaimsServiceRequest}
                   />
 
                   <MetaClaimsService

@@ -18,6 +18,7 @@ export const FILE_INPUT_LABEL_DEFAULT = 'Select File'
 
 export const META_CLAIMS_SERVICES_BY_PROPERTY = {
   'ddex.id': 'ddex',
+  'facebook.id': 'facebook',
   'ppl.id': 'ppl',
   'spotify.id': 'spotify',
   'twitter.id': 'twitter',
