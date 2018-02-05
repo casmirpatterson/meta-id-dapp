@@ -15,6 +15,7 @@ import rootReducer from 'core/reducers'
 import routeConfig from 'core/routes'
 import { WebStorage } from 'core/services'
 import { isDevelopment } from 'core/util'
+import { actions as SessionActions } from 'domains/session'
 
 // create middleware
 const middleware = createMiddleware(isDevelopment)
@@ -47,7 +48,11 @@ const persistState = WebStorage.getSessionItem(STATE_KEY) || {}
 export const configureStore = (state = persistState) => {
   const store = finalCreateStore(rootReducer, Immutable.fromJS(state))
 
+  // init router history module
   store.dispatch(FarceActions.init())
+
+  // retrieve stored `session` state
+  store.dispatch(SessionActions.getStoredSession(STATE_KEY))
 
   // store state on change
   store.subscribe(() => {
@@ -55,7 +60,6 @@ export const configureStore = (state = persistState) => {
       claims: store.getState().get('claims'),
       identity: store.getState().get('identity'),
       profile: store.getState().get('profile'),
-      session: store.getState().get('session'),
     })
   })
 
