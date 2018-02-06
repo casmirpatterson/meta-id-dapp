@@ -21,6 +21,15 @@ const getError = createSelector([getAll], state => {
 })
 
 /**
+ * Get application initial load status
+ *
+ * @type {Boolean}
+ */
+const getIsInitialLoad = createSelector([getAll], state => {
+  return state.get('isInitialLoad')
+})
+
+/**
  * Get application network request status
  *
  * @type {Boolean}
@@ -41,6 +50,7 @@ const getIsSetupMetaIdModalOpen = createSelector(
 
 export default {
   error: getError,
+  isInitialLoad: getIsInitialLoad,
   isRequesting: getIsRequesting,
   isSetupMetaIdModalOpen: getIsSetupMetaIdModalOpen,
 }
