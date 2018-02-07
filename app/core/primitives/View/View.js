@@ -9,6 +9,8 @@ import { View as ViewPrimitive } from 'jaak-primitives'
  * @return {Function} React component
  */
 const StyledView = styled(ViewPrimitive)`
+  background-color: ${({ backgroundColor, theme }) =>
+    theme[backgroundColor] || backgroundColor};
   display: ${({ display }) => display};
   flex-direction: ${({ flexDirection }) => flexDirection};
   max-width: ${({ maxWidth }) => maxWidth};
@@ -31,6 +33,7 @@ const View = ({ children, ...props }) => (
  * @desc Primitive's default properties
  */
 View.defaultProps = {
+  backgroundColor: 'none',
   display: 'block',
   flexDirection: 'initial',
   maxWidth: 'initial',
@@ -42,6 +45,8 @@ View.defaultProps = {
  * @desc Primitive's prop type definitions
  */
 View.propTypes = {
+  /** Background color */
+  backgroundColor: PropTypes.string,
   /** Display */
   display: PropTypes.string,
   /** Flex direction */

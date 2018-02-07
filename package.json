@@ -85,6 +85,7 @@
     "react-modal": "^3.1.10",
     "react-redux": "^5.0.6",
     "react-responsive": "^4.0.3",
+    "react-transition-group": "^2.2.1",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "redux-immutablejs": "0.0.8",

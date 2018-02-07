@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 import { ThemeProvider } from 'styled-components'
 
-import { Link, Logo, Search } from 'core/components'
+import { AppLoader, Fade, Link, Logo, Search } from 'core/components'
 import {
   Anchor,
   Box as CustomBox,
@@ -28,7 +28,7 @@ import {
   actions as SessionActions,
   selectors as SessionSelectors,
 } from 'domains/session'
-import { selectors as UISelectors } from 'domains/ui'
+import { actions as UIActions, selectors as UISelectors } from 'domains/ui'
 
 class App extends Component {
   getChildContext() {
@@ -50,6 +50,7 @@ class App extends Component {
       actions,
       children,
       error,
+      isInitialLoad,
       isRequesting,
       sessionIdentity,
     } = this.props
@@ -57,6 +58,14 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <View display="flex" flexDirection="column" size={['100%', 'auto']}>
+          <Fade
+            duration={500}
+            in={isInitialLoad && isRequesting}
+            onExited={() => actions.update({ isInitialLoad: false })}
+          >
+            <AppLoader />
+          </Fade>
+
           <Main>
             <Header
               maxWidth="1280px"
@@ -155,10 +164,11 @@ App.childContextTypes = {
 export default connect(
   createStructuredSelector({
     error: UISelectors.error,
+    isInitialLoad: UISelectors.isInitialLoad,
     isRequesting: UISelectors.isRequesting,
     sessionIdentity: SessionSelectors.sessionIdentity,
   }),
   dispatch => ({
-    actions: bindActionCreators({ ...SessionActions }, dispatch),
+    actions: bindActionCreators({ ...SessionActions, ...UIActions }, dispatch),
   })
 )(App)
