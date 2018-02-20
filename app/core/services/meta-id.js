@@ -63,11 +63,12 @@ export const readIdentity = variables => {
 }
 
 /**
- * Add a new verifiable claim to the META Claims Index
+ * Add a new verifiable claim to a META Claims Graph
  *
  * @param  {Object} variables                 Query variables
  * @param  {Object} variables.claim           ClaimInput object
  * @param  {String} variables.claim.claim     Value of the claim
+ * @param  {String} variables.claim.graph     Route of the claim graph
  * @param  {String} variables.claim.issuer    Ethereum address of issuer
  * @param  {String} variables.claim.property  Key of the claim
  * @param  {String} variables.claim.signature Issuer's signature of the claim
@@ -81,6 +82,7 @@ export const createClaim = variables => {
         createClaim(input: $claim) {
           id
           claim
+          graph
           issuer
           property
           signature
@@ -93,11 +95,12 @@ export const createClaim = variables => {
 }
 
 /**
- * Read all verifiable claims from the META Claims Index by `claim`, `issuer`, `property` or `subject`
+ * Read all verifiable claims from a META Claims Graph by `claim`, `graph`, `issuer`, `property` or `subject`
  *
  * @param  {Object} variables                   Query variables
  * @param  {Object} variables.filter            ClaimFilter object
  * @param  {String} [variables.filter.claim]    Value of the claim
+ * @param  {String} [variables.filter.graph]    Route of the claim graph
  * @param  {String} [variables.filter.issuer]   Ethereum address of issuer
  * @param  {String} [variables.filter.property] Key of the claim
  * @param  {String} [variables.filter.subject]  Ethereum address of subject
@@ -110,6 +113,7 @@ export const readClaims = variables => {
         claim (filter: $filter) {
           id
           claim
+          graph
           issuer
           property
           signature
