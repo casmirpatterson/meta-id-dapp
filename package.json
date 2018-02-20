@@ -94,6 +94,6 @@
     "reselect": "^3.0.1",
     "slugify": "^1.2.7",
     "styled-components": "^2.2.3",
-    "swarm-js": "^0.1.37"
+    "swarm-js": "git+https://git@github.com/lukehedger/swarm-js.git"
   }
 }
