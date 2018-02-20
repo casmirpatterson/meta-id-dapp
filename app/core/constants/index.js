@@ -34,11 +34,8 @@ export const PROFILE_IMAGE_DEFAULT = 'img/default-profile.png'
 export const STATE_KEY = '@MetaId:store'
 
 export const EXAMPLE_IDENTITY = {
-  id: '0x5f3081f47ecc0581c89eb16d69626102a6677a1ff2ec77058da16ac6f5290f0e',
-  owner: '0xDB51E8cC266E1199370879e9a895818E94a79614',
-  signature:
-    '0x0f30d4b094bd8de5cb1d6d2a90ce2a3bd508a4852795ccbdcb665ab384ba4fb0725b94bd6bbe1d2d28d678edbe3e94cd0f0272ab1303600c5db50a3d4a9f71c001',
-  username: 'effiestevens.id.meta',
+  address: '0xDB51E8cC266E1199370879e9a895818E94a79614',
+  graph: 'effiestevens.meta',
   claims: {
     '0x1b01ee053de32f92874292d938fdddd2928de92474d38727ec1d028a92aaf750': {
       id: '0x1b01ee053de32f92874292d938fdddd2928de92474d38727ec1d028a92aaf750',
