@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Box, Position } from 'jaak-primitives'
-import { identity } from 'meta.js'
+import { META_ID_USERNAME_SUFFIX } from '@meta.js/shared'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -40,9 +40,10 @@ class App extends Component {
   onSubmitSearch = searchInput => {
     const { router } = this.props
 
-    return router.push(
-      `${routes.search.path}/${identity.getIdFromUsername(searchInput)}`
-    )
+    // remove META-ID suffix from search input
+    const id = searchInput.replace(META_ID_USERNAME_SUFFIX, '')
+
+    return router.push(`${routes.search.path}/${id}`)
   }
 
   render() {
@@ -52,7 +53,7 @@ class App extends Component {
       error,
       isInitialLoad,
       isRequesting,
-      sessionIdentity,
+      isLoggedIn,
     } = this.props
 
     return (
@@ -78,7 +79,7 @@ class App extends Component {
                     <Logo maxWidth="157px" size={['29px', '157px']} />
                   </Link>
 
-                  {sessionIdentity && (
+                  {isLoggedIn && (
                     <Fragment>
                       <Link
                         activePropName={HeaderLink.defaultProps.activePropName}
@@ -106,7 +107,7 @@ class App extends Component {
                   </Box>
 
                   <Box flex="none" size={['auto', '100px']}>
-                    {sessionIdentity ? (
+                    {isLoggedIn ? (
                       <PrimaryButton onClick={() => actions.logout()}>
                         Logout
                       </PrimaryButton>
@@ -166,7 +167,7 @@ export default connect(
     error: UISelectors.error,
     isInitialLoad: UISelectors.isInitialLoad,
     isRequesting: UISelectors.isRequesting,
-    sessionIdentity: SessionSelectors.sessionIdentity,
+    isLoggedIn: SessionSelectors.isLoggedIn,
   }),
   dispatch => ({
     actions: bindActionCreators({ ...SessionActions, ...UIActions }, dispatch),
