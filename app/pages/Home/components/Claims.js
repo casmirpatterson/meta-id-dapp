@@ -6,7 +6,7 @@ import { BodyLink, Image, Text } from 'core/primitives'
 import { routes } from 'core/routes'
 import { metaId } from 'core/util'
 
-const Claims = ({ claims }) => {
+const Claims = ({ claims = [] }) => {
   const claimIssuerProfiles = metaId.getClaimIssuerProfilesFromClaims(
     Object.values(claims)
   )
