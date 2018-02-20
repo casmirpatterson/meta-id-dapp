@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { compose, withState } from 'recompose'
 
+import { MetaIdInput } from 'core/components'
 import { FILE_INPUT_LABEL_DEFAULT } from 'core/constants'
 import {
   Input,
@@ -20,6 +21,8 @@ const Form = ({
   setFilename,
   setKeystore,
   setPassword,
+  setUsername,
+  username,
 }) => {
   const onFileUpload = file => {
     return readFileAsText(file)
@@ -44,6 +47,12 @@ const Form = ({
         }}
       >
         <Text color="primary" fontWeight={700} margin={[0, 0, '16px']}>
+          Enter your username
+        </Text>
+
+        <MetaIdInput onChange={value => setUsername(value)} />
+
+        <Text color="primary" fontWeight={700} margin={['16px', 0, '16px']}>
           Upload an Ethereum keystore file
         </Text>
 
@@ -84,9 +93,9 @@ const Form = ({
       <PrimaryButton
         borderTopLeftRadius="0"
         borderTopRightRadius="0"
-        disabled={!keystore || !password}
+        disabled={!keystore || !password || !username}
         fontSize="16px"
-        onClick={() => onSubmit({ keystore, password })}
+        onClick={() => onSubmit({ keystore, password, username })}
         padding={['20px']}
         size={['auto', '100%']}
       >
@@ -99,7 +108,8 @@ const Form = ({
 const enhance = compose(
   withState('filename', 'setFilename', FILE_INPUT_LABEL_DEFAULT),
   withState('keystore', 'setKeystore', null),
-  withState('password', 'setPassword', '')
+  withState('password', 'setPassword', ''),
+  withState('username', 'setUsername', '')
 )
 
 export default enhance(Form)
