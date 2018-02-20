@@ -9,7 +9,7 @@ const AppLoader = () => (
     position="absolute"
     size={['100%']}
     style={{ pointerEvents: 'none' }}
-    zIndex="0"
+    zIndex="999"
   >
     <View backgroundColor="primary" size={['100%']}>
       <Position
