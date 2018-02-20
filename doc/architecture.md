@@ -2,8 +2,7 @@
 
 The META ID dapp is built with the following technologies:
 - 💎 **Ethereum** - a decentralized platform that runs smart contracts
-- 🍇 **GraphQL** - a query language for APIs and a runtime for fulfilling those queries
-  with your existing data
+- 🍇 **GraphQL** - a query language for APIs
 - ⚛️ **React** - a JavaScript library for building user interfaces
 - 🗄 **Redux** - a predictable state container for JavaScript apps
 - 💅 **Styled Components** - visual primitives for the component age
@@ -13,7 +12,9 @@ The META ID dapp is built with the following technologies:
 Code that is intended to be shared across the application.
 
 #### Components
-Reusable, functional React components made up of UI primitives. These components generally do not have any styles of their own and are not connected to any data sources.
+Reusable, functional React components made up of UI primitives. These components
+generally do not have any styles of their own and are not connected to any data
+sources.
 
 #### Constants
 Configuration data used in the application, such as environment variables,
@@ -54,17 +55,18 @@ APIs.
 Application logic and Redux state management.
 
 #### Claims
-Store of retrieved META Identity Claim objects, keyed by Claim ID.
+Store of retrieved META Identity Claims graphs, keyed by Graph Name and Claim ID.
 
 #### Identity
-Store of retrieved META Identity objects, keyed by Identity ID.
+Store of newly created META Identity objects, keyed by Identity ID.
 
 #### Profile
 Store of resolved META Identity Profile Claim objects (from Swarm), keyed by
 Claim ID.
 
 #### Session
-User session data, like the current user's Ethereum account.
+User session data, like the current user's Ethereum account and META Claims
+Graph name.
 
 #### UI
 Application user interface data, like errors and loading state.
