@@ -5,7 +5,7 @@ import { MetaIdentity } from 'core/components'
 import { Text } from 'core/primitives'
 import { Claims } from './'
 
-const Onymous = ({ identity, onProfileImageChange }) => {
+const Onymous = ({ address, claims, graph, onProfileImageChange }) => {
   return (
     <Box flexDirection="column" size={['100%', 'auto']}>
       <Box
@@ -17,7 +17,9 @@ const Onymous = ({ identity, onProfileImageChange }) => {
         style={{ maxWidth: '1280px' }}
       >
         <MetaIdentity
-          identity={identity}
+          address={address}
+          claims={claims}
+          graph={graph}
           onProfileImageChange={onProfileImageChange}
         />
 
@@ -38,7 +40,7 @@ const Onymous = ({ identity, onProfileImageChange }) => {
           size={['auto', '100%']}
           style={{ maxWidth: '1280px' }}
         >
-          <Claims claims={identity.claims} />
+          <Claims claims={claims} />
         </Box>
       </Box>
     </Box>
