@@ -20,15 +20,18 @@ export default createReducer(initialState, {
   [actions.CREATE_CLAIM]: (state, action) =>
     handle(state, action, {
       success: prevState =>
-        prevState.merge({
-          [action.payload.createClaim.id]: model.claimFactory(
-            action.payload.createClaim
-          ),
-        }),
+        prevState.mergeIn(
+          [action.meta.graph],
+          createClaim([action.payload.createClaim])
+        ),
     }),
 
   [actions.READ_CLAIMS]: (state, action) =>
     handle(state, action, {
-      success: prevState => prevState.merge(createClaim(action.payload.claim)),
+      success: prevState =>
+        prevState.mergeIn(
+          [action.meta.graph],
+          createClaim(action.payload.claim)
+        ),
     }),
 })
