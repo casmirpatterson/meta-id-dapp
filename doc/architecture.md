@@ -12,9 +12,9 @@ The META ID dapp is built with the following technologies:
 Code that is intended to be shared across the application.
 
 #### Components
-Reusable, functional React components made up of UI primitives. These components
-generally do not have any styles of their own and are not connected to any data
-sources.
+Reusable, functional React components composed of UI [Primitives](#primitives).
+These components generally do not have any styles of their own and are not
+connected to any data sources.
 
 #### Constants
 Configuration data used in the application, such as environment variables,
