@@ -6,12 +6,15 @@ import { PROFILE_IMAGE_DEFAULT } from 'core/constants'
 import { FileInputLabel, Image, Input, Text } from 'core/primitives'
 import { metaId, readFileAsDataURL, toCapitalised } from 'core/util'
 
-const MetaIdentity = ({ identity, onProfileImageChange }) => {
+const MetaIdentity = ({
+  address,
+  claims = [],
+  graph,
+  onProfileImageChange,
+}) => {
   // TODO - move profile claim selector to a memoized function
   const profile = metaId.getProfileClaimsKeyedBySubProperty(
-    metaId.getProfileClaimsFromMetaIdentityClaims(
-      Object.values(identity.claims)
-    )
+    metaId.getProfileClaimsFromMetaIdentityClaims(Object.values(claims))
   )
 
   const renderProfileImage = (
@@ -56,19 +59,21 @@ const MetaIdentity = ({ identity, onProfileImageChange }) => {
         </Text>
 
         <Text fontSize="16px" fontWeight={700} margin={[0, 0, '8px']}>
-          <MetaIdDisplay username={identity.username} />
+          <MetaIdDisplay username={graph} />
         </Text>
 
-        <Text
-          borderColor="accent"
-          borderRadius="4px"
-          borderWidth="1px"
-          fontWeight={700}
-          padding={['8px']}
-          size={['auto', 'max-content']}
-        >
-          {identity.owner}
-        </Text>
+        {address && (
+          <Text
+            borderColor="accent"
+            borderRadius="4px"
+            borderWidth="1px"
+            fontWeight={700}
+            padding={['8px']}
+            size={['auto', 'max-content']}
+          >
+            {address}
+          </Text>
+        )}
       </Box>
     </Box>
   )
