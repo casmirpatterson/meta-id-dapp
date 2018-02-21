@@ -1,4 +1,4 @@
-import { getIdFromUsername } from '@meta.js/identity'
+import { identity } from 'meta.js'
 import { createSelector } from 'reselect'
 
 import { selectors as Claims } from 'domains/claims'
@@ -86,7 +86,7 @@ const getSessionClaimsGraph = createSelector(
  * @type {Object}
  */
 const getSessionIdentityId = createSelector(getGraph, graph => {
-  return graph && getIdFromUsername(graph)
+  return graph && identity.getIdFromUsername(graph)
 })
 
 export default {

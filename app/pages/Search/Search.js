@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getClaimsGraphFromUsername } from '@meta.js/identity'
+import { identity } from 'meta.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
@@ -34,7 +34,7 @@ class Search extends Component {
     const { actions } = this.props
 
     // get claims graph name
-    const graph = getClaimsGraphFromUsername(username)
+    const graph = identity.getClaimsGraphFromUsername(username)
 
     // fetch claims graph
     return actions.readClaimsByGraph(graph)
@@ -44,7 +44,7 @@ class Search extends Component {
     const { claimsWithProfileData, routeParams } = this.props
 
     // get claims graph name
-    const graph = getClaimsGraphFromUsername(routeParams.id)
+    const graph = identity.getClaimsGraphFromUsername(routeParams.id)
 
     // get claims graph data
     const claims = claimsWithProfileData[graph]

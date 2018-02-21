@@ -1,4 +1,4 @@
-import { getClaimsGraphFromUsername } from '@meta.js/identity'
+import { identity } from 'meta.js'
 
 import { WebStorage } from 'core/services'
 import * as actions from './actionTypes'
@@ -24,7 +24,11 @@ export const getStoredSession = key => ({
  */
 export const login = (account, username, isNewUser = false) => ({
   type: actions.LOGIN,
-  payload: { account, graph: getClaimsGraphFromUsername(username), isNewUser },
+  payload: {
+    account,
+    graph: identity.getClaimsGraphFromUsername(username),
+    isNewUser,
+  },
 })
 
 /**

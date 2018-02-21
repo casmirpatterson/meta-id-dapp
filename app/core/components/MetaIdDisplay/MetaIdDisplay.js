@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { shared } from 'meta.js'
+import { META_ID_USERNAME_SUFFIX } from '@meta.js/shared'
 
 import { Span } from 'core/primitives'
 import { metaId } from 'core/util'
@@ -7,7 +7,7 @@ import { metaId } from 'core/util'
 const MetaIdDisplay = ({ username }) => (
   <Fragment>
     <Span color="accent">{metaId.getNameFromUsername(username)}</Span>
-    <Span color="grey">{shared.META_ID_USERNAME_SUFFIX}</Span>
+    <Span color="grey">{META_ID_USERNAME_SUFFIX}</Span>
   </Fragment>
 )
 

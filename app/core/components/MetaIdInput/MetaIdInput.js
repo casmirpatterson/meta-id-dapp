@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { shared } from 'meta.js'
+import { META_ID_USERNAME_SUFFIX } from '@meta.js/shared'
 
 import { Box, Span, TextInput } from 'core/primitives'
 
@@ -24,7 +24,7 @@ const MetaIdInput = ({ onChange }) => (
         borderWidth="0px"
       />
       <Span color="primary" fontWeight={700}>
-        {shared.META_ID_USERNAME_SUFFIX}
+        {META_ID_USERNAME_SUFFIX}
       </Span>
     </Box>
   </Fragment>
