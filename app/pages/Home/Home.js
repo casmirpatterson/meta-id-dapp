@@ -10,7 +10,6 @@ import { View } from 'core/primitives'
 import { Swarm } from 'core/services'
 
 import { actions as ClaimsActions } from 'domains/claims'
-import { selectors as IdentitySelectors } from 'domains/identity'
 import {
   actions as SessionActions,
   selectors as SessionSelectors,
@@ -21,7 +20,7 @@ import * as Components from './components'
 
 class Home extends Component {
   onProfileImageChange = profileImage => {
-    const { account, actions, sessionIdentity } = this.props
+    const { account, actions, graph, sessionIdentityId } = this.props
 
     // upload profile image to Swarm
     // then create a self-issued verified profile claim object
@@ -30,7 +29,8 @@ class Home extends Component {
       .then(hash =>
         identityClaims.createProfileMetaIdentityClaim(
           hash,
-          { id: sessionIdentity.id, privateKey: account.privateKey },
+          graph,
+          { id: sessionIdentityId, privateKey: account.privateKey },
           PROFILE_CLAIM_SUB_PROPERTY.image
         )
       )
@@ -38,7 +38,7 @@ class Home extends Component {
   }
 
   onSubmitSetup = displayName => {
-    const { account, actions, sessionIdentity } = this.props
+    const { account, actions, graph, sessionIdentityId } = this.props
 
     // upload display name profile claim data to Swarm
     // then create a self-issued verified profile claim object
@@ -47,7 +47,8 @@ class Home extends Component {
       .then(hash =>
         identityClaims.createProfileMetaIdentityClaim(
           hash,
-          { id: sessionIdentity.id, privateKey: account.privateKey },
+          graph,
+          { id: sessionIdentityId, privateKey: account.privateKey },
           PROFILE_CLAIM_SUB_PROPERTY.name
         )
       )
@@ -59,12 +60,11 @@ class Home extends Component {
 
   render() {
     const {
-      identityWithClaims,
+      accountAddress,
+      graph,
       isSetupMetaIdModalOpen,
-      sessionIdentity,
+      sessionClaimsGraph,
     } = this.props
-
-    const identity = sessionIdentity && identityWithClaims[sessionIdentity.id]
 
     return (
       <View size={['100%', 'auto']}>
@@ -73,9 +73,11 @@ class Home extends Component {
           submitSetup={this.onSubmitSetup}
         />
 
-        {sessionIdentity ? (
+        {graph ? (
           <Components.Onymous
-            identity={identity}
+            address={accountAddress}
+            claims={sessionClaimsGraph}
+            graph={graph}
             onProfileImageChange={this.onProfileImageChange}
           />
         ) : (
@@ -93,9 +95,11 @@ Home.contextTypes = {
 export default connect(
   createStructuredSelector({
     account: SessionSelectors.account,
-    identityWithClaims: IdentitySelectors.identityWithClaims,
+    accountAddress: SessionSelectors.accountAddress,
+    graph: SessionSelectors.graph,
     isSetupMetaIdModalOpen: UISelectors.isSetupMetaIdModalOpen,
-    sessionIdentity: SessionSelectors.sessionIdentity,
+    sessionClaimsGraph: SessionSelectors.sessionClaimsGraph,
+    sessionIdentityId: SessionSelectors.sessionIdentityId,
   }),
   dispatch => ({
     actions: bindActionCreators(

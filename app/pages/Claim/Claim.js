@@ -32,7 +32,7 @@ class Claim extends Component {
   }
 
   onMetaClaimsServiceCallback = (claimMessage, provider, extraData = {}) => {
-    const { account, actions, location, sessionIdentity } = this.props
+    const { account, actions, graph, location, sessionIdentityId } = this.props
 
     // TODO - this should be smarter 🤓
     if (provider === 'spotify') {
@@ -46,7 +46,8 @@ class Claim extends Component {
     const claim = identityClaims.createVerifiableIdentityClaimObject(
       account,
       claimMessage,
-      sessionIdentity.id,
+      graph,
+      sessionIdentityId,
       extraData
     )
 
@@ -194,8 +195,9 @@ class Claim extends Component {
 export default connect(
   createStructuredSelector({
     account: SessionSelectors.account,
+    graph: SessionSelectors.graph,
     oAuthClaimMessage: SessionSelectors.oAuthClaimMessage,
-    sessionIdentity: SessionSelectors.sessionIdentity,
+    sessionIdentityId: SessionSelectors.sessionIdentityId,
   }),
   dispatch => ({
     actions: bindActionCreators(

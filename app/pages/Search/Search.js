@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
-import { isValidAddress } from 'ethereumjs-util'
+import { getClaimsGraphFromUsername } from '@meta.js/identity'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 
 import { Text, View } from 'core/primitives'
 import {
-  actions as IdentityActions,
-  selectors as IdentitySelectors,
-} from 'domains/identity'
+  actions as ClaimsActions,
+  selectors as ClaimsSelectors,
+} from 'domains/claims'
 import { Identity } from './components'
 
 class Search extends Component {
   componentDidMount() {
     const { routeParams } = this.props
 
-    // fetch the searched META Identity
-    return this.fetchIdentity(routeParams.id)
+    // fetch the searched META Claims Graph
+    return this.fetchClaimsGraph(routeParams.id)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,36 +25,34 @@ class Search extends Component {
 
     // has `id` route param changed?
     if (routeParams.id !== nextRouteParams.id) {
-      // fetch the searched META Identity
-      return this.fetchIdentity(nextRouteParams.id)
+      // fetch the searched META Claims Graph
+      return this.fetchClaimsGraph(nextRouteParams.id)
     }
   }
 
-  fetchIdentity = id => {
+  fetchClaimsGraph = username => {
     const { actions } = this.props
 
-    let readIdentity
+    // get claims graph name
+    const graph = getClaimsGraphFromUsername(username)
 
-    // check `id` for `owner` address or `id` hash
-    if (isValidAddress(id)) {
-      readIdentity = actions.readIdentityByOwner
-    } else {
-      readIdentity = actions.readIdentityById
-    }
-
-    // fetch identity by `owner` || `id`
-    return readIdentity(id)
+    // fetch claims graph
+    return actions.readClaimsByGraph(graph)
   }
 
   render() {
-    const { identityWithClaims, routeParams } = this.props
+    const { claimsWithProfileData, routeParams } = this.props
 
-    const identity = identityWithClaims[routeParams.id]
+    // get claims graph name
+    const graph = getClaimsGraphFromUsername(routeParams.id)
+
+    // get claims graph data
+    const claims = claimsWithProfileData[graph]
 
     return (
       <View size={['100%', 'auto']}>
-        {identity ? (
-          <Identity identity={identity} />
+        {claims ? (
+          <Identity claims={claims} graph={graph} />
         ) : (
           <Text
             fontSize="22px"
@@ -62,7 +60,7 @@ class Search extends Component {
             margin={['32px', 0, 0]}
             textAlign="center"
           >
-            No META ID found
+            <code>{graph}</code> does not exist or has no claims
           </Text>
         )}
       </View>
@@ -72,9 +70,9 @@ class Search extends Component {
 
 export default connect(
   createStructuredSelector({
-    identityWithClaims: IdentitySelectors.identityWithClaims,
+    claimsWithProfileData: ClaimsSelectors.claimsWithProfileData,
   }),
   dispatch => ({
-    actions: bindActionCreators({ ...IdentityActions }, dispatch),
+    actions: bindActionCreators({ ...ClaimsActions }, dispatch),
   })
 )(Search)

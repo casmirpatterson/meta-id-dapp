@@ -12,41 +12,21 @@ import { MetaClaims, MetaId } from 'core/services'
  * @return {Object}                  Flux Standard Action
  */
 export const createClaim = claim => ({
+  meta: { graph: claim.graph },
   type: actions.CREATE_CLAIM,
   promise: MetaId.createClaim({ claim }),
 })
 
 /**
- * Read verifiable claims from the META Claims Index by `issuer`
+ * Read verifiable claims from a META Claims Graph
  *
- * @param  {String} issuer Ethereum address of claim issuer
- * @return {Object}        Flux Standard Action
+ * @param  {String} graph Claims graph
+ * @return {Object}       Flux Standard Action
  */
-export const readClaimsByIssuer = issuer => ({
+export const readClaimsByGraph = graph => ({
+  meta: { graph },
   type: actions.READ_CLAIMS,
-  promise: MetaId.readClaims({ filter: { issuer } }),
-})
-
-/**
- * Read verifiable claims from the META Claims Index by `subject`
- *
- * @param  {String} subject Ethereum address of claim subject
- * @return {Object}         Flux Standard Action
- */
-export const readClaimsBySubject = subject => ({
-  type: actions.READ_CLAIMS,
-  promise: MetaId.readClaims({ filter: { subject } }),
-})
-
-/**
- * Read verifiable claims from the META Claims Index by `subject` AND `property`
- *
- * @param  {String} subject Ethereum address of claim subject
- * @return {Object}         Flux Standard Action
- */
-export const readClaimsBySubjectAndProperty = (property, subject) => ({
-  type: actions.READ_CLAIMS,
-  promise: MetaId.readClaims({ filter: { property, subject } }),
+  promise: MetaId.readClaims({ filter: { graph } }),
 })
 
 /**

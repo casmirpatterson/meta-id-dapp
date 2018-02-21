@@ -5,7 +5,7 @@ import { MetaIdentity } from 'core/components'
 import { Text } from 'core/primitives'
 import { Claims } from './'
 
-const Identity = ({ identity }) => {
+const Identity = ({ claims, graph }) => {
   return (
     <Box flexDirection="column" size={['100%', 'auto']}>
       <Box
@@ -16,7 +16,7 @@ const Identity = ({ identity }) => {
         size={['auto', '100%']}
         style={{ maxWidth: '1280px' }}
       >
-        <MetaIdentity identity={identity} />
+        <MetaIdentity claims={claims} graph={graph} />
 
         <Text
           fontSize="20px"
@@ -35,7 +35,7 @@ const Identity = ({ identity }) => {
           size={['auto', '100%']}
           style={{ maxWidth: '1280px' }}
         >
-          <Claims claims={identity.claims} />
+          <Claims claims={claims} />
         </Box>
       </Box>
     </Box>

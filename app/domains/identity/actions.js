@@ -21,36 +21,3 @@ export const createIdentity = (account, username) => ({
     ),
   }),
 })
-
-/**
- * Retrieve a META Identity by `id`
- *
- * @param  {String} id Hash of META Identity username
- * @return {Object}    Flux Standard Action
- */
-export const readIdentityById = id => ({
-  type: actions.READ_IDENTITY,
-  promise: MetaId.readIdentity({ filter: { id } }),
-})
-
-/**
- * Retrieve a META Identity by `owner` address
- *
- * @param  {String} owner Ethereum address of META Identity owner
- * @return {Object}       Flux Standard Action
- */
-export const readIdentityByOwner = owner => ({
-  type: actions.READ_IDENTITY,
-  promise: MetaId.readIdentity({ filter: { owner } }),
-})
-
-/**
- * Retrieve a META Identity by `username`
- *
- * @param  {String} username Username of META Identity owner
- * @return {Object}          Flux Standard Action
- */
-export const readIdentityByUsername = username => ({
-  type: actions.READ_IDENTITY,
-  promise: MetaId.readIdentity({ filter: { username } }),
-})

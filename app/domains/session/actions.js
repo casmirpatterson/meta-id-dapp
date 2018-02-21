@@ -1,3 +1,5 @@
+import { getClaimsGraphFromUsername } from '@meta.js/identity'
+
 import { WebStorage } from 'core/services'
 import * as actions from './actionTypes'
 
@@ -15,13 +17,14 @@ export const getStoredSession = key => ({
 /**
  * Start session and set account
  *
- * @param  {Object}  account         Decrypted Ethereum keystore
+ * @param  {Object}  account           Decrypted Ethereum keystore
+ * @param  {String}  username          META ID username
  * @param  {Boolean} [isNewUser=false] Flag a newly created user during login process
- * @return {Object}                  Flux Standard Action
+ * @return {Object}                    Flux Standard Action
  */
-export const login = (account, isNewUser = false) => ({
+export const login = (account, username, isNewUser = false) => ({
   type: actions.LOGIN,
-  payload: { account, isNewUser },
+  payload: { account, graph: getClaimsGraphFromUsername(username), isNewUser },
 })
 
 /**

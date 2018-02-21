@@ -40,7 +40,7 @@ const MetaClaimsService = ({
     </Fragment>
   ) : (
     <PrimaryButton cursor="auto" margin={[0, 0, '16px']} padding={['8px']}>
-      <Position position="relative">
+      <Position position="relative" zIndex="0">
         <Text fontSize="16px" fontWeight={700} textTransform="uppercase">
           {claimsService.property}
         </Text>

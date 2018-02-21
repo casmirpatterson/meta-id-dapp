@@ -1,7 +1,8 @@
+import { getIdFromUsername } from '@meta.js/identity'
 import { createSelector } from 'reselect'
 
+import { selectors as Claims } from 'domains/claims'
 import { name } from './constants'
-import { selectors as Identity } from 'domains/identity'
 
 /**
  * Select the entire domain from the store by `name`
@@ -39,6 +40,15 @@ const getIsLoggedIn = createSelector(getAccount, account => {
 })
 
 /**
+ * Get session account's claims graph name
+ *
+ * @type {Boolean}
+ */
+const getGraph = createSelector(getAll, state => {
+  return state.get('graph')
+})
+
+/**
  * Get new user flag
  *
  * @type {Boolean}
@@ -57,24 +67,35 @@ const getOAuthClaimMessage = createSelector(getAll, state => {
 })
 
 /**
- * Get META Identity of session account
+ * Get META Claims Graph of session account
  *
  * @type {Object}
  */
-const getSessionIdentity = createSelector(
-  [getAccountAddress, Identity.identity],
-  (address, identity) => {
-    const sessionIdentity = identity.find(id => id.get('owner') === address)
+const getSessionClaimsGraph = createSelector(
+  [getGraph, Claims.claimsWithProfileData],
+  (graph, claims) => {
+    const sessionClaimsGraph = claims[graph]
 
-    return sessionIdentity && sessionIdentity.toObject()
+    return sessionClaimsGraph
   }
 )
+
+/**
+ * Get META Identity `id` of session account
+ *
+ * @type {Object}
+ */
+const getSessionIdentityId = createSelector(getGraph, graph => {
+  return graph && getIdFromUsername(graph)
+})
 
 export default {
   account: getAccount,
   accountAddress: getAccountAddress,
   isLoggedIn: getIsLoggedIn,
+  graph: getGraph,
   isNewUser: getIsNewUser,
   oAuthClaimMessage: getOAuthClaimMessage,
-  sessionIdentity: getSessionIdentity,
+  sessionClaimsGraph: getSessionClaimsGraph,
+  sessionIdentityId: getSessionIdentityId,
 }

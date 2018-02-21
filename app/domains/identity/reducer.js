@@ -19,14 +19,4 @@ export default createReducer(initialState, {
           ),
         }),
     }),
-
-  [actions.READ_IDENTITY]: (state, action) =>
-    handle(state, action, {
-      success: prevState =>
-        prevState.merge({
-          [action.payload.identity[0].id]: createIdentity(
-            action.payload.identity[0]
-          ),
-        }),
-    }),
 })

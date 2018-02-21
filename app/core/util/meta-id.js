@@ -26,7 +26,7 @@ export const getClaimIssuerProfilesFromClaims = claims => {
 /**
  * Get a common name from a META Identity `username`
  *
- * @example getNameFromUsername('luke.id.meta') // => 'luke'
+ * @example getNameFromUsername('luke.meta') // => 'luke'
  *
  * @param  {String} username META Identity username
  * @return {String}          Common name extracted from username

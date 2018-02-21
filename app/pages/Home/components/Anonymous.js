@@ -45,7 +45,11 @@ const Anonymous = ({ exampleIdentity }) => (
             margin={[0, 0, 0, '32px']}
             padding={['32px', '24px']}
           >
-            <MetaIdentity identity={exampleIdentity} />
+            <MetaIdentity
+              address={exampleIdentity.address}
+              claims={exampleIdentity.claims}
+              graph={exampleIdentity.graph}
+            />
           </Section>
         </MediaQuery>
       </Box>

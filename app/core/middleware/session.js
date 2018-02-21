@@ -3,7 +3,7 @@ import { Actions as farce } from 'farce'
 import { STATE_KEY } from 'core/constants'
 import { routes } from 'core/routes'
 import { isDomainAction } from 'core/util'
-import { actions as IdentityActions } from 'domains/identity'
+import { actions as ClaimsActions } from 'domains/claims'
 import {
   actions as SessionActions,
   actionTypes as session,
@@ -15,10 +15,8 @@ const SessionMiddleware = ({ dispatch }) => next => action => {
   if (!isDomainAction(name, action.type)) return next(action)
 
   if (session.LOGIN === action.type) {
-    // fetch user's META Identity
-    dispatch(
-      IdentityActions.readIdentityByOwner(action.payload.account.address)
-    )
+    // fetch user's META Claims Graph
+    dispatch(ClaimsActions.readClaimsByGraph(action.payload.graph))
 
     // redirect to Home page
     dispatch(farce.push(routes.home.path))

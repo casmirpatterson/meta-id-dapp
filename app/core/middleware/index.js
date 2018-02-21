@@ -2,7 +2,6 @@ import { createLogger } from 'redux-logger'
 import { middleware as reduxPack } from 'redux-pack'
 
 import ClaimsMiddleware from './claims'
-import IdentityMiddleware from './identity'
 import SessionMiddleware from './session'
 import UIMiddleware from './ui'
 
@@ -11,7 +10,6 @@ const createMiddleware = isDevelopment => {
   const middleware = [
     reduxPack,
     ClaimsMiddleware,
-    IdentityMiddleware,
     SessionMiddleware,
     UIMiddleware,
   ]

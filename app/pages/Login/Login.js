@@ -9,7 +9,7 @@ import { actions as UIActions } from 'domains/ui'
 import * as Components from './components'
 
 class Login extends Component {
-  onFormSubmit = ({ keystore, password }) => {
+  onFormSubmit = ({ keystore, password, username }) => {
     const { actions } = this.props
 
     // parse the keystore file into JSON
@@ -28,7 +28,7 @@ class Login extends Component {
     }
 
     // log the account in
-    return actions.login(account)
+    return actions.login(account, username)
   }
 
   render() {
